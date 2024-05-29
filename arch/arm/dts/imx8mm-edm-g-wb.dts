@@ -1,0 +1,170 @@
+/*
+ * Copyright 2020 Technexion Ltd.
+ * 
+ * Author: Richard Hu <Richard.hu@technexion.com>
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ */
+
+/dts-v1/;
+
+#include "imx8mm-edm-g.dtsi"
+
+/ {
+	model = "TechNexion EDM-G-IMX8MM and Wandboard baseboard";
+	compatible = "fsl,imx8mm-edm-g", "fsl,imx8mm";
+
+/*
+	regulators {
+		reg_lvds_pwr: regulator_lvdspwr {
+			pinctrl-names = "default";
+			pinctrl-0 = <&pinctrl_lvds0_pwr>;
+			compatible = "regulator-fixed";
+			regulator-name = "lvds0_vdden";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			gpio = <&gpio1 7 GPIO_ACTIVE_HIGH>;
+			enable-active-high;
+			status = "okay";
+		};
+
+		reg_lvds_backlight_pwr: regulator_lvdsblpwr {
+			pinctrl-names = "default";
+			pinctrl-0 = <&pinctrl_lvds0_backlight_pwr>;
+			compatible = "regulator-fixed";
+			regulator-name = "lvds0_bl_en";
+			regulator-min-microvolt = <3300000>;
+			regulator-max-microvolt = <3300000>;
+			gpio = <&gpio1 12 GPIO_ACTIVE_HIGH>;
+			enable-active-high;
+			regulator-always-on;
+		};
+	};
+
+	lvds_backlight: lvds_backlight {
+		compatible = "pwm-backlight";
+		pwms = <&pwm2 0 50000>;
+		brightness-levels = <0 36 72 108 144 180 216 255>;
+		default-brightness-level = <6>;
+		status = "okay";
+	};
+	*/
+};
+
+&gpio1 {
+	lvds-pwr-on {
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_lvds0_pwr>;
+		gpio-hog;
+		gpios = <7 GPIO_ACTIVE_HIGH>;
+		output-high;
+	};
+
+	lvds-bl-pwr-on {
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_lvds0_backlight_pwr>;
+		gpio-hog;
+		gpios = <12 GPIO_ACTIVE_HIGH>;
+		output-high;
+	};
+};
+
+&gpio5 {
+	bl-pwm-on {
+		pinctrl-names = "default";
+		pinctrl-0 = <&pinctrl_lvds_bl_pwm>;
+		gpio-hog;
+		gpios = <4 GPIO_ACTIVE_HIGH>;
+		output-high;
+	};
+};
+
+&i2c1 {
+	clock-frequency = <400000>;
+	pinctrl-names = "default";
+	pinctrl-0 = <&pinctrl_i2c1>;
+	status = "okay";
+	dsi_lvds_bridge: sn65dsi84@2d {
+		reg = <0x2d>;
+		compatible = "ti,sn65dsi84";
+		#gpio-cells = <2>;
+		dsi-lanes = <4>;
+		pinctrl-0 = <&pinctrl_mipi_dsi_en>;
+		enable-gpios = <&gpio3 9 GPIO_ACTIVE_HIGH>;
+
+		status = "okay";
+
+		port@2 {
+			sn65dsi84_from_dsim: endpoint {
+				remote-endpoint = <&dsim_to_sn65dsi84>;
+			};
+		};
+
+	};
+};
+
+&mipi_dsi {
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-parents;
+	/delete-property/ assigned-clock-rates;
+	status = "okay";
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	port@2{
+		dsim_to_sn65dsi84: endpoint {
+			remote-endpoint = <&sn65dsi84_from_dsim>;
+		};
+	};
+};
+
+
+&lcdif {
+	enable_polarity_low;
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-parents;
+	/delete-property/ assigned-clock-rates;
+	display = <&display0>;
+	status = "okay";
+
+	display0: display@0 {
+		bits-per-pixel = <24>;
+		bus-width = <24>;
+	};
+};
+
+&pwm2 {
+	status = "okay";
+};
+
+&pwm3 {
+	status = "okay";
+};
+
+
+&usdhc1 {
+	status = "okay";
+};
+
+&usdhc2 {
+	status = "okay";
+};
+
+&usbotg1 {
+	dr_mode = "peripheral";
+	status = "okay";
+};
+
+&usbotg2 {
+	dr_mode = "host";
+	status = "okay";
+};
+
