@@ -238,7 +238,7 @@ int power_init_board(void)
 	struct pmic *p;
 	int ret;
 
-	ret = power_pca9450_init(I2C_PMIC, 0x35);
+	ret = power_pca9450_init(I2C_PMIC, 0x25);
 	if (ret)
 		printf("power init failed");
 	p = pmic_get("PCA9450");
@@ -247,7 +247,7 @@ int power_init_board(void)
 	/* BUCKxOUT_DVS0/1 control BUCK123 output */
 	ret = pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
 
-	 printf("%s pmic_reg_write %d", __func__, ret);
+	 printf("%s pmic_reg_write 0x%x \n", __func__, ret);
 
 	/* Buck 1 DVS control through PMIC_STBY_REQ */
 	pmic_reg_write(p, PCA9450_BUCK1CTRL, 0x59);
