@@ -708,6 +708,8 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 
 static int imx8m_power_domain_probe(struct udevice *dev)
 {
+	return 0;
+
 printf("%s imx8m_power_domain_probe start \n", dev->name); //test
 
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
@@ -734,7 +736,6 @@ printf("%s imx8m_power_domain_probe end \n", dev->name); //test
 
 static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 {
-
 printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
@@ -751,7 +752,7 @@ printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 		pdata->has_pd = 1;
 
 
-printf("%s imx8m_power_domain_of_to_plat end\n", dev->name); //test
+printf("%s imx8m_power_domain_of_to_plat end ID=%d\n", dev->name, pdata->resource_id); //test
 
 	return 0;
 }
