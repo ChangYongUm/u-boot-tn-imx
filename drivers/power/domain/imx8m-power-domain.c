@@ -523,7 +523,7 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 	u32 pgc;
 	int ret;
 
-	printf("imx8m_power_domain_on"); //test
+	printf("%s imx8m_power_domain_on \n", dev->name); //test
 
 	if (pdata->count > 0) { /* Already on */
 		pdata->count++;
@@ -669,7 +669,7 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 	const char *name;
 	int ret = 0;
 
-	printf("imx8m_power_domain_bind"); //test
+	printf("%s imx8m_power_domain_bind \n", dev->name); //test
 
 	offset = dev_of_offset(dev);
 	for (offset = fdt_first_subnode(gd->fdt_blob, offset); offset > 0;
@@ -705,7 +705,7 @@ static int imx8m_power_domain_probe(struct udevice *dev)
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
 
-printf("imx8m_power_domain_probe"); //test
+printf("%s imx8m_power_domain_probe \n", dev->name); //test
 
 	/* Nothing to do for non-"power-domain" driver instances. */
 	if (!strstr(dev->name, "power-domain"))
@@ -727,7 +727,7 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 	struct imx_pgc_domain_data *domain_data =
 		(struct imx_pgc_domain_data *)dev_get_driver_data(dev);
 
-printf("imx8m_power_domain_of_to_plat"); //test
+printf("%s imx8m_power_domain_of_to_plat\n", dev->name); //test
 
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
