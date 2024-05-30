@@ -8,6 +8,7 @@
 #include <dt-bindings/gpio/gpio.h>
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/interrupt-controller/arm-gic.h>
+#include <dt-bindings/power/imx8mm-power.h>
 #include <dt-bindings/reset/imx8mm-dispmix.h>
 #include <dt-bindings/thermal/thermal.h>
 
@@ -207,7 +208,7 @@
 		compatible = "simple-bus";
 		/* HSIO SS */
 		hsiomix_pd: hsiomix-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <0>;
 			domain-name = "hsiomix";
@@ -215,7 +216,7 @@
 		};
 
 		pcie_pd: pcie-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <1>;
 			domain-name = "pcie";
@@ -224,7 +225,7 @@
 		};
 
 		usb_otg1_pd: usbotg1-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <2>;
 			domain-name = "usb_otg1";
@@ -232,7 +233,7 @@
 		};
 
 		usb_otg2_pd: usbotg2-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <3>;
 			domain-name = "usb_otg2";
@@ -241,7 +242,7 @@
 
 		/* GPU SS */
 		gpumix_pd: gpumix-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <4>;
 			domain-name = "gpumix";
@@ -253,7 +254,7 @@
 
 		/* VPU SS */
 		vpumix_pd: vpumix-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <5>;
 			domain-name = "vpumix";
@@ -261,7 +262,7 @@
 		};
 
 		vpu_g1_pd: vpug1-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <6>;
 			domain-name = "vpu_g1";
@@ -270,7 +271,7 @@
 		};
 
 		vpu_g2_pd: vpug2-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <7>;
 			domain-name = "vpu_g2";
@@ -279,7 +280,7 @@
 		};
 
 		vpu_h1_pd: vpuh1-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <8>;
 			domain-name = "vpu_h1";
@@ -289,7 +290,7 @@
 
 		/* DISP SS */
 		dispmix_pd: dispmix-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <9>;
 			domain-name = "dispmix";
@@ -299,7 +300,7 @@
 		};
 
 		mipi_pd: mipi-pd {
-			compatible = "fsl,imx8m-pm-domain";
+			compatible = "fsl,imx8mm-gpc";
 			#power-domain-cells = <0>;
 			domain-index = <10>;
 			domain-name = "mipi";
