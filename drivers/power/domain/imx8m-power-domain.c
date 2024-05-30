@@ -117,7 +117,7 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
 
-	printf("%s imx8m_power_domain_of_to_plat resource_id %d\n", dev->name, pdata->resource_id );	
+	printf("%s %ld imx8m_power_domain_of_to_plat offset=%d resource_id %d\n", dev->name, &gd->fdt_blob, dev_of_offset(dev), pdata->resource_id );	
 
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
