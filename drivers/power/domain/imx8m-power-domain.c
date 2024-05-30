@@ -751,7 +751,6 @@ printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
 
-
 printf("%s imx8m_power_domain_of_to_plat end ID=%d\n", dev->name, pdata->resource_id); //test
 
 	return 0;
