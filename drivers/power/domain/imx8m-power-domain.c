@@ -745,7 +745,12 @@ printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
 
-	if(pdata->resource_id<0) return -19;
+	if(pdata->resource_id<0) 
+	{
+		printf("%s pd=%d imx8m_power_domain_of_to_plat fail offset=%d\n", pdata->dev->name,  pdata->has_pd, dev_of_offset(dev)); //test
+
+		return -ENODEV;
+	}
 
 	pdata->domain = &domain_data->domains[pdata->resource_id];
 	pdata->regs = domain_data->pgc_regs;
