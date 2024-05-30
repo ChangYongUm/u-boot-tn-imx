@@ -747,7 +747,7 @@ printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 
 	if(pdata->resource_id<0) 
 	{
-		printf("%s pd=%d imx8m_power_domain_of_to_plat fail offset=%d\n", pdata->pd.dev->name,  pdata->has_pd, dev_of_offset(dev)); //test
+		printf("%s count=%d imx8m_power_domain_of_to_plat fail offset=%d\n", dev->driver->name,  pdata->count, dev_of_offset(dev)); //test
 
 		return -ENODEV;
 	}
