@@ -713,6 +713,8 @@ printf("%s imx8m_power_domain_probe \n", dev->name); //test
 		return 0;
 	}
 
+printf("%s imx8m_power_domain_probe 1 \n", dev->name); //test
+
 	/* Grab optional power domain clock. */
 	ret = clk_get_bulk(dev, &pdata->clk);
 	if (ret && ret != -ENOENT) 
@@ -721,6 +723,8 @@ printf("%s imx8m_power_domain_probe \n", dev->name); //test
 		printf("%s Failed to get domain clock (%d) \n", dev->name, ret); //test
 		return ret;
 	}
+
+printf("%s imx8m_power_domain_probe 2 \n", dev->name); //test	
 
 	return 0;
 }
