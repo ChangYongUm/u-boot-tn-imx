@@ -245,7 +245,10 @@ int power_init_board(void)
 	pmic_probe(p);
 
 	/* BUCKxOUT_DVS0/1 control BUCK123 output */
-	pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
+	ret = pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
+
+	 printf("%s pmic_reg_write %d", __func__, ret);
+
 	/* Buck 1 DVS control through PMIC_STBY_REQ */
 	pmic_reg_write(p, PCA9450_BUCK1CTRL, 0x59);
 
