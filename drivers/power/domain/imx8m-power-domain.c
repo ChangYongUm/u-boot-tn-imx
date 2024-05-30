@@ -80,6 +80,9 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 	int ret = 0;
 
 	offset = dev_of_offset(dev);
+
+printf("%s imx8m_power_domain_bind offset %d\n", dev->name, offset);	
+
 	for (offset = fdt_first_subnode(gd->fdt_blob, offset); offset > 0;
 	     offset = fdt_next_subnode(gd->fdt_blob, offset)) {
 		/* Bind the subnode to this driver */
@@ -113,6 +116,8 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
+
+	printf("%s imx8m_power_domain_of_to_plat resource_id %d\n", dev->name, data->resource_id );	
 
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
