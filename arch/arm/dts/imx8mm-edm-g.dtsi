@@ -299,6 +299,7 @@
 };
 
 &i2c1 {
+	u-boot,dm-spl;	
 	clock-frequency = <400000>;
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_i2c1>;
@@ -433,19 +434,6 @@
 	pinctrl-0 = <&pinctrl_i2c4>;
 	status = "okay";
 };
-
-&i2c1 {
-	u-boot,dm-spl;
-};
-
-&pinctrl_i2c1 {
-	u-boot,dm-spl;
-};
-
-&pinctrl_pmic {
-	u-boot,dm-spl;
-};
-
 
 &fec1 {
 	pinctrl-names = "default";
