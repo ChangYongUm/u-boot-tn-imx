@@ -67,8 +67,6 @@ static int imx6sx_ldb_setup(struct udevice *dev, const struct display_timing *ti
 	/* GPR6 */
 	regmap_write(priv->gpr, 0x18, ctrl);
 
-	printf("imx6sx_ldb_setup"); //test
-
 	/* GPR5 */
 	video_dev = video_link_get_video_device();
 	if (!video_dev) {
