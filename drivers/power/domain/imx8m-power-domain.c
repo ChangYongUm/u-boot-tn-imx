@@ -515,10 +515,11 @@ static const struct imx_pgc_domain_data imx8mp_pgc_domain_data = {
 
 static int imx8m_power_domain_on(struct power_domain *power_domain)
 {
+	struct udevice *dev = power_domain->dev;
 
 	printf("%s imx8m_power_domain_on start \n", dev->name); //test
 
-	struct udevice *dev = power_domain->dev;
+	
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	const struct imx_pgc_domain *domain = pdata->domain;
 	const struct imx_pgc_regs *regs = pdata->regs;
