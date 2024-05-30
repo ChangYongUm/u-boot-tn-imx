@@ -515,6 +515,9 @@ static const struct imx_pgc_domain_data imx8mp_pgc_domain_data = {
 
 static int imx8m_power_domain_on(struct power_domain *power_domain)
 {
+
+	printf("%s imx8m_power_domain_on start \n", dev->name); //test
+
 	struct udevice *dev = power_domain->dev;
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	const struct imx_pgc_domain *domain = pdata->domain;
@@ -522,8 +525,6 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 	void __iomem *base = pdata->base;
 	u32 pgc;
 	int ret;
-
-	printf("%s imx8m_power_domain_on \n", dev->name); //test
 
 	if (pdata->count > 0) { /* Already on */
 		pdata->count++;
@@ -573,11 +574,15 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 
 	pdata->count++;
 
+	printf("%s imx8m_power_domain_on end \n", dev->name); //test
+
 	return 0;
 
 out_clk_disable:
 	if (pdata->clk.count)
 		clk_disable_bulk(&pdata->clk);
+
+		printf("%s imx8m_power_domain_on fail \n", dev->name); //test
 	return ret;
 }
 
@@ -678,7 +683,7 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 		name = fdt_get_name(gd->fdt_blob, offset, NULL);
 
 		/* Descend into 'pgc' subnode */
-		if (!strstr(name, "power-domain")) {
+		if (!strstr(name, "-pd")) {
 			offset = fdt_first_subnode(gd->fdt_blob, offset);
 			name = fdt_get_name(gd->fdt_blob, offset, NULL);
 		}
@@ -702,7 +707,7 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 
 static int imx8m_power_domain_probe(struct udevice *dev)
 {
-printf("%s imx8m_power_domain_probe \n", dev->name); //test
+printf("%s imx8m_power_domain_probe start \n", dev->name); //test
 
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
@@ -710,33 +715,30 @@ printf("%s imx8m_power_domain_probe \n", dev->name); //test
 	/* Nothing to do for non-"power-domain" driver instances. */
 	if (!strstr(dev->name, "-pd"))
 	{
-		printf("%s imx8m_power_domain_probe _pd none \n", dev->name); //test
 		return 0;
 	}
-
-printf("%s imx8m_power_domain_probe 1 \n", dev->name); //test
 
 	/* Grab optional power domain clock. */
 	ret = clk_get_bulk(dev, &pdata->clk);
 	if (ret && ret != -ENOENT) 
 	{
 		dev_err(dev, "Failed to get domain clock (%d)\n", ret);
-		printf("%s Failed to get domain clock (%d) \n", dev->name, ret); //test
 		return ret;
 	}
 
-printf("%s imx8m_power_domain_probe 2 \n", dev->name); //test	
+printf("%s imx8m_power_domain_probe end \n", dev->name); //test	
 
 	return 0;
 }
 
 static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 {
+
+printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
+
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	struct imx_pgc_domain_data *domain_data =
 		(struct imx_pgc_domain_data *)dev_get_driver_data(dev);
-
-printf("%s imx8m_power_domain_of_to_plat\n", dev->name); //test
 
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
@@ -746,6 +748,9 @@ printf("%s imx8m_power_domain_of_to_plat\n", dev->name); //test
 
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
+
+
+printf("%s imx8m_power_domain_of_to_plat end\n", dev->name); //test
 
 	return 0;
 }
