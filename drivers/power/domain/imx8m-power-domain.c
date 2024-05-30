@@ -708,8 +708,9 @@ printf("%s imx8m_power_domain_probe \n", dev->name); //test
 	int ret;
 
 	/* Nothing to do for non-"power-domain" driver instances. */
-	if (!strstr(dev->name, "power-domain"))
+	if (!strstr(dev->name, "_pd"))
 	{
+		printf("%s imx8m_power_domain_probe _pd none \n", dev->name); //test
 		return 0;
 	}
 
