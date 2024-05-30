@@ -35,6 +35,8 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 
 	pdata = dev_get_plat(dev);
 
+printf("%s imx8m_power_domain_on %d\n", dev->name, pdata->resource_id);	
+
 	if (pdata->resource_id < 0)
 		return -EINVAL;
 
