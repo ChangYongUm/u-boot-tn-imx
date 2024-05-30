@@ -702,19 +702,23 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 
 static int imx8m_power_domain_probe(struct udevice *dev)
 {
+printf("%s imx8m_power_domain_probe \n", dev->name); //test
+
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
 
-printf("%s imx8m_power_domain_probe \n", dev->name); //test
-
 	/* Nothing to do for non-"power-domain" driver instances. */
 	if (!strstr(dev->name, "power-domain"))
+	{
 		return 0;
+	}
 
 	/* Grab optional power domain clock. */
 	ret = clk_get_bulk(dev, &pdata->clk);
-	if (ret && ret != -ENOENT) {
+	if (ret && ret != -ENOENT) 
+	{
 		dev_err(dev, "Failed to get domain clock (%d)\n", ret);
+		printf("%s Failed to get domain clock (%d) \n", dev->name, ret); //test
 		return ret;
 	}
 
