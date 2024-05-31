@@ -715,6 +715,10 @@ static int imx8m_power_domain_probe(struct udevice *dev)
 	if (ret && ret != -ENOENT) 
 	{
 		dev_err(dev, "Failed to get domain clock (%d)\n", ret);
+
+		if (ret)
+			printf("%s '%s': %d\n", __func__, dev->driver->name, ret);
+
 		return ret;
 	}
 
@@ -723,8 +727,6 @@ static int imx8m_power_domain_probe(struct udevice *dev)
 
 static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 {
-printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
-
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	struct imx_pgc_domain_data *domain_data =
 		(struct imx_pgc_domain_data *)dev_get_driver_data(dev);
@@ -745,8 +747,6 @@ printf("%s imx8m_power_domain_of_to_plat start\n", dev->name); //test
 
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
-
-printf("%s imx8m_power_domain_of_to_plat end ID=%d\n", dev->name, pdata->resource_id); //test
 
 	return 0;
 }
