@@ -181,17 +181,27 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 	for (i = 0; i < count; i++) {
 		ret = power_domain_get_by_index(dev, &pd, i);
 		if (ret)
+		{
+			printf("%s %s(0) ret=%d on=%d \n", dev->name, __func__, ret, on); //test
 			return ret;
+		}
+
 		if (on)
 			ret = power_domain_on(&pd);
 		else
 			ret = power_domain_off(&pd);
 
 		if (ret)
+		{
+			printf("%s %s(1) ret=%d on=%d  \n", dev->name, __func__, ret, on); //test
 			return ret;
+		}
 
 		if (count > 0 && !on && dev_get_parent(dev) == pd.dev)
+		{
+			printf("%s %s(2) ret=%d on=%d  \n", dev->name, __func__, ret, on); //test		
 			return ret;
+		}
 
 		if (count > 0 && !on)
 			device_remove(pd.dev, DM_REMOVE_NORMAL);
@@ -202,7 +212,7 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 int dev_power_domain_on(struct udevice *dev)
 {
-	printf("%s() \n", __func__); //test
+	printf("%s %s() \n", dev->name, __func__); //test
 	return dev_power_domain_ctrl(dev, true);
 }
 
