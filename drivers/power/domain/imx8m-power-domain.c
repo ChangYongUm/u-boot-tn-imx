@@ -684,7 +684,7 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 		name = fdt_get_name(gd->fdt_blob, offset, NULL);
 
 		/* Descend into 'pgc' subnode */
-		if (!strstr(name, "-pd")) {
+		if (!strstr(name, "power-domain")) {
 			offset = fdt_first_subnode(gd->fdt_blob, offset);
 			name = fdt_get_name(gd->fdt_blob, offset, NULL);
 		}
@@ -716,7 +716,7 @@ printf("%s imx8m_power_domain_probe start \n", dev->name); //test
 	int ret;
 
 	/* Nothing to do for non-"power-domain" driver instances. */
-	if (!strstr(dev->name, "-pd"))
+	if (!strstr(dev->name, "power-domain"))
 	{
 		return 0;
 	}
