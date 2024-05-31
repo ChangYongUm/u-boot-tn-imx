@@ -93,6 +93,8 @@ int power_domain_get_by_index(struct udevice *dev,
 	if (ret) {
 		debug("%s: dev_read_phandle_with_args failed: %d\n",
 		      __func__, ret);
+
+	   printf("%s %s(0) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		return ret;
 	}
 
@@ -101,6 +103,7 @@ int power_domain_get_by_index(struct udevice *dev,
 	if (ret) {
 		debug("%s: uclass_get_device_by_ofnode failed: %d\n",
 		      __func__, ret);
+			  printf("%s %s(1) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		return ret;
 	}
 	ops = power_domain_dev_ops(dev_power_domain);
@@ -111,12 +114,14 @@ int power_domain_get_by_index(struct udevice *dev,
 	else
 		ret = power_domain_of_xlate_default(power_domain, &args);
 	if (ret) {
+		printf("%s %s(2) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		debug("of_xlate() failed: %d\n", ret);
 		return ret;
 	}
 
 	ret = ops->request ? ops->request(power_domain) : 0;
 	if (ret) {
+		printf("%s %s(3) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		debug("ops->request() failed: %d\n", ret);
 		return ret;
 	}
@@ -212,7 +217,6 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 int dev_power_domain_on(struct udevice *dev)
 {
-	printf("%s %s() \n", dev->name, __func__); //test
 	return dev_power_domain_ctrl(dev, true);
 }
 
