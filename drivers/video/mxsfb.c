@@ -518,6 +518,9 @@ static int mxs_video_probe(struct udevice *dev)
 	debug("%s() plat: base 0x%lx, size 0x%x\n",
 	       __func__, plat->base, plat->size);
 
+	printf("%s() plat: base 0x%lx, size 0x%x\n",
+	       __func__, plat->base, plat->size); //test
+
 	priv->reg_base = dev_read_addr(dev);
 	if (priv->reg_base == FDT_ADDR_T_NONE) {
 		dev_err(dev, "lcdif base address is not found\n");
