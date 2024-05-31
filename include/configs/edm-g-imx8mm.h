@@ -258,4 +258,7 @@
 #include "imx8mm_evk_android.h"
 #endif
 
+#define CONFIG_POWER_DOMAIN
+#define CONFIG_OF_REAL
+
 #endif
