@@ -170,10 +170,11 @@ int power_domain_off(struct power_domain *power_domain)
 	return ops->off ? ops->off(power_domain) : 0;
 }
 
+
 #if CONFIG_IS_ENABLED(OF_REAL)
 static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 {
-	struct power_domain pd;
+	s	struct power_domain pd;
 	int i, count, ret = 0;
 
 	count = dev_count_phandle_with_args(dev, "power-domains",
