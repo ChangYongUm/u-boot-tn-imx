@@ -338,7 +338,8 @@ struct udevice *video_link_get_next_device(struct udevice *curr_dev)
 		if (video_links[curr_video_link].link_devs[i] == curr_dev) {
 			if ((i + 1) < video_links[curr_video_link].dev_num) {
 				ret = device_probe(video_links[curr_video_link].link_devs[i + 1]);
-				if (ret) {
+				if (ret) 
+				{
 					printf("probe device is failed, ret %d\n", ret);
 					return NULL;
 				}
