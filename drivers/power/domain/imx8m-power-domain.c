@@ -517,9 +517,6 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 {
 	struct udevice *dev = power_domain->dev;
 
-	printf("%s imx8m_power_domain_on start \n", dev->name); //test
-
-	
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	const struct imx_pgc_domain *domain = pdata->domain;
 	const struct imx_pgc_regs *regs = pdata->regs;
@@ -574,8 +571,6 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 		clk_disable_bulk(&pdata->clk);
 
 	pdata->count++;
-
-	printf("%s imx8m_power_domain_on end \n", dev->name); //test
 
 	return 0;
 
@@ -675,8 +670,6 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 	const char *name;
 	int ret = 0;
 
-	printf("%s imx8m_power_domain_bind \n", dev->name); //test
-
 	offset = dev_of_offset(dev);
 	for (offset = fdt_first_subnode(gd->fdt_blob, offset); offset > 0;
 	     offset = fdt_next_subnode(gd->fdt_blob, offset)) {
@@ -708,10 +701,6 @@ static int imx8m_power_domain_bind(struct udevice *dev)
 
 static int imx8m_power_domain_probe(struct udevice *dev)
 {
-	return 0;
-
-printf("%s imx8m_power_domain_probe start \n", dev->name); //test
-
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
 
@@ -728,8 +717,6 @@ printf("%s imx8m_power_domain_probe start \n", dev->name); //test
 		dev_err(dev, "Failed to get domain clock (%d)\n", ret);
 		return ret;
 	}
-
-printf("%s imx8m_power_domain_probe end \n", dev->name); //test	
 
 	return 0;
 }
