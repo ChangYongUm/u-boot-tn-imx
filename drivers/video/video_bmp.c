@@ -18,6 +18,12 @@
 #define BMP_RLE8_EOBMP		1
 #define BMP_RLE8_DELTA		2
 
+
+static inline void schedule(void)
+{
+}
+
+
 /**
  * get_bmp_col_16bpp() - Convert a colour-table entry into a 16bpp pixel value
  *
