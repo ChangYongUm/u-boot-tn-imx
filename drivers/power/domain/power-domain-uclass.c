@@ -103,7 +103,8 @@ int power_domain_get_by_index(struct udevice *dev,
 	if (ret) {
 		debug("%s: uclass_get_device_by_ofnode failed: %d\n",
 		      __func__, ret);
-			  printf("%s %s(1) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
+		printf("%s %s(1) ret=%d count=%d valid=%d\n", 
+			  dev->name, __func__, ret, args.args_count, ofnode_valid(args.node)); //test
 		return ret;
 	}
 	ops = power_domain_dev_ops(dev_power_domain);
