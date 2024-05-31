@@ -128,7 +128,7 @@
 
 
 &lcdif {
-	enable_polarity_low;
+	enable_polarity_low;	
 	
 	/delete-property/ assigned-clocks;
 	/delete-property/ assigned-clock-parents;

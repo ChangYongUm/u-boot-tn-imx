@@ -281,6 +281,8 @@ static int mxs_of_get_timings(struct udevice *dev,
 			      struct display_timing *timings,
 			      u32 *bpp)
 {
+	printf("%s() \n", __func__); //test
+		
 	int ret = 0;
 	u32 display_phandle;
 	ofnode display_node;
@@ -325,6 +327,8 @@ static int mxs_of_get_timings(struct udevice *dev,
 
 static int mxs_video_probe(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
+
 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
 	struct mxsfb_priv *priv = dev_get_priv(dev);
@@ -491,3 +495,4 @@ U_BOOT_DRIVER(mxs_video) = {
 	.flags	= DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
 	.priv_auto   = sizeof(struct mxsfb_priv),
 };
+

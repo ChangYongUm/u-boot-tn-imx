@@ -60,6 +60,8 @@ static int sn65dsi84_i2c_reg_read(struct udevice *dev, uint8_t addr, uint8_t *da
 
 static int sn65dsi84_enable(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
+
 	uint8_t address;
 	uint8_t data = 0;
 	int err;
@@ -140,14 +142,14 @@ static int sn65dsi84_enable(struct udevice *dev)
 	sn65dsi84_i2c_reg_write(dev,0x09,1);
 	debug("Soft reset to default \n");
 
-	printf("sn65dsi84_enable Done\n"); //test
-
 	return 0;
 }
 
 
 static int sn65dsi84_panel_enable_backlight(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
+
 	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
 	struct mipi_dsi_device *device = plat->device;
 
@@ -165,6 +167,8 @@ static int sn65dsi84_panel_enable_backlight(struct udevice *dev)
 
 static int sn65dsi84_panel_get_display_timing(struct udevice *dev, struct display_timing *timings)
 {
+	printf("%s() \n", __func__); //test
+
 	struct mipi_dsi_panel_plat *plat = dev_get_plat(dev);
 	struct mipi_dsi_device *device = plat->device;
 	struct sn65dsi84_panel_priv *priv = dev_get_priv(dev);
@@ -184,6 +188,8 @@ static int sn65dsi84_panel_get_display_timing(struct udevice *dev, struct displa
 
 static int sn65dsi84_panel_probe(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
+
 	struct sn65dsi84_panel_priv *priv = dev_get_priv(dev);
 
 	debug("%s : sn65dsi84 probe start \n\r",__func__);
@@ -202,6 +208,8 @@ static int sn65dsi84_panel_probe(struct udevice *dev)
 
 static int sn65dsi84_panel_of_to_plat(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
+
 	struct sn65dsi84_panel_priv *priv = dev_get_priv(dev);
 	int ret;
 
