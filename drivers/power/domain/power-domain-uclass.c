@@ -202,6 +202,7 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 int dev_power_domain_on(struct udevice *dev)
 {
+	printf("%s() \n", __func__); //test
 	return dev_power_domain_ctrl(dev, true);
 }
 

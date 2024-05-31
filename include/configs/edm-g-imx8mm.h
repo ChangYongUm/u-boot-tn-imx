@@ -259,6 +259,5 @@
 #endif
 
 #define CONFIG_POWER_DOMAIN
-#define CONFIG_OF_REAL
 
 #endif
