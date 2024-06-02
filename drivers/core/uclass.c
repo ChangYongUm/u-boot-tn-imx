@@ -400,6 +400,9 @@ int uclass_find_device_by_ofnode(enum uclass_id id, ofnode node,
 	uclass_foreach_dev(dev, uc) {
 		log(LOGC_DM, LOGL_DEBUG_CONTENT, "      - checking %s\n",
 		    dev->name);
+
+		printf("%s  %s - checking %s \n", __func__, dev->name, ofnode_get_name(node) ); //test
+
 		if (ofnode_equal(dev_ofnode(dev), node)) {
 			*devp = dev;
 			goto done;
