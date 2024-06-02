@@ -539,7 +539,7 @@ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
 	if(ret) 
 	{
 		printf("%s  - result for %s: %s (ret=%d)\n", __func__, 
-	    	ofnode_get_name(node), dev ? dev->name : , ret); //test
+	    	ofnode_get_name(node), dev ? dev->name : "(none)", ret); //test
 	}
 
 
