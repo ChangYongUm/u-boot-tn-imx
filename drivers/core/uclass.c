@@ -381,10 +381,21 @@ int uclass_find_device_by_ofnode(enum uclass_id id, ofnode node,
 	log(LOGC_DM, LOGL_DEBUG, "Looking for %s\n", ofnode_get_name(node));
 	*devp = NULL;
 	if (!ofnode_valid(node))
+	{
+		printf("%s  - ofnode_valid %s: (id=%d)\n", __func__, 
+	    	ofnode_get_name(node), id ); //test
+
 		return -ENODEV;
+	}
+		
 	ret = uclass_get(id, &uc);
 	if (ret)
+	{
+		printf("%s  - uclass_get %s: (id=%d)\n", __func__, 
+	    	ofnode_get_name(node), id ); //test
+
 		return ret;
+	}
 
 	uclass_foreach_dev(dev, uc) {
 		log(LOGC_DM, LOGL_DEBUG_CONTENT, "      - checking %s\n",
@@ -525,10 +536,8 @@ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
 	log(LOGC_DM, LOGL_DEBUG, "   - result for %s: %s (ret=%d)\n",
 	    ofnode_get_name(node), dev ? dev->name : "(none)", ret);
 
-
-
-	printf("%s  - result for %s: %s (ret=%d)\n", __func__, 
-	    ofnode_get_name(node), dev ? dev->name : "(none)", ret);
+	if(ret) printf("%s  - result for %s: (ret=%d)\n", __func__, 
+	    ofnode_get_name(node), dev ? dev->name : , ret); //test
 
 
 	return uclass_get_device_tail(dev, ret, devp);

@@ -73,7 +73,7 @@ int power_domain_lookup_name(const char *name, struct power_domain *power_domain
 		return 0;
 	}
 
-	printf("%s fail: %s, ret = %d\n", __func__, name, ret);
+	printf("%s fail: %s, ret = %d\n", __func__, name, ret); 
 	return -EINVAL;
 }
 
