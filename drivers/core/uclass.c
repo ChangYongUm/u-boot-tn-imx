@@ -536,8 +536,11 @@ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
 	log(LOGC_DM, LOGL_DEBUG, "   - result for %s: %s (ret=%d)\n",
 	    ofnode_get_name(node), dev ? dev->name : "(none)", ret);
 
-	if(ret) printf("%s  - result for %s: (ret=%d)\n", __func__, 
-	    ofnode_get_name(node), dev ? dev->name : , ret); //test
+	if(ret) 
+	{
+		printf("%s  - result for %s: (ret=%d)\n", __func__, 
+	    	ofnode_get_name(node), dev ? dev->name : , ret); //test
+	}
 
 
 	return uclass_get_device_tail(dev, ret, devp);
