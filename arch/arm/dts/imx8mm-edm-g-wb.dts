@@ -129,7 +129,7 @@
 
 &lcdif {
 	enable_polarity_low;	
-	
+
 	/delete-property/ assigned-clocks;
 	/delete-property/ assigned-clock-parents;
 	/delete-property/ assigned-clock-rates; 
@@ -162,11 +162,11 @@
 
 &usbotg1 {
 	dr_mode = "peripheral";
-	status = "okay";
+	status = "disabled";
 };
 
 &usbotg2 {
 	dr_mode = "host";
-	status = "okay";
+	status = "disabled";
 };
 
