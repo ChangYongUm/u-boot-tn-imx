@@ -398,7 +398,9 @@ int uclass_find_device_by_ofnode(enum uclass_id id, ofnode node,
 
 		if(id==UCLASS_DISPLAY || id==UCLASS_POWER_DOMAIN)
 		{
-			printf(" %s %s - checking %ld %ld\n",  ofnode_get_name(node), dev->name,  dev->node_.of_offset, node.of_offset); //test
+			printf("      - checking %s %ld %ld\n",  dev->name,  dev->node_.of_offset, node.of_offset));
+
+			// printf(" %s %s - checking %ld %ld\n",  ofnode_get_name(node), dev->name,  dev->node_.of_offset, node.of_offset); //test
 		}	
 
 		if (ofnode_equal(dev_ofnode(dev), node)) {
