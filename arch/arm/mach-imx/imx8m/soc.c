@@ -876,7 +876,7 @@ static int check_mipi_dsi_nodes(void *blob)
 	};
 
 
-printf("%s ----- \n", __func__); //test
+//printf("%s ----- \n", __func__); //test
 
 	int lookup_node;
 	int nodeoff;

@@ -577,7 +577,9 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
 						 cell_count, index,
 						 &args);
 		if (ret)
+		{
 			return ret;
+		}
 		ofnode_from_of_phandle_args(&args, out_args);
 	} else {
 		struct fdtdec_phandle_args args;
@@ -588,7 +590,9 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
 						     list_name, cells_name,
 						     cell_count, index, &args);
 		if (ret)
+		{
 			return ret;
+		}
 		ofnode_from_fdtdec_phandle_args(&args, out_args);
 	}
 
