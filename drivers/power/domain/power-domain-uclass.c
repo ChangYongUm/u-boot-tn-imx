@@ -87,7 +87,7 @@ int power_domain_get_by_index(struct udevice *dev,
 
 	debug("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain);
 
-	printf("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain); //test
+	printf("%s(dev=%s, power_domain=%s, index =%d)\n", __func__, dev->name, power_domain->dev->name, index); //test
 
 	ret = dev_read_phandle_with_args(dev, "power-domain",
 					 "#power-domain-cells", 0, index,
@@ -96,7 +96,7 @@ int power_domain_get_by_index(struct udevice *dev,
 		debug("%s: dev_read_phandle_with_args failed: %d\n",
 		      __func__, ret);
 
-	   printf("%s %s(0) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
+	   printf("%s %s(0) ret=%d index=%d \n", __func__, dev->name, ret, index); //test
 		return ret;
 	}
 
