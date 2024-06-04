@@ -1,56 +1,81 @@
 // SPDX-License-Identifier: GPL-2.0+
 /*
- * Copyright (C) 2020 Sean Anderson <seanga2@gmail.com>
+ * Copyright (c) 2014 Google, Inc
  */
+
+#define LOG_CATEGORY UCLASS_SIMPLE_BUS
 
 #include <common.h>
-#include <clk.h>
+#include <asm/global_data.h>
 #include <dm.h>
+#include <dm/simple_bus.h>
+#include <fdt_support.h>
 
-/*
- * Power domains are taken care of by driver_probe, so we just have to enable
- * clocks
- */
-static int simple_pm_bus_probe(struct udevice *dev)
+DECLARE_GLOBAL_DATA_PTR;
+
+fdt_addr_t simple_bus_translate(struct udevice *dev, fdt_addr_t addr)
 {
-	int ret;
-	struct clk_bulk *bulk = dev_get_priv(dev);
+	struct simple_bus_plat *plat = dev_get_uclass_plat(dev);
 
-	ret = clk_get_bulk(dev, bulk);
-	if (ret)
-		return ret;
+	if (addr >= plat->base && addr < plat->base + plat->size)
+		addr = (addr - plat->base) + plat->target;
 
-	ret = clk_enable_bulk(bulk);
-	if (ret && ret != -ENOSYS) {
-		clk_release_bulk(bulk);
-		return ret;
-	}
+	return addr;
+}
+
+static int simple_bus_post_bind(struct udevice *dev)
+{
+#if CONFIG_IS_ENABLED(OF_PLATDATA)
 	return 0;
-}
-
-static int simple_pm_bus_remove(struct udevice *dev)
-{
+#else
+	struct simple_bus_plat *plat = dev_get_uclass_plat(dev);
 	int ret;
-	struct clk_bulk *bulk = dev_get_priv(dev);
 
-	ret = clk_release_bulk(bulk);
-	if (ret && ret != -ENOSYS)
-		return ret;
-	else
-		return 0;
+	if (CONFIG_IS_ENABLED(SIMPLE_BUS_CORRECT_RANGE)) {
+		uint64_t caddr, paddr, len;
+
+		/* only read range index 0 */
+		ret = fdt_read_range((void *)gd->fdt_blob, dev_of_offset(dev),
+				     0, &caddr, &paddr, &len);
+		if (!ret) {
+			plat->base = caddr;
+			plat->target = paddr;
+			plat->size = len;
+		}
+	} else {
+		u32 cell[3];
+
+		ret = dev_read_u32_array(dev, "ranges", cell,
+					 ARRAY_SIZE(cell));
+		if (!ret) {
+			plat->base = cell[0];
+			plat->target = cell[1];
+			plat->size = cell[2];
+		}
+	}
+
+	return dm_scan_fdt_dev(dev);
+#endif
 }
 
-static const struct udevice_id simple_pm_bus_ids[] = {
-	{ .compatible = "simple-pm-bus" },
-	{ }
+UCLASS_DRIVER(simple_bus) = {
+	.id		= UCLASS_SIMPLE_BUS,
+	.name		= "simple_bus",
+	.post_bind	= simple_bus_post_bind,
+	.per_device_plat_auto	= sizeof(struct simple_bus_plat),
 };
 
-U_BOOT_DRIVER(simple_pm_bus_drv) = {
-	.name	= "simple_pm_bus",
+#if CONFIG_IS_ENABLED(OF_REAL)
+static const struct udevice_id generic_simple_bus_ids[] = {
+	{ .compatible = "simple-bus" },
+	{ .compatible = "simple-mfd" },
+	{ }
+};
+#endif
+
+U_BOOT_DRIVER(simple_bus) = {
+	.name	= "simple_bus",
 	.id	= UCLASS_SIMPLE_BUS,
-	.of_match = simple_pm_bus_ids,
-	.probe = simple_pm_bus_probe,
-	.remove = simple_pm_bus_remove,
-	.priv_auto	= sizeof(struct clk_bulk),
+	.of_match = of_match_ptr(generic_simple_bus_ids),
 	.flags	= DM_FLAG_PRE_RELOC,
 };
