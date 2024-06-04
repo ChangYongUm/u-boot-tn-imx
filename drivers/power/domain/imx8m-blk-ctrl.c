@@ -189,6 +189,8 @@ static int imx8m_blk_ctrl_probe(struct udevice *dev)
 	struct imx8m_blk_ctrl_data *drv_data =
 		(struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
 
+printf("%s - %s %ld\n", __func__, dev->name,  dev->node_.of_offset); //test
+
 	priv->base = dev_read_addr_ptr(dev);
 	if (!priv->base)
 		return -EINVAL;
