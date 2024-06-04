@@ -87,7 +87,7 @@ int power_domain_get_by_index(struct udevice *dev,
 
 	debug("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain);
 
-	printf("%s(dev=%s, power_domain=%s, index =%d)\n", __func__, dev->name, power_domain->dev->name, index); //test
+	printf("\n %s(dev=%s, power_domain=%s, index =%d)\n", __func__, dev->name, power_domain->dev->name, index); //test
 
 	ret = dev_read_phandle_with_args(dev, "power-domains",
 					 "#power-domain-cells", 0, index,
@@ -150,6 +150,7 @@ int power_domain_get_by_name(struct udevice *dev,
 
 int power_domain_get(struct udevice *dev, struct power_domain *power_domain)
 {
+	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev.name); //test
 	return power_domain_get_by_index(dev, power_domain, 0);
 }
 
@@ -189,9 +190,11 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 	count = dev_count_phandle_with_args(dev, "power-domains",
 					    "#power-domain-cells", 0);
 
-	printf("%s - %s  countt = %d  \n", __func__, dev->name, count); //test
 
-	for (i = 0; i < count; i++) {
+	for (i = 0; i < count; i++) 
+	{
+		printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev.name); //test
+
 		ret = power_domain_get_by_index(dev, &pd, i);
 		if (ret)
 		{
