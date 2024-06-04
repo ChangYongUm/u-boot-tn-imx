@@ -1202,7 +1202,7 @@
 			};
 
 			disp_blk_ctrl: blk-ctrl@32e28000 {
-				compatible = "fsl,imx8mm-disp-blk-ctrl", "syscon";
+				compatible = "fsl,imx8mm-disp-blk-ctrl";
 				reg = <0x32e28000 0x100>;
 				power-domains = <&pgc_dispmix>, <&pgc_dispmix>,
 						<&pgc_dispmix>, <&pgc_mipi>,
