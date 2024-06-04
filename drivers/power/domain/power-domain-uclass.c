@@ -141,6 +141,8 @@ int power_domain_get_by_name(struct udevice *dev,
 		return index;
 	}
 
+	printf("%s - %s  %d  \n", __func__, dev->name, index); //test
+
 	return power_domain_get_by_index(dev, power_domain, index);
 }
 
