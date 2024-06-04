@@ -193,9 +193,10 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 	for (i = 0; i < count; i++) 
 	{
-		printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev->name); //test
-
 		ret = power_domain_get_by_index(dev, &pd, i);
+
+		printf("%s - %s  power_domain = %s  i=%d\n", __func__, dev->name, pd.dev->name, i); //test
+
 		if (ret)
 		{
 			printf("%s %s(0) ret=%d on=%d \n", dev->name, __func__, ret, on); //test
