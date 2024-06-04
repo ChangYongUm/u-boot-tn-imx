@@ -1233,7 +1233,6 @@
 				ports = <&lcdif_disp0>;
 			};
 
-
 			usbotg1: usb@32e40000 {
 				compatible = "fsl,imx8mm-usb", "fsl,imx7d-usb";
 				reg = <0x32e40000 0x200>;
