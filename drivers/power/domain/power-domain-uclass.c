@@ -87,6 +87,8 @@ int power_domain_get_by_index(struct udevice *dev,
 
 	debug("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain);
 
+	printf("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain); //test
+
 	ret = dev_read_phandle_with_args(dev, "power-domain",
 					 "#power-domain-cells", 0, index,
 					 &args);
