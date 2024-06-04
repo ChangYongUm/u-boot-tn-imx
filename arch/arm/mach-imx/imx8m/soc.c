@@ -875,6 +875,9 @@ static int check_mipi_dsi_nodes(void *blob)
 		"/soc@0/bus@30800000/mipi-dsi@30a00000/ports/port@0/endpoint@0"
 	};
 
+
+printf("%s ----- \n", __func__); //test
+
 	int lookup_node;
 	int nodeoff;
 	bool new_path = check_fdt_new_path(blob);
