@@ -274,7 +274,6 @@ int bmp_display(ulong addr, int x, int y)
 		ret = video_bmp_display(dev, addr, x, y, align);
 	}
 
-
 	printf("video_bmp_display %s addr =%ld xy=%d,%d \n", dev->name, addr, x, y); //test
 
 
