@@ -18,43 +18,6 @@
 #include <linux/ioport.h>
 #include <asm/global_data.h>
 
-
-static inline int oftree_find(const void *fdt)
-{
-	return 0;
-}
-
-
-/**
- * ofnode_from_tree_offset() - get an ofnode from a tree offset (flat tree)
- *
- * Looks up the tree and returns an ofnode with the correct of_offset (i.e.
- * containing the tree ID).
- *
- * If @offset is < 0 then this returns an ofnode with that offset and no tree
- * ID.
- *
- * @tree: tree to check
- * @offset: offset within that tree (can be < 0)
- * @return node for that offset, with the correct ID
- */
-static ofnode ofnode_from_tree_offset(oftree tree, int offset)
-{
-	ofnode node;
-
-	if (CONFIG_IS_ENABLED(OFNODE_MULTI_TREE) && offset >= 0) {
-		int tree_id = oftree_find(tree.fdt);
-
-		if (tree_id == -1)
-			return ofnode_null();
-		node.of_offset = OFTREE_NODE(tree_id, offset);
-	} else {
-		node.of_offset = offset;
-	}
-
-	return node;
-}
-
 bool ofnode_name_eq(ofnode node, const char *name)
 {
 	const char *node_name;
