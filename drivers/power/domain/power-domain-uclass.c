@@ -91,7 +91,7 @@ int power_domain_get_by_index(struct udevice *dev,
 					 "#power-domain-cells", 0, index,
 					 &args);
 
-printf("%s %s(0) ret=%d index=%d args_count = %d name=%s\n", __func__, dev->name, ret, index, args.args_count, ofnode_name(args.node)); //test
+printf("%s %s(0) ret=%d index=%d args_count = %d name=%s\n", __func__, dev->name, ret, index, args.args_count, ofnode_get_name(args.node)); //test
 
 
 	if (ret) {
