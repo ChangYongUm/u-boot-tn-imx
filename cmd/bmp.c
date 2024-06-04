@@ -275,7 +275,7 @@ int bmp_display(ulong addr, int x, int y)
 	}
 
 
-	printf("video_bmp_display %s \n", dev->name); //test
+	printf("video_bmp_display %s addr = %ld xy=%ld,%ld %d \n", dev->name, addr, x, y, align); //test
 
 
 #elif defined(CONFIG_LCD)
