@@ -576,7 +576,7 @@ int device_probe(struct udevice *dev)
 	ret = device_get_dma_constraints(dev);
 	if (ret)
 	{
-		printf("%s(6) %s ret = %d\n", __func__, rdev->name, et); //test	
+		printf("%s(6) %s ret = %d\n", __func__, dev->name, ret); //test	
 		goto fail;
 	}
 
