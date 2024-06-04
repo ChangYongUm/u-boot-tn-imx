@@ -4,6 +4,8 @@
  * Written by Simon Glass <sjg@chromium.org>
  */
 
+#define LOG_CATEGORY	LOGC_DT
+
 #include <common.h>
 #include <dm.h>
 #include <fdtdec.h>
@@ -17,6 +19,8 @@
 #include <linux/err.h>
 #include <linux/ioport.h>
 #include <asm/global_data.h>
+
+DECLARE_GLOBAL_DATA_PTR;
 
 bool ofnode_name_eq(ofnode node, const char *name)
 {
