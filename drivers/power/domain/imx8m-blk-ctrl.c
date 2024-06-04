@@ -53,13 +53,11 @@ struct imx8m_blk_ctrl_data {
 
 static int imx8m_blk_ctrl_request(struct power_domain *power_domain)
 {
-		printf("%s - %ld\n", __func__, power_domain->id); //test
 	return 0;
 }
 
 static int imx8m_blk_ctrl_free(struct power_domain *power_domain)
 {
-		printf("%s - %ld\n", __func__, power_domain->id); //test
 	return 0;
 }
 
@@ -95,7 +93,6 @@ static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
 		(struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
 	int ret;
 
-	printf("%s - %ld\n", __func__, power_domain->id); //test
 
 	debug("%s, id %lu\n", __func__, power_domain->id);
 

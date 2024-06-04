@@ -577,8 +577,6 @@ static int imx8m_power_domain_on(struct power_domain *power_domain)
 out_clk_disable:
 	if (pdata->clk.count)
 		clk_disable_bulk(&pdata->clk);
-
-		printf("%s imx8m_power_domain_on fail \n", dev->name); //test
 	return ret;
 }
 
@@ -738,8 +736,6 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 
 	if(pdata->resource_id<0) 
 	{
-		printf("%s count=%d imx8m_power_domain_of_to_plat fail offset=%d\n", dev->driver->name,  pdata->count, dev_of_offset(dev)); //test
-
 		return -ENODEV;
 	}
 

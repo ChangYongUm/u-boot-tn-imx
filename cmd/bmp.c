@@ -255,8 +255,6 @@ int bmp_display(ulong addr, int x, int y)
 	}
 	addr = map_to_sysmem(bmp);
 
-	printf("bmp_display\n"); //test
-
 #ifdef CONFIG_DM_VIDEO
 #ifdef CONFIG_VIDEO_LINK
 	dev = video_link_get_video_device();
@@ -273,9 +271,13 @@ int bmp_display(ulong addr, int x, int y)
 		    x == BMP_ALIGN_CENTER ||
 		    y == BMP_ALIGN_CENTER)
 			align = true;
-
 		ret = video_bmp_display(dev, addr, x, y, align);
 	}
+
+
+	printf("video_bmp_display %s \n", dev->name); //test
+
+
 #elif defined(CONFIG_LCD)
 	ret = lcd_display_bitmap(addr, x, y);
 #elif defined(CONFIG_VIDEO)
