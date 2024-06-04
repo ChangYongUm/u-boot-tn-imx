@@ -568,7 +568,7 @@ int device_probe(struct udevice *dev)
 		ret = dev_iommu_enable(dev);
 		if (ret)
 		{
-			printf("%s(5) %s ret = %d\n", __func__, rdev->name, et); //test
+			printf("%s(5) %s ret = %d\n", __func__, dev->name, ret); //test
 			goto fail;
 		}
 	}
@@ -622,7 +622,7 @@ int device_probe(struct udevice *dev)
 	ret = uclass_post_probe_device(dev);
 	if (ret)
 	{
-		printf("%s(11) %s ret = %d\n", __func__, rdev->name, et); //test
+		printf("%s(11) %s ret = %d\n", __func__, dev->name, ret); //test
 		goto fail_uclass;
 	}
 
