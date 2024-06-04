@@ -94,6 +94,8 @@ static int imx8m_blk_ctrl_power_on(struct power_domain *power_domain)
 	int ret;
 
 
+printf("%s(0) %s power_domain_on\n", __func__, dev->name); //test
+
 	debug("%s, id %lu\n", __func__, power_domain->id);
 
 	if (!priv->domains[power_domain->id].power_dev.dev)
@@ -189,6 +191,8 @@ static int imx8m_blk_ctrl_probe(struct udevice *dev)
 	struct imx8m_blk_ctrl *priv = (struct imx8m_blk_ctrl *)dev_get_priv(dev);
 	struct imx8m_blk_ctrl_data *drv_data =
 		(struct imx8m_blk_ctrl_data *)dev_get_driver_data(dev);
+
+printf("%s(0) %s imx8m_blk_ctrl_probe \n", __func__, dev->name); //test
 
 	priv->base = dev_read_addr_ptr(dev);
 	if (!priv->base)

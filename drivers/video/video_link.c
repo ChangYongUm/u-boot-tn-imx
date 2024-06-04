@@ -369,7 +369,7 @@ struct udevice *video_link_get_video_device(void)
 
 	ret = device_probe(video_links[curr_video_link].link_devs[0]);
 	if (ret) {
-		printf("%s device_probe failed, cur=%ld, name=%s, ret %d\n", __func__, curr_video_link, video_links[curr_video_link].link_devs[0]->name, ret);
+		printf("%s device_probe failed, cur=%ld, name=%s, ret %d\n\n", __func__, curr_video_link, video_links[curr_video_link].link_devs[0]->name, ret);
 		return NULL;
 	}
 
