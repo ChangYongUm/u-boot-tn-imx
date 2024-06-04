@@ -704,6 +704,9 @@ static int imx8m_power_domain_probe(struct udevice *dev)
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
 
+	printf("%s - %s\n", __func__, dev->name); //test
+
+
 	/* Nothing to do for non-"power-domain" driver instances. */
 	if (!strstr(dev->name, "power-domain"))
 	{
