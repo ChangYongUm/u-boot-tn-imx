@@ -489,7 +489,7 @@ int device_probe(struct udevice *dev)
 
 	if (!dev)
 	{
-		printf("%s(0) ret = %d\n", __func__, ret); //test
+		printf("%s(0) %s ret = %d\n", __func__, dev->name, ret); //test
 		return -EINVAL;
 	}
 
@@ -502,7 +502,7 @@ int device_probe(struct udevice *dev)
 	ret = device_of_to_plat(dev);
 	if (ret)
 	{
-		printf("%s(1) ret = %d\n", __func__, ret); //test
+		printf("%s(1) %s ret = %d\n", __func__, dev->name, ret); //test
 		goto fail;
 	}
 
@@ -511,7 +511,7 @@ int device_probe(struct udevice *dev)
 		ret = device_probe(dev->parent);
 		if (ret)
 		{
-			printf("%s(2) ret = %d\n", __func__, ret); //test
+			printf("%s(2) %s ret = %d\n", __func__, dev->name, ret); //test
 			goto fail;
 		}
 
@@ -536,7 +536,7 @@ int device_probe(struct udevice *dev)
 		ret = dev_power_domain_on(dev);
 		if (ret)
 		{
-			printf("%s(4) ret = %d\n", __func__, ret); //test
+			printf("%s(4) %s ret = %d\n", __func__, dev->name, ret); //test
 			goto fail;
 		}
 	}
@@ -568,7 +568,7 @@ int device_probe(struct udevice *dev)
 		ret = dev_iommu_enable(dev);
 		if (ret)
 		{
-			printf("%s(5) ret = %d\n", __func__, ret); //test
+			printf("%s(5) %s ret = %d\n", __func__, rdev->name, et); //test
 			goto fail;
 		}
 	}
@@ -576,14 +576,14 @@ int device_probe(struct udevice *dev)
 	ret = device_get_dma_constraints(dev);
 	if (ret)
 	{
-		printf("%s(6) ret = %d\n", __func__, ret); //test	
+		printf("%s(6) %s ret = %d\n", __func__, rdev->name, et); //test	
 		goto fail;
 	}
 
 	ret = uclass_pre_probe_device(dev);
 	if (ret)
 	{
-		printf("%s(7) ret = %d\n", __func__, ret); //test
+		printf("%s(7) %s ret = %d\n", __func__, dev->name, ret); //test
 		goto fail;
 	}
 
@@ -591,7 +591,7 @@ int device_probe(struct udevice *dev)
 		ret = dev->parent->driver->child_pre_probe(dev);
 		if (ret)
 		{
-			printf("%s(8) ret = %d\n", __func__, ret); //test		
+			printf("%s(8) %s ret = %d\n", __func__, dev->name, ret); //test		
 			goto fail;
 		}
 	}
@@ -605,7 +605,7 @@ int device_probe(struct udevice *dev)
 		ret = clk_set_defaults(dev, CLK_DEFAULTS_PRE);
 		if (ret)
 		{
-			printf("%s(9) ret = %d\n", __func__, ret); //test
+			printf("%s(9) %s ret = %d\n", __func__, dev->name, ret); //test
 			goto fail;
 		}
 	}
@@ -614,7 +614,7 @@ int device_probe(struct udevice *dev)
 		ret = drv->probe(dev);
 		if (ret)
 		{
-			printf("%s(10) ret = %d\n", __func__, ret); //test
+			printf("%s(10) %s ret = %d\n", __func__, dev->name, ret); //test
 			goto fail;
 		}
 	}
@@ -622,7 +622,7 @@ int device_probe(struct udevice *dev)
 	ret = uclass_post_probe_device(dev);
 	if (ret)
 	{
-		printf("%s(11) ret = %d\n", __func__, ret); //test
+		printf("%s(11) %s ret = %d\n", __func__, rdev->name, et); //test
 		goto fail_uclass;
 	}
 

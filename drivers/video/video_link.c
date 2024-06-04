@@ -512,16 +512,17 @@ int video_link_init(void)
 		for (env_id = 0; env_id < video_links_num; env_id ++) {
 			for (i = video_links[env_id].dev_num - 1; i >= 0 ; i--) {
 				dev = video_links[env_id].link_devs[i];
-				if (device_get_uclass_id(dev) == UCLASS_PANEL) {
+				if (device_get_uclass_id(dev) == UCLASS_PANEL) 
+				{
 					ret = device_probe(video_links[env_id].link_devs[i]);
-
-					printf("video_link_init, env_id=%d i=%ld / video_links_num=%ld , ret = %d \n", env_id, i, video_links_num, ret);//test
-
 
 					if (!ret) 
 					{
 						curr_video_link = env_id;
 						env_id = video_links_num;
+
+						printf("%s, env_id=%d curr_video_link=%ld video_links_num=%ld \n", __func__, env_id, curr_video_link, video_links_num);//test
+
 					}
 					break;
 				}
@@ -529,7 +530,6 @@ int video_link_init(void)
 		}
 	}
 
-	printf("video_link_init, env_id=%d curr_video_link=%ld video_links_num=%ld \n", env_id, curr_video_link, video_links_num);//test
 
 	list_videolink(true);
 
