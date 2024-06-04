@@ -150,7 +150,7 @@ int power_domain_get_by_name(struct udevice *dev,
 
 int power_domain_get(struct udevice *dev, struct power_domain *power_domain)
 {
-	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev.name); //test
+	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev->name); //test
 	return power_domain_get_by_index(dev, power_domain, 0);
 }
 
@@ -193,7 +193,7 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 	for (i = 0; i < count; i++) 
 	{
-		printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev.name); //test
+		printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev->name); //test
 
 		ret = power_domain_get_by_index(dev, &pd, i);
 		if (ret)
