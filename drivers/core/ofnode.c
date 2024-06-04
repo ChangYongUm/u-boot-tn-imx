@@ -417,7 +417,7 @@ int ofnode_stringlist_search(ofnode node, const char *property,
 	} else {
 		int ret;
 
-		ret = fdt_stringlist_search(ofnode_to_fdt(node),
+		ret = fdt_stringlist_search(gd->fdt_blob,
 					    ofnode_to_offset(node), property,
 					    string);
 		if (ret == -FDT_ERR_NOTFOUND)
@@ -438,8 +438,7 @@ int ofnode_read_string_index(ofnode node, const char *property, int index,
 	} else {
 		int len;
 
-		*outp = fdt_stringlist_get(ofnode_to_fdt(node),
-					   ofnode_to_offset(node),
+		*outp = fdt_stringlist_get(gd->fdt_blob, ofnode_to_offset(node),
 					   property, index, &len);
 		if (len < 0)
 			return -EINVAL;
@@ -452,7 +451,7 @@ int ofnode_read_string_count(ofnode node, const char *property)
 	if (ofnode_is_np(node)) {
 		return of_property_count_strings(ofnode_to_np(node), property);
 	} else {
-		return fdt_stringlist_count(ofnode_to_fdt(node),
+		return fdt_stringlist_count(gd->fdt_blob,
 					    ofnode_to_offset(node), property);
 	}
 }
