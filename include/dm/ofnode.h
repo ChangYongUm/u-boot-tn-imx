@@ -1549,5 +1549,6 @@ int ofnode_add_subnode(ofnode parent, const char *name, ofnode *nodep);
  * @dst: Destination node to write properties too
  */
 int ofnode_copy_props(ofnode src, ofnode dst);
+int ofnode_get_first_property(ofnode node, struct ofprop *prop);
 
 #endif
