@@ -53,11 +53,13 @@ struct imx8m_blk_ctrl_data {
 
 static int imx8m_blk_ctrl_request(struct power_domain *power_domain)
 {
+		printf("%s - %ld\n", __func__, power_domain->id); //test
 	return 0;
 }
 
 static int imx8m_blk_ctrl_free(struct power_domain *power_domain)
 {
+		printf("%s - %ld\n", __func__, power_domain->id); //test
 	return 0;
 }
 
