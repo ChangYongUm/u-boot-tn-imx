@@ -87,8 +87,6 @@ int power_domain_get_by_index(struct udevice *dev,
 
 	debug("%s(dev=%p, power_domain=%p)\n", __func__, dev, power_domain);
 
-	printf("\n %s(dev=%s, power_domain=%s, index =%d)\n", __func__, dev->name, power_domain->dev->name, index); //test
-
 	ret = dev_read_phandle_with_args(dev, "power-domains",
 					 "#power-domain-cells", 0, index,
 					 &args);
@@ -138,12 +136,16 @@ int power_domain_get_by_name(struct udevice *dev,
 	int index;
 
 	index = dev_read_stringlist_search(dev, "power-domain-names", name);
-	if (index < 0) {
+	if (index < 0) 
+	{
 		debug("fdt_stringlist_search() failed: %d\n", index);
+
+		printf("%s - %s fdt_stringlist_search() failed: %d\n  \n", __func__, dev->name, index); //test
+
 		return index;
 	}
 
-	printf("%s - %s  Searching name -%s, result = %d  \n", __func__, dev->name, name, index); //test
+	printf("%s - %s  Searching Name -%s, Searching Index = %d  \n", __func__, dev->name, name, index); //test
 
 	return power_domain_get_by_index(dev, power_domain, index);
 }

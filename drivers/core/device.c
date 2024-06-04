@@ -523,7 +523,6 @@ int device_probe(struct udevice *dev)
 		 */
 		if (dev_get_flags(dev) & DM_FLAG_ACTIVATED)
 		{
-			printf("%s(3) ret = %d\n", __func__, ret); //test
 			return 0;
 		}
 	}
