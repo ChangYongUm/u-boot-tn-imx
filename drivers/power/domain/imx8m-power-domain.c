@@ -213,16 +213,14 @@ struct imx8m_power_domain_plat {
 	int count;
 };
 
-#if defined(CONFIG_IMX8MM) || defined(CONFIG_IMX8MN) || defined(CONFIG_IMX8MQ)
 static const struct imx_pgc_regs imx7_pgc_regs = {
 	.map = GPC_PGC_CPU_MAPPING,
 	.pup = GPC_PU_PGC_SW_PUP_REQ,
 	.pdn = GPC_PU_PGC_SW_PDN_REQ,
 	.hsk = GPC_PU_PWRHSK,
 };
-#endif
 
-#ifdef CONFIG_IMX8MQ
+
 static const struct imx_pgc_domain imx8m_pgc_domains[] = {
 	[IMX8M_POWER_DOMAIN_PCIE1] = {
 		.bits  = {
@@ -262,9 +260,7 @@ static const struct imx_pgc_domain_data imx8m_pgc_domain_data = {
 	.domains_num = ARRAY_SIZE(imx8m_pgc_domains),
 	.pgc_regs = &imx7_pgc_regs,
 };
-#endif
 
-#ifdef CONFIG_IMX8MM
 static const struct imx_pgc_domain imx8mm_pgc_domains[] = {
 	[IMX8MM_POWER_DOMAIN_HSIOMIX] = {
 		.bits  = {
@@ -382,136 +378,6 @@ static const struct imx_pgc_domain_data imx8mm_pgc_domain_data = {
 	.domains_num = ARRAY_SIZE(imx8mm_pgc_domains),
 	.pgc_regs = &imx7_pgc_regs,
 };
-#endif
-
-#ifdef CONFIG_IMX8MN
-static const struct imx_pgc_domain imx8mn_pgc_domains[] = {
-	[IMX8MN_POWER_DOMAIN_HSIOMIX] = {
-		.bits  = {
-			.pxx = 0, /* no power sequence control */
-			.map = 0, /* no power sequence control */
-			.hskreq = IMX8MN_HSIO_HSK_PWRDNREQN,
-			.hskack = IMX8MN_HSIO_HSK_PWRDNACKN,
-		},
-		.keep_clocks = true,
-	},
-
-	[IMX8MN_POWER_DOMAIN_OTG1] = {
-		.bits  = {
-			.pxx = IMX8MN_OTG1_SW_Pxx_REQ,
-			.map = IMX8MN_OTG1_A53_DOMAIN,
-		},
-		.pgc   = BIT(IMX8MN_PGC_OTG1),
-	},
-
-	[IMX8MN_POWER_DOMAIN_GPUMIX] = {
-		.bits  = {
-			.pxx = IMX8MN_GPUMIX_SW_Pxx_REQ,
-			.map = IMX8MN_GPUMIX_A53_DOMAIN,
-			.hskreq = IMX8MN_GPUMIX_HSK_PWRDNREQN,
-			.hskack = IMX8MN_GPUMIX_HSK_PWRDNACKN,
-		},
-		.pgc   = BIT(IMX8MN_PGC_GPUMIX),
-		.keep_clocks = true,
-	},
-
-	[IMX8MN_POWER_DOMAIN_DISPMIX] = {
-		.bits  = {
-			.pxx = IMX8MN_DISPMIX_SW_Pxx_REQ,
-			.map = IMX8MN_DISPMIX_A53_DOMAIN,
-			.hskreq = IMX8MN_DISPMIX_HSK_PWRDNREQN,
-			.hskack = IMX8MN_DISPMIX_HSK_PWRDNACKN,
-		},
-		.pgc   = BIT(IMX8MN_PGC_DISPMIX),
-		.keep_clocks = true,
-	},
-
-	[IMX8MN_POWER_DOMAIN_MIPI] = {
-		.bits  = {
-			.pxx = IMX8MN_MIPI_SW_Pxx_REQ,
-			.map = IMX8MN_MIPI_A53_DOMAIN,
-		},
-		.pgc   = BIT(IMX8MN_PGC_MIPI),
-	},
-};
-
-static const struct imx_pgc_domain_data imx8mn_pgc_domain_data = {
-	.domains = imx8mn_pgc_domains,
-	.domains_num = ARRAY_SIZE(imx8mn_pgc_domains),
-	.pgc_regs = &imx7_pgc_regs,
-};
-#endif
-
-#ifdef CONFIG_IMX8MP
-static const struct imx_pgc_domain imx8mp_pgc_domains[19] = {
-	[IMX8MP_POWER_DOMAIN_MIPI_PHY1] = {
-		.bits = {
-			.pxx = IMX8MP_MIPI_PHY1_SW_Pxx_REQ,
-			.map = IMX8MP_MIPI_PHY1_A53_DOMAIN,
-		},
-		.pgc = BIT(IMX8MP_PGC_MIPI1),
-	},
-
-	[IMX8MP_POWER_DOMAIN_PCIE_PHY] = {
-		.bits = {
-			.pxx = IMX8MP_PCIE_PHY_SW_Pxx_REQ,
-			.map = IMX8MP_PCIE_PHY_A53_DOMAIN,
-		},
-		.pgc = BIT(IMX8MP_PGC_PCIE),
-	},
-
-	[IMX8MP_POWER_DOMAIN_USB1_PHY] = {
-		.bits = {
-			.pxx = IMX8MP_USB1_PHY_Pxx_REQ,
-			.map = IMX8MP_USB1_PHY_A53_DOMAIN,
-		},
-		.pgc = BIT(IMX8MP_PGC_USB1),
-	},
-
-	[IMX8MP_POWER_DOMAIN_USB2_PHY] = {
-		.bits = {
-			.pxx = IMX8MP_USB2_PHY_Pxx_REQ,
-			.map = IMX8MP_USB2_PHY_A53_DOMAIN,
-		},
-		.pgc = BIT(IMX8MP_PGC_USB2),
-	},
-
-	[IMX8MP_POWER_DOMAIN_MEDIAMIX] = {
-		.bits = {
-			.pxx = IMX8MP_MEDIMIX_Pxx_REQ,
-			.map = IMX8MP_MEDIAMIX_A53_DOMAIN,
-			.hskreq = IMX8MP_MEDIAMIX_PWRDNREQN,
-			.hskack = IMX8MP_MEDIAMIX_PWRDNACKN,
-		},
-		.pgc = BIT(IMX8MP_PGC_MEDIAMIX),
-		.keep_clocks = true,
-	},
-
-	[IMX8MP_POWER_DOMAIN_HSIOMIX] = {
-		.bits = {
-			.pxx = IMX8MP_HSIOMIX_Pxx_REQ,
-			.map = IMX8MP_HSIOMIX_A53_DOMAIN,
-			.hskreq = IMX8MP_HSIOMIX_PWRDNREQN,
-			.hskack = IMX8MP_HSIOMIX_PWRDNACKN,
-		},
-		.pgc = BIT(IMX8MP_PGC_HSIOMIX),
-		.keep_clocks = true,
-	},
-};
-
-static const struct imx_pgc_regs imx8mp_pgc_regs = {
-	.map = IMX8MP_GPC_PGC_CPU_MAPPING,
-	.pup = IMX8MP_GPC_PU_PGC_SW_PUP_REQ,
-	.pdn = IMX8MP_GPC_PU_PGC_SW_PDN_REQ,
-	.hsk = IMX8MP_GPC_PU_PWRHSK,
-};
-
-static const struct imx_pgc_domain_data imx8mp_pgc_domain_data = {
-	.domains = imx8mp_pgc_domains,
-	.domains_num = ARRAY_SIZE(imx8mp_pgc_domains),
-	.pgc_regs = &imx8mp_pgc_regs,
-};
-#endif
 
 static int imx8m_power_domain_on(struct power_domain *power_domain)
 {
@@ -750,10 +616,7 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 }
 
 static const struct udevice_id imx8m_power_domain_ids[] = {
-	{ .compatible = "fsl,imx8mq-gpc", .data = (long)&imx8m_pgc_domain_data },
 	{ .compatible = "fsl,imx8mm-gpc", .data = (long)&imx8mm_pgc_domain_data },
-	{ .compatible = "fsl,imx8mn-gpc", .data = (long)&imx8mn_pgc_domain_data },
-	{ .compatible = "fsl,imx8mp-gpc", .data = (long)&imx8mp_pgc_domain_data },
 	{ }
 };
 
