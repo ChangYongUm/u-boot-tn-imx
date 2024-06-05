@@ -81,7 +81,7 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 	uint8_t valid_data = 0;
 	uint32_t vdctrl0;
 
-	printf("%s() \n", __func__); //test
+	printf("%s() %s \n", __func__, dev->name); //test
 
 #if CONFIG_IS_ENABLED(CLK)
 	struct clk clk;
