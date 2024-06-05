@@ -93,6 +93,8 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		return;
 	}
 
+	printf("%s() clk.name=%s  rate = %ld  \n", __func__, clk.name, clk.rate); //test
+
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
 		dev_err(dev, "Failed to set mxs pix clk: %d\n", ret);
