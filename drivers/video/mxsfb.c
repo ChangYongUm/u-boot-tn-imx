@@ -84,7 +84,7 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 
 #if CONFIG_IS_ENABLED(CLK)
 	struct clk clk;
-	int ret;
+	long ret;
 
 	ret = clk_get_by_name(dev, "pix", &clk);
 	if (ret) {
@@ -96,7 +96,7 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
-		dev_err(dev, "Failed to set mxs pix clk: %d\n", ret);
+		dev_err(dev, "Failed to set mxs pix clk: %ld %d\n", clk.rate, ret);
 		return;
 	}
 
