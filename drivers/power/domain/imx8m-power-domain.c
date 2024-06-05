@@ -609,6 +609,9 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 	pdata->regs = domain_data->pgc_regs;
 	pdata->base = dev_read_addr_ptr(dev->parent);
 
+printf("%s - %s\n", __func__, dev->name); //test
+
+
 	if (!power_domain_get(dev, &pdata->pd))
 		pdata->has_pd = 1;
 
