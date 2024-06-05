@@ -168,8 +168,9 @@ int splash_display(void)
 		return ret;
 
 	splash_get_pos(&x, &y);
-
 	ret = bmp_display(addr, x, y);
+
+	printf("%s bmp_display %ld %ld %ld\n", __func__,addr, x, y);//test
 
 	/* Skip banner output on video console if the logo is not at 0,0 */
 	if (x || y)
