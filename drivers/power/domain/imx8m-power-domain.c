@@ -601,9 +601,11 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 					    "reg", -1);
 
 
-printf("%s - %s pdata->resource_id=%d\n", __func__, dev->name, pdata->resource_id); //test
 
-	if(pdata->resource_id<0) 
+
+printf("%s - %s domain_data->domains_num=%d pdata->resource_id=%d\n", __func__, dev->name, domain_data->domains_num, pdata->resource_id); //test
+
+	if(pdata->resource_id<0 || pdata->resource_id>=domain_data->domains_num) 
 	{
 		return -ENODEV;
 	}
