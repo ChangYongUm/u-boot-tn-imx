@@ -167,6 +167,8 @@ static int imx_sec_dsim_probe(struct udevice *dev)
 
 	device->dev = dev;
 
+	printf("%s - %s\n", __func__, dev->name); //test
+
 #if IS_ENABLED(CONFIG_DM_RESET)
 	int ret;
 	/* Allow to not have resets */
