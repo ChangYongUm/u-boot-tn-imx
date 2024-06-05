@@ -327,7 +327,7 @@ static int mxs_of_get_timings(struct udevice *dev,
 
 static int mxs_video_probe(struct udevice *dev)
 {
-	printf("%s() \n", __func__); //test
+	printf("%s() %s start \n", __func__, dev->name); //test
 
 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
@@ -443,6 +443,8 @@ static int mxs_video_probe(struct udevice *dev)
 					DCACHE_WRITEBACK);
 	video_set_flush_dcache(dev, true);
 	gd->fb_base = plat->base;
+
+	printf("%s() %s end \n", __func__, dev->name); //test
 
 	return ret;
 }

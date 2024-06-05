@@ -704,18 +704,17 @@
 				#reset-cells = <1>;
 			};
 
-	
-
-				power-domains {
-					#address-cells = <1>;
-					#size-cells = <0>;
-
+			gpc: gpc@303a0000 {
 				compatible = "fsl,imx8mm-gpc";
 				reg = <0x303a0000 0x10000>;
 				interrupts = <GIC_SPI 87 IRQ_TYPE_LEVEL_HIGH>;
 				interrupt-parent = <&gic>;
 				interrupt-controller;
 				#interrupt-cells = <3>;
+
+				pgc {
+					#address-cells = <1>;
+					#size-cells = <0>;
 
 					pgc_hsiomix: power-domain@0 {
 						#power-domain-cells = <0>;
@@ -804,7 +803,7 @@
 						#power-domain-cells = <0>;
 						reg = <IMX8MM_POWER_DOMAIN_MIPI>;
 					};
-				
+				};
 			};
 		};
 
