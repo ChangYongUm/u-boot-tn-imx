@@ -600,6 +600,9 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
 
+
+printf("%s - %s pdata->resource_id=%d\n", __func__, dev->name, pdata->resource_id); //test
+
 	if(pdata->resource_id<0) 
 	{
 		return -ENODEV;
