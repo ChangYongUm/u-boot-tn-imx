@@ -90,7 +90,7 @@ int power_domain_get_by_index(struct udevice *dev,
 	ret = dev_read_phandle_with_args(dev, "power-domains",
 					 "#power-domain-cells", 0, index,
 					 &args);
-	printf("[0] %s %s( ret=%d index=%d args_count = %d name=%s\n", __func__, dev->name, ret, index, args.args_count, ofnode_get_name(args.node)); //test
+	printf("[0] %s %s( ret=%d index=%d args_count = %d name=%s )\n", __func__, dev->name, ret, index, args.args_count, ofnode_get_name(args.node)); //test
 
 	if (ret) {
 		debug("%s: dev_read_phandle_with_args failed: %d\n",
