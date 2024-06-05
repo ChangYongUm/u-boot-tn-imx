@@ -572,7 +572,7 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
 		struct of_phandle_args args;
 		int ret;
 
-		printf("[0] %s %s ofnode_is_np \n", __func__, ofnode_get_name(node)); //test
+		//printf("[0] %s %s ofnode_is_np \n", __func__, ofnode_get_name(node)); //test
 
 		ret = of_parse_phandle_with_args(ofnode_to_np(node),
 						 list_name, cells_name,
@@ -592,7 +592,7 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
 						     list_name, cells_name,
 						     cell_count, index, &args);
 
-		printf("[1] %s %s fdtdec_parse_phandle_with_args %d \n", __func__, ofnode_get_name(node), ret); //test
+		//printf("[1] %s %s fdtdec_parse_phandle_with_args %d \n", __func__, ofnode_get_name(node), ret); //test
 
 		if (ret)
 		{
