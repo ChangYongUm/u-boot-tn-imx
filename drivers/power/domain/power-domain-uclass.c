@@ -157,8 +157,7 @@ int power_domain_get_by_name(struct udevice *dev,
 }
 
 int power_domain_get(struct udevice *dev, struct power_domain *power_domain)
-{
-	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, power_domain->dev->name); //test
+{	
 	return power_domain_get_by_index(dev, power_domain, 0);
 }
 

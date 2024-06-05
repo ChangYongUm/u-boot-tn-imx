@@ -601,7 +601,6 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 					    "reg", -1);
 
 
-pdata->resource_id = IMX8MM_POWER_DOMAIN_DISPMIX;
 printf("%s - %s domain_data->domains_num=%d pdata->resource_id=%X dev_of_offset(dev) = %d\n", __func__, dev->name, domain_data->domains_num, pdata->resource_id, dev_of_offset(dev)); //test
 
 	if(pdata->resource_id<0 || pdata->resource_id>=domain_data->domains_num) 
@@ -613,11 +612,12 @@ printf("%s - %s domain_data->domains_num=%d pdata->resource_id=%X dev_of_offset(
 	pdata->regs = domain_data->pgc_regs;
 	pdata->base = dev_read_addr_ptr(dev->parent);
 
-printf("%s - %s\n", __func__, dev->name); //test
-
-
 	if (!power_domain_get(dev, &pdata->pd))
+	{
 		pdata->has_pd = 1;
+	}
+
+	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, pdata->pd.dev->name); //test
 
 	return 0;
 }
