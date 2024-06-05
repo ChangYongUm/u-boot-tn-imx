@@ -472,6 +472,8 @@ int uclass_get_device_tail(struct udevice *dev, int ret, struct udevice **devp)
 
 	*devp = dev;
 
+printf("%s device_probe %s \n", __func__, dev->name); //test
+
 	return 0;
 }
 
@@ -528,11 +530,7 @@ int uclass_get_device_by_ofnode(enum uclass_id id, ofnode node,
 	*devp = NULL;
 	ret = uclass_find_device_by_ofnode(id, node, &dev);
 
-if(id==UCLASS_POWER_DOMAIN)
-{
 	printf("[0] %s Looking for %s \n", __func__, ofnode_get_name(node)); //test
-}
-
 
 	log(LOGC_DM, LOGL_DEBUG, "   - result for %s: %s (ret=%d)\n",
 	    ofnode_get_name(node), dev ? dev->name : "(none)", ret);
