@@ -81,7 +81,6 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 	uint8_t valid_data = 0;
 	uint32_t vdctrl0;
 
-	printf("%s() %s \n", __func__, dev->name); //test
 
 #if CONFIG_IS_ENABLED(CLK)
 	struct clk clk;
@@ -93,7 +92,7 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		return;
 	}
 
-	printf("%s() clk.name=%s  rate = %ld  \n", __func__, clk.dev->name, clk.rate); //test
+	printf("%s() clk.name=%s  rate = %ld  wanted = %ld\n", __func__, clk.dev->name, clk.rate, timings->pixelclock.typ); //test
 
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
@@ -224,9 +223,6 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 static int mxs_probe_common(struct udevice *dev, struct display_timing *timings,
 			    int bpp, u32 fb, bool bridge)
 {
-
-	printf("%s() \n", __func__); //test
-
 	/* Start framebuffer */
 	mxs_lcd_init(dev, fb, timings, bpp, bridge);
 
@@ -259,8 +255,6 @@ static int mxs_probe_common(struct udevice *dev, struct display_timing *timings,
 
 static int mxs_remove_common(phys_addr_t reg_base, u32 fb)
 {
-	printf("%s() \n", __func__); //test
-
 	struct mxs_lcdif_regs *regs = (struct mxs_lcdif_regs *)(reg_base);
 	int timeout = 1000000;
 
@@ -290,8 +284,7 @@ static int mxs_of_get_timings(struct udevice *dev,
 			      struct display_timing *timings,
 			      u32 *bpp)
 {
-	printf("%s() \n", __func__); //test
-		
+	
 	int ret = 0;
 	u32 display_phandle;
 	ofnode display_node;
@@ -336,8 +329,6 @@ static int mxs_of_get_timings(struct udevice *dev,
 
 static int mxs_video_probe(struct udevice *dev)
 {
-	printf("%s() %s start \n", __func__, dev->name); //test
-
 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 	struct video_priv *uc_priv = dev_get_uclass_priv(dev);
 	struct mxsfb_priv *priv = dev_get_priv(dev);
@@ -350,9 +341,6 @@ static int mxs_video_probe(struct udevice *dev)
 
 	debug("%s() plat: base 0x%lx, size 0x%x\n",
 	       __func__, plat->base, plat->size);
-
-	printf("%s() plat: base 0x%lx, size 0x%x\n",
-	       __func__, plat->base, plat->size); //test
 
 	priv->reg_base = dev_read_addr(dev);
 	if (priv->reg_base == FDT_ADDR_T_NONE) {
@@ -453,15 +441,11 @@ static int mxs_video_probe(struct udevice *dev)
 	video_set_flush_dcache(dev, true);
 	gd->fb_base = plat->base;
 
-	printf("%s() %s end \n", __func__, dev->name); //test
-
 	return ret;
 }
 
 static int mxs_video_bind(struct udevice *dev)
 {
-	printf("%s() \n", __func__); //test
-
 	struct video_uc_plat *plat = dev_get_uclass_plat(dev);
 
 	/* Max size supported by LCDIF, because in bind, we can't probe panel */

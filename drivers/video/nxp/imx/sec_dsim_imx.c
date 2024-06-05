@@ -167,8 +167,6 @@ static int imx_sec_dsim_probe(struct udevice *dev)
 
 	device->dev = dev;
 
-	printf("%s() %s start \n", __func__, dev->name); //test
-
 #if IS_ENABLED(CONFIG_DM_RESET)
 	int ret;
 	/* Allow to not have resets */
@@ -193,9 +191,6 @@ static int imx_sec_dsim_probe(struct udevice *dev)
 		}
 	}
 #endif
-
-	printf("%s() %s end \n", __func__, dev->name); //test
-
 	return 0;
 }
 
@@ -225,8 +220,6 @@ static int imx_sec_dsim_check_timing(struct udevice *dev, struct display_timing 
 	priv->adj.flags |= DISPLAY_FLAGS_HSYNC_HIGH | DISPLAY_FLAGS_VSYNC_HIGH;
 
 	*timing = priv->adj;
-
-	printf("%s() \n", __func__); //test
 
 	return 0;
 }
