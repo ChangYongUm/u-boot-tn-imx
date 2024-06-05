@@ -81,6 +81,8 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 	uint8_t valid_data = 0;
 	uint32_t vdctrl0;
 
+	printf("%s() \n", __func__); //test
+
 #if CONFIG_IS_ENABLED(CLK)
 	struct clk clk;
 	int ret;
@@ -220,6 +222,9 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 static int mxs_probe_common(struct udevice *dev, struct display_timing *timings,
 			    int bpp, u32 fb, bool bridge)
 {
+
+	printf("%s() \n", __func__); //test
+
 	/* Start framebuffer */
 	mxs_lcd_init(dev, fb, timings, bpp, bridge);
 
@@ -252,6 +257,8 @@ static int mxs_probe_common(struct udevice *dev, struct display_timing *timings,
 
 static int mxs_remove_common(phys_addr_t reg_base, u32 fb)
 {
+	printf("%s() \n", __func__); //test
+
 	struct mxs_lcdif_regs *regs = (struct mxs_lcdif_regs *)(reg_base);
 	int timeout = 1000000;
 
