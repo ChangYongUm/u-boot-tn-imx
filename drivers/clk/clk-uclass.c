@@ -93,6 +93,10 @@ static int clk_get_by_index_tail(int ret, ofnode node,
 
 	clk->dev = dev_clk;
 
+	printf("%s(dev=%s, clk=%s index=%d arg.node=%s arg_count=%d)\n", __func__, dev->name,  clk->dev->name, 
+index, args.args_count, ofnode_get_name(args.node)  );//test					 
+
+
 	ops = clk_dev_ops(dev_clk);
 
 	if (ops->of_xlate)
