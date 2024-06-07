@@ -131,6 +131,9 @@ static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
 		return log_ret(ret);
 	}
 
+printf("%s(dev=%s, name=%s, index=%d arg_count=%d)\n", __func__, dev->name, prop_name, 
+index, args.args_count  );//test
+
 
 	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
 				     index, clk);
@@ -402,9 +405,6 @@ int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
 {
 	int index;
 
-	debug("%s(dev=%p, name=%s, clk=%p)\n", __func__, dev, name, clk);
-	printf("%s(dev=%s, name=%s, clk=%p)\n", __func__, dev->name, name, clk);//test
-
 	clk->dev = NULL;
 
 	index = dev_read_stringlist_search(dev, "clock-names", name);
@@ -412,6 +412,8 @@ int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
 		debug("fdt_stringlist_search() failed: %d\n", index);
 		return index;
 	}
+
+	printf("%s(dev=%s, name=%s, index=%d clk=%p)\n", __func__, dev->name, name, index, clk);//test
 
 	return clk_get_by_index(dev, index, clk);
 }
@@ -426,6 +428,8 @@ int clk_get_by_name_nodev(ofnode node, const char *name, struct clk *clk)
 	clk->dev = NULL;
 
 	index = ofnode_stringlist_search(node, "clock-names", name);
+
+
 	if (index < 0) {
 		debug("fdt_stringlist_search() failed: %d\n", index);
 		return index;
@@ -590,6 +594,7 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
 	if (!clk_valid(clk))
 		return 0;
+
 	ops = clk_dev_ops(clk->dev);
 
 	if (!ops->set_rate)
