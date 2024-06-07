@@ -94,7 +94,7 @@ static int clk_get_by_index_tail(int ret, ofnode node,
 	clk->dev = dev_clk;
 
 	printf("%s(clk=%s index=%d arg.node=%s arg_count=%d)\n", __func__,  clk->dev->name, 
-index, args.args_count, ofnode_get_name(args.node)  );//test					 
+index, ofnode_get_name(args->node), args->args_count  );//test					 
 
 
 	ops = clk_dev_ops(dev_clk);
