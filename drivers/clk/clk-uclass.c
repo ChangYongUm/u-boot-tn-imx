@@ -93,10 +93,6 @@ static int clk_get_by_index_tail(int ret, ofnode node,
 
 	clk->dev = dev_clk;
 
-	printf("%s(clk=%s index=%d arg.node=%s arg_count=%d)\n", __func__,  clk->dev->name, 
-index, ofnode_get_name(args->node), args->args_count  );//test					 
-
-
 	ops = clk_dev_ops(dev_clk);
 
 	if (ops->of_xlate)
@@ -146,9 +142,7 @@ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
 
 	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0,
 					 index, &args);
-
-printf("%s(dev=%s, index=%d arg.node=%s arg_count=%d)\n", __func__, dev->name,  
-index, ofnode_get_name(args.node), args.args_count  );//test					 
+	 
 
 	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
 				     index, clk);
@@ -415,8 +409,6 @@ int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
 		debug("fdt_stringlist_search() failed: %d\n", index);
 		return index;
 	}
-
-	printf("%s(dev=%s, name=%s, index=%d clk=%p)\n", __func__, dev->name, name, index, clk);//test
 
 	return clk_get_by_index(dev, index, clk);
 }
