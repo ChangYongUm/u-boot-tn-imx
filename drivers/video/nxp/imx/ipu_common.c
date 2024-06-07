@@ -133,10 +133,12 @@ struct clk *clk_get_parent(struct clk *clk)
 
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
+
+printf("%s() %p %d=.%d\n", __func__, clk->set_rate, rate);//test
+
 	if (!clk)
 		return 0;
 
-printf("%s() %p %d=.%d\n", __func__, clk->set_rate, rate);//test
 
 	if (clk->set_rate)	
 		clk->set_rate(clk, rate);
