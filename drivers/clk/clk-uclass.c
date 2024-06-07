@@ -596,12 +596,20 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
 
 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
 	if (!clk_valid(clk))
+	{
+		printf("%s() clk_invalid clk.name=%s %d->%d\n", __func__, clk->dev->name, clk.rate, rate); //test
+
 		return 0;
+	}
 
 	ops = clk_dev_ops(clk->dev);
 
 	if (!ops->set_rate)
+	{
+		printf("%s() ops->set_rate clk.name=%s \n", __func__, clk->dev->name ); //test
+
 		return -ENOSYS;
+	}
 
 	/* Clean up cached rates for us and all child clocks */
 	clk_clean_rate_cache(clk);
