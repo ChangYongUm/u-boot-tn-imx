@@ -92,7 +92,7 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		return;
 	}
 
-	printf("%s() clk.name=%s  rate = %ld  wanted = %ld\n", __func__, clk.dev->name, clk.rate, timings->pixelclock.typ); //test
+	printf("%s() dev.name = %s clk.name=%s  rate = %ld  wanted = %ld\n", __func__, dev->name, clk.dev->name, clk.rate, timings->pixelclock.typ); //test
 
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
@@ -363,8 +363,8 @@ static int mxs_video_probe(struct udevice *dev)
 		}
 	}
 
-	printf("%s() name=%s  priv->reg_base =0x%lx timings = %ld (%ldx%ld)\n", __func__, dev->name, 
-	priv->reg_base, timings.pixelclock.typ, timings.hactive.typ, timings.vactive.typ ); //test
+	printf("%s() name=%s  plat: base 0x%lx, size 0x%x priv->reg_base =0x%lx timings = %ld (%ldx%ld)\n", __func__, dev->name, 
+	plat->base, plat->size, priv->reg_base, timings.pixelclock.typ, timings.hactive.typ, timings.vactive.typ ); //test
 
 
 	if (priv->disp_dev) {
@@ -375,8 +375,8 @@ static int mxs_video_probe(struct udevice *dev)
 				dev_err(dev, "fail to enable display\n");
 				return ret;
 			}
-		}
-		printf("%s() device_get_uclass_id  %s %d \n", __func__, priv->disp_dev->name, device_get_uclass_id(priv->disp_dev) ); //test
+			printf("%s() UCLASS_DISPLAY  %s display_enable \n", __func__, priv->disp_dev->name  ); //test
+		}		
 #endif
 
 #if IS_ENABLED(CONFIG_VIDEO_BRIDGE)
@@ -393,7 +393,7 @@ static int mxs_video_probe(struct udevice *dev)
 				return ret;
 			}
 
-			printf("%s() video_bridge_set_backlight \n", __func__); //test
+			printf("%s() UCLASS_VIDEO_BRIDGE  %s video_bridge_set_backlight \n", __func__, priv->disp_dev->name  ); //test
 
 			enable_bridge = true;
 
@@ -411,7 +411,8 @@ static int mxs_video_probe(struct udevice *dev)
 				return ret;
 			}
 
-			printf("%s() panel_enable_backlight \n", __func__); //test
+			printf("%s() UCLASS_VIDEO_BRIDGE  %s panel_enable_backlight \n", __func__, priv->disp_dev->name  ); //test
+
 		}
 	}
 
