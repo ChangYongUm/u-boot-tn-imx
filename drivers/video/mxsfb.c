@@ -360,6 +360,9 @@ static int mxs_video_probe(struct udevice *dev)
 		}
 	}
 
+	printf("%s() name=%s  priv->reg_base =0x%lx timings = %ld\n", __func__, dev->name, priv->reg_base , timings.pixelclock.typ); //test
+
+
 	if (priv->disp_dev) {
 #if IS_ENABLED(CONFIG_DISPLAY)
 		if (device_get_uclass_id(priv->disp_dev) == UCLASS_DISPLAY) {
@@ -369,6 +372,7 @@ static int mxs_video_probe(struct udevice *dev)
 				return ret;
 			}
 		}
+		printf("%s() device_get_uclass_id\n", __func__); //test
 #endif
 
 #if IS_ENABLED(CONFIG_VIDEO_BRIDGE)
@@ -385,6 +389,8 @@ static int mxs_video_probe(struct udevice *dev)
 				return ret;
 			}
 
+			printf("%s() video_bridge_set_backlight \n", __func__); //test
+
 			enable_bridge = true;
 
 			/* sec dsim needs enable ploarity at low, default we set to high */
@@ -400,6 +406,8 @@ static int mxs_video_probe(struct udevice *dev)
 					priv->disp_dev->name, ret);
 				return ret;
 			}
+
+			printf("%s() panel_enable_backlight \n", __func__); //test
 		}
 	}
 
