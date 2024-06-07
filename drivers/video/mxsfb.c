@@ -92,7 +92,9 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		return;
 	}
 
-	printf("%s() dev.name = %s clk.name=%s  rate = %ld  wanted = %ld\n", __func__, dev->name, clk.dev->name, clk.rate, timings->pixelclock.typ); //test
+	ofnode node = dev_ofnode(dev);
+
+	printf("%s() dev.name = %s node.name=%s clk.name=%s  rate = 0x%x wanted = %ld\n", __func__, dev->name, ofnode_get_name(node), clk.dev->name, clk.rate, timings->pixelclock.typ); //test
 
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
