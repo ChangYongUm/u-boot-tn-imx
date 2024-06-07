@@ -597,7 +597,7 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
 	if (!clk_valid(clk))
 	{
-		printf("%s() clk_invalid clk.name=%s %d->%d\n", __func__, clk->dev->name, clk.rate, rate); //test
+		printf("%s() clk_invalid clk.name=%s %d->%d\n", __func__, clk->dev->name, clk->rate, rate); //test
 
 		return 0;
 	}
