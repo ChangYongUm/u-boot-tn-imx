@@ -136,7 +136,9 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 	if (!clk)
 		return 0;
 
-	if (clk->set_rate)
+printf("%s() %p %d=.%d\n", __func__, clk->set_rate, rate);//test
+
+	if (clk->set_rate)	
 		clk->set_rate(clk, rate);
 
 	return clk->rate;
