@@ -403,8 +403,8 @@ int clk_get_by_name(struct udevice *dev, const char *name, struct clk *clk)
 	int index;
 
 	debug("%s(dev=%p, name=%s, clk=%p)\n", __func__, dev, name, clk);
-	printf("%s(dev=%p, name=%s, clk=%p)\n", __func__, dev, name, clk);//test
-	
+	printf("%s(dev=%s, name=%s, clk=%p)\n", __func__, dev->name, name, clk);//test
+
 	clk->dev = NULL;
 
 	index = dev_read_stringlist_search(dev, "clock-names", name);
