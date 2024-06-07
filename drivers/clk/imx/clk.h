@@ -50,6 +50,10 @@ struct imx93_pll_fracn_gp {
 	unsigned int odiv;
 };
 
+extern struct imx_pll14xx_clk imx_1416x_pll;
+extern struct imx_pll14xx_clk imx_1443x_pll;
+extern struct imx_pll14xx_clk imx_1443x_dram_pll;
+
 struct clk *clk_register_imx93_pll(const char *name, const char *parent_name,
 				   void __iomem *reg);
 struct clk *clk_register_imx93_clk_gate(const char *name, const char *parent_name,
