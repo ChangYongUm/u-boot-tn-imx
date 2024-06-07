@@ -593,7 +593,7 @@ static void clk_clean_rate_cache(struct clk *clk)
 ulong clk_set_rate(struct clk *clk, ulong rate)
 {
 
-printf("%s() %p %d\n", __func__, clk, rate);//test
+printf("clk_uclass %s() %p %d\n", __func__, clk, rate);//test
 
 	const struct clk_ops *ops;
 

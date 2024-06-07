@@ -134,8 +134,7 @@ struct clk *clk_get_parent(struct clk *clk)
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
 
-printf("%s() %p
-=.%d\n", __func__, clk, rate);//test
+printf("ipu_common %s() %p=.%d\n", __func__, clk, rate);//test
 
 	if (!clk)
 		return 0;
