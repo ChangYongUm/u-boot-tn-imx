@@ -131,8 +131,7 @@ static int clk_get_by_indexed_prop(struct udevice *dev, const char *prop_name,
 		return log_ret(ret);
 	}
 
-printf("%s(dev=%s, name=%s, index=%d arg_count=%d)\n", __func__, dev->name, prop_name, 
-index, args.args_count  );//test
+
 
 
 	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
@@ -146,6 +145,9 @@ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
 
 	ret = dev_read_phandle_with_args(dev, "clocks", "#clock-cells", 0,
 					 index, &args);
+
+printf("%s(dev=%s, name=%s, index=%d arg.node=%s arg_count=%d)\n", __func__, dev->name, prop_name, 
+index, args.args_count, ofnode_get_name(args.node)  );//test					 
 
 	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
 				     index, clk);
