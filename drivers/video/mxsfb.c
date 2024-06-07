@@ -324,10 +324,8 @@ static int mxs_of_get_timings(struct udevice *dev,
 		}
 	}
 
-
-printf("%s() name=%s  node_name=%s  bits-per-pixel=%d  disp_dev =%s \n", __func__, dev->name, ofnode_get_name(display_node) , *bpp,  priv->disp_dev ? "null":priv->disp_dev->name ); //test
-
-
+printf("%s() name=%s  node_name=%s  bits-per-pixel=%d  priv->disp_dev =%s \n", 
+__func__, dev->name, ofnode_get_name(display_node) , *bpp,  priv->disp_dev ? priv->disp_dev->name:"null" ); //test
 
 	return ret;
 }
@@ -365,7 +363,8 @@ static int mxs_video_probe(struct udevice *dev)
 		}
 	}
 
-	printf("%s() name=%s  priv->reg_base =0x%lx timings = %ld\n", __func__, dev->name, priv->reg_base, timings.pixelclock.typ); //test
+	printf("%s() name=%s  priv->reg_base =0x%lx timings = %ld (%ldx%ld)\n", __func__, dev->name, 
+	priv->reg_base, timings.pixelclock.typ, timings.hactive.typ, timings.vactive.typ ); //test
 
 
 	if (priv->disp_dev) {
