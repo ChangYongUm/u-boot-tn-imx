@@ -93,7 +93,7 @@ static int clk_get_by_index_tail(int ret, ofnode node,
 
 	clk->dev = dev_clk;
 
-	printf("%s(dev=%s, clk=%s index=%d arg.node=%s arg_count=%d)\n", __func__, dev->name,  clk->dev->name, 
+	printf("%s(clk=%s index=%d arg.node=%s arg_count=%d)\n", __func__,  clk->dev->name, 
 index, args.args_count, ofnode_get_name(args.node)  );//test					 
 
 
@@ -148,7 +148,7 @@ int clk_get_by_index(struct udevice *dev, int index, struct clk *clk)
 					 index, &args);
 
 printf("%s(dev=%s, index=%d arg.node=%s arg_count=%d)\n", __func__, dev->name,  
-index, args.args_count, ofnode_get_name(args.node)  );//test					 
+index, ofnode_get_name(args.node), args.args_count  );//test					 
 
 	return clk_get_by_index_tail(ret, dev_ofnode(dev), &args, "clocks",
 				     index, clk);
