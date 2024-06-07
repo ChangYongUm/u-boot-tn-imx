@@ -614,6 +614,8 @@ printf("clk_uclass %s() %p %d\n", __func__, clk, rate);//test
 		return -ENOSYS;
 	}
 
+	printf("%s() ops->set_rate clk.name=%s driver->name = %s %d \n", __func__, clk->dev->name, clk->dev->driver->name, clk->rate ); //test
+
 	/* Clean up cached rates for us and all child clocks */
 	clk_clean_rate_cache(clk);
 
