@@ -133,12 +133,8 @@ struct clk *clk_get_parent(struct clk *clk)
 
 int clk_set_rate(struct clk *clk, unsigned long rate)
 {
-
-printf("ipu_common %s() %p=.%d\n", __func__, clk, rate);//test
-
 	if (!clk)
 		return 0;
-
 
 	if (clk->set_rate)	
 		clk->set_rate(clk, rate);
@@ -343,7 +339,6 @@ static int ipu_pixel_clk_set_rate(struct clk *clk, unsigned long rate)
 	u64 div, parent_rate;
 	u32 remainder;
 
-printf("%s() clk->parent->rate %d=.%d\n", __func__, clk->parent->rate, rate);//test
 
 	parent_rate = (unsigned long long)clk->parent->rate * 16;
 	div = parent_rate;

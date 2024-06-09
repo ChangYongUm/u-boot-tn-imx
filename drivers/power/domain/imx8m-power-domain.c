@@ -568,8 +568,6 @@ static int imx8m_power_domain_probe(struct udevice *dev)
 	struct imx8m_power_domain_plat *pdata = dev_get_plat(dev);
 	int ret;
 
-	printf("%s - %s\n", __func__, dev->name); //test
-
 	/* Nothing to do for non-"power-domain" driver instances. */
 	if (!strstr(dev->name, "power-domain"))
 	{
@@ -600,8 +598,6 @@ static int imx8m_power_domain_of_to_plat(struct udevice *dev)
 	pdata->resource_id = fdtdec_get_int(gd->fdt_blob, dev_of_offset(dev),
 					    "reg", -1);
 
-printf("%s - %s domain_data->domains_num=%d pdata->resource_id=0x%X dev_of_offset(dev) = %d\n", __func__, dev->name, domain_data->domains_num, pdata->resource_id, dev_of_offset(dev)); //test
-
 	if(pdata->resource_id<0 ) 
 	{
 		return -ENODEV;
@@ -615,8 +611,6 @@ printf("%s - %s domain_data->domains_num=%d pdata->resource_id=0x%X dev_of_offse
 	{
 		pdata->has_pd = 1;
 	}
-
-	printf("%s - %s  power_domain = %s  \n", __func__, dev->name, pdata->pd.dev->name); //test
 
 	return 0;
 }

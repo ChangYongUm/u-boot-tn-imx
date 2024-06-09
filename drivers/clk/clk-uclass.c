@@ -585,15 +585,12 @@ static void clk_clean_rate_cache(struct clk *clk)
 ulong clk_set_rate(struct clk *clk, ulong rate)
 {
 
-printf("clk_uclass %s() %p %ld\n", __func__, clk, rate);//test
-
 	const struct clk_ops *ops;
 
 	debug("%s(clk=%p, rate=%lu)\n", __func__, clk, rate);
 	if (!clk_valid(clk))
 	{
 		printf("%s() clk_invalid clk.name=%s %ld->%ld\n", __func__, clk->dev->name, clk->rate, rate); //test
-
 		return 0;
 	}
 
@@ -602,7 +599,6 @@ printf("clk_uclass %s() %p %ld\n", __func__, clk, rate);//test
 	if (!ops->set_rate)
 	{
 		printf("%s() ops->set_rate clk.name=%s \n", __func__, clk->dev->name ); //test
-
 		return -ENOSYS;
 	}
 
