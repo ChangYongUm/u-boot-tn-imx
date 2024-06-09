@@ -261,8 +261,8 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 			/*
 			 * Not found or something else bad happened.
 			 */
-			printf ("libfdt fdt_path_offset() returned %s\n",
-				fdt_strerror(nodeoffset));
+			printf ("0 libfdt fdt_path_offset() returned %s pathp = %s\n",
+				fdt_strerror(nodeoffset), pathp);
 			return 1;
 		}
 		err = fdt_add_subnode(working_fdt, nodeoffset, nodep);
@@ -298,8 +298,8 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 			/*
 			 * Not found or something else bad happened.
 			 */
-			printf ("libfdt fdt_path_offset() returned %s\n",
-				fdt_strerror(nodeoffset));
+			printf ("1 libfdt fdt_path_offset() returned %s pathp =%s\n",
+				fdt_strerror(nodeoffset), pathp);
 			return 1;
 		}
 
@@ -358,8 +358,8 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 			/*
 			 * Not found or something else bad happened.
 			 */
-			printf("libfdt fdt_path_offset() returned %s\n",
-				fdt_strerror(nodeoffset));
+			printf("2 libfdt fdt_path_offset() returned %s pathp=%s\n",
+				fdt_strerror(nodeoffset), pathp);
 			return 1;
 		}
 
@@ -488,8 +488,8 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 			/*
 			 * Not found or something else bad happened.
 			 */
-			printf ("libfdt fdt_path_offset() returned %s\n",
-				fdt_strerror(nodeoffset));
+			printf ("3 libfdt fdt_path_offset() returned %s argv=%s,%s\n",
+				fdt_strerror(nodeoffset), argv[0], argv[1]);
 			return 1;
 		}
 		/*
@@ -953,8 +953,8 @@ static int fdt_print(const char *pathp, char *prop, int depth)
 		/*
 		 * Not found or something else bad happened.
 		 */
-		printf ("libfdt fdt_path_offset() returned %s\n",
-			fdt_strerror(nodeoffset));
+		printf ("4 libfdt fdt_path_offset() returned %s pathp=%s\n",
+			fdt_strerror(nodeoffset), pathp);
 		return 1;
 	}
 	/*

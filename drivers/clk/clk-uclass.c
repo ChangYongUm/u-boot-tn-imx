@@ -598,11 +598,9 @@ ulong clk_set_rate(struct clk *clk, ulong rate)
 
 	if (!ops->set_rate)
 	{
-		printf("%s() ops->set_rate clk.name=%s \n", __func__, clk->dev->name ); //test
+		printf("%s() FAILED ops->set_rate clk.name=%s driver->name = %s %ld\n", __func__, clk->dev->name, clk->dev->driver->name, clk->rate); //test
 		return -ENOSYS;
 	}
-
-	printf("%s() ops->set_rate clk.name=%s driver->name = %s %ld \n", __func__, clk->dev->name, clk->dev->driver->name, clk->rate ); //test
 
 	/* Clean up cached rates for us and all child clocks */
 	clk_clean_rate_cache(clk);
