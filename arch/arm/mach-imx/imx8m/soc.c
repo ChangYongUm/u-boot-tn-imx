@@ -1527,8 +1527,6 @@ int arch_misc_init(void)
 	acquire_buildinfo();
 
 
-	while(1);//test
-
 	printf("%s done\n", __func__ ); //test
 
 
