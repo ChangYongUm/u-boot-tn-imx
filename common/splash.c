@@ -179,6 +179,7 @@ printf("%s start\n", __func__ ); //test
 #if defined(CONFIG_DM_VIDEO) && !defined(CONFIG_HIDE_LOGO_VERSION)
 	splash_display_banner();
 #endif
+
 end:
 printf("%s done\n", __func__ ); //test
 	return ret;
