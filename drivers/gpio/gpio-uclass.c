@@ -326,7 +326,7 @@ int gpio_hog_probe_all(void)
 	int ret;
 	int retval = 0;
 
-while(1);//test
+
 	printf("%s start\n", __func__ ); //test
 
 	for (uclass_first_device(UCLASS_NOP, &dev);
@@ -343,6 +343,7 @@ while(1);//test
 	}
 
 	printf("%s end\n", __func__ ); //test
+while(1);//test
 
 	return retval;
 }
