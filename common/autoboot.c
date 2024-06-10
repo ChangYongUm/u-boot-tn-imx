@@ -370,9 +370,6 @@ static int abortboot_single_key(int bootdelay)
 
 	printf("Hit any key to stop autoboot: %2d ", bootdelay);
 
-while(1);//test
-
-
 	/*
 	 * Check if key already pressed
 	 */

@@ -19,6 +19,7 @@ static int gpio_backlight_enable(struct udevice *dev)
 {
 	struct gpio_backlight_priv *priv = dev_get_priv(dev);
 
+printf("%s done\n", __func__ ); //test
 	dm_gpio_set_value(&priv->gpio, 1);
 
 	return 0;
@@ -45,6 +46,8 @@ static int gpio_backlight_of_to_plat(struct udevice *dev)
 static int gpio_backlight_probe(struct udevice *dev)
 {
 	struct gpio_backlight_priv *priv = dev_get_priv(dev);
+
+printf("%s done\n", __func__ ); //test
 
 	if (priv->def_value)
 		gpio_backlight_enable(dev);
