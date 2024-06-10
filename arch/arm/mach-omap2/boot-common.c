@@ -288,6 +288,8 @@ skip_ipu1:
 
 void spl_board_init(void)
 {
+	printf("%s start\n", __func__ ); //test
+
 	/* Prepare console output */
 	preloader_console_init();
 
@@ -309,6 +311,10 @@ void spl_board_init(void)
 	if (IS_ENABLED(CONFIG_SPL_BUILD) &&
 	    IS_ENABLED(CONFIG_REMOTEPROC_TI_IPU))
 		spl_boot_ipu();
+
+	printf("%s done\n", __func__ ); //test
+
+	while(1);//test
 }
 
 void __noreturn jump_to_image_no_args(struct spl_image_info *spl_image)

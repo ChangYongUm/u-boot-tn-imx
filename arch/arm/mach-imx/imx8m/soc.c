@@ -1507,7 +1507,6 @@ static __maybe_unused void acquire_buildinfo(void)
 	}
 
 	printf("\n BuildInfo:\n  - ATF %s\n\n", (char *)&atf_commit);
-
 }
 
 int arch_misc_init(void)
