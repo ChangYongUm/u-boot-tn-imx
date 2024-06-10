@@ -175,6 +175,10 @@ int splash_display(void)
 	if (x || y)
 		goto end;
 
+
+
+while(1);//test
+
 #if defined(CONFIG_DM_VIDEO) && !defined(CONFIG_HIDE_LOGO_VERSION)
 	splash_display_banner();
 #endif
