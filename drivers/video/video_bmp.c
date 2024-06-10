@@ -382,7 +382,9 @@ height = 800;
 					*fb++ = i;
 					*fb++ = j;
 					*fb++ = 0;
-					*fb++ = 0;
+					*bmap++;
+					*bmap++;
+					*bmap++;
 					/*
 					if (bpix == 16) {
 						// 16bit 565RGB format 
@@ -410,8 +412,8 @@ height = 800;
 					}
 					*/
 				}
-				fb -= priv->line_length + width * (bpix / 8);
-				bmap += (padded_width - width);
+				//fb -= priv->line_length + width * (bpix / 8);
+				//bmap += (padded_width - width);
 			}
 		}
 		break;
