@@ -115,12 +115,14 @@
 		"booti ${loadaddr} - ${fdt_addr_r}"
 
 #else
+/*
+	SR_IR_V2_COMMAND \
+	"prepare_mcore=setenv mcore_clk clk-imx8mm.mcore_booted;\0" \
+*/
 #define CONFIG_EXTRA_ENV_SETTINGS		\
 	CONFIG_MFG_ENV_SETTINGS \
 	BOOTENV \
 	JAILHOUSE_ENV \
-	SR_IR_V2_COMMAND \
-	"prepare_mcore=setenv mcore_clk clk-imx8mm.mcore_booted;\0" \
 	"scriptaddr=0x43500000\0" \
 	"kernel_addr_r=" __stringify(CONFIG_LOADADDR) "\0" \
 	"bsp_script=boot.scr\0" \

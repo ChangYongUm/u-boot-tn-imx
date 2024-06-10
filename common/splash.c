@@ -158,6 +158,11 @@ int splash_display(void)
 	char *s;
 	int x = 0, y = 0, ret;
 
+return 0; //test
+
+
+
+
 	s = env_get("splashimage");
 	if (!s)
 		return -EINVAL;
