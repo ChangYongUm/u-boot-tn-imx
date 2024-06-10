@@ -294,6 +294,9 @@ static int gpio_hog_probe(struct udevice *dev)
 	struct gpio_hog_priv *priv = dev_get_priv(dev);
 	int ret;
 
+	printf("%s start\n", __func__ ); //test
+
+
 	ret = gpio_dev_request_index(dev->parent, dev->name, "gpio-hog",
 				     plat->val[0], plat->gpiod_flags,
 				     plat->val[1], &priv->gpiod);
@@ -311,6 +314,8 @@ static int gpio_hog_probe(struct udevice *dev)
 			return ret;
 		}
 	}
+	
+	printf("%s end\n", __func__ ); //test
 
 	return 0;
 }
@@ -320,6 +325,8 @@ int gpio_hog_probe_all(void)
 	struct udevice *dev;
 	int ret;
 	int retval = 0;
+
+	printf("%s start\n", __func__ ); //test
 
 	for (uclass_first_device(UCLASS_NOP, &dev);
 	     dev;
@@ -333,6 +340,8 @@ int gpio_hog_probe_all(void)
 			}
 		}
 	}
+
+	printf("%s end\n", __func__ ); //test
 
 	return retval;
 }

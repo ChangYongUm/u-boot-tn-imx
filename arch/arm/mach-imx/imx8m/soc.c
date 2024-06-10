@@ -1511,6 +1511,9 @@ static __maybe_unused void acquire_buildinfo(void)
 
 int arch_misc_init(void)
 {
+	printf("%s start\n", __func__ ); //test
+
+
 #ifndef CONFIG_ANDROID_SUPPORT
 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
 		struct udevice *dev;
@@ -1523,7 +1526,11 @@ int arch_misc_init(void)
 #endif
 	acquire_buildinfo();
 
+
 	while(1);//test
+
+	printf("%s done\n", __func__ ); //test
+
 
 	return 0;
 }

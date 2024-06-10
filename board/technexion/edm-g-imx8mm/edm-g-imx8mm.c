@@ -416,6 +416,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 
 int board_late_init(void)
 {
+
+	while(1);//test
+	
 	printf("%s start\n", __func__ ); //test
 
 #ifndef CONFIG_AVB_SUPPORT
