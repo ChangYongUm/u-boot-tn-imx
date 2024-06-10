@@ -158,6 +158,9 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		break;
 	}
 
+	printf("%s bpp=%d, bus_width=%d word_len=%d bridge=%d \n", __func__, bpp, bus_width, word_len, bridge); //test
+
+
 	writel(bus_width | word_len | LCDIF_CTRL_DOTCLK_MODE |
 		LCDIF_CTRL_BYPASS_COUNT | LCDIF_CTRL_LCDIF_MASTER,
 		&regs->hw_lcdif_ctrl);

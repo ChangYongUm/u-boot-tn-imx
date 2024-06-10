@@ -140,6 +140,8 @@ static int sn65dsi84_enable(struct udevice *dev)
 	sn65dsi84_i2c_reg_write(dev,0x09,1);
 	debug("Soft reset to default \n");
 
+	printf("%s len=%d, i2c write done \n", __func__, len); //test
+
 	return 0;
 }
 
