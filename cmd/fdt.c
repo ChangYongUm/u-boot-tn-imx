@@ -488,8 +488,8 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 			/*
 			 * Not found or something else bad happened.
 			 */
-			printf ("3 libfdt fdt_path_offset() returned %s argv=%s,%s,%s,%s\n",
-				fdt_strerror(nodeoffset), argv[0], argv[1], argv[2], argv[3]);
+			printf ("3 cmdtp->name=%s libfdt fdt_path_offset() returned %s argv=%s,%s,%s\n", cmdtp->name,
+				fdt_strerror(nodeoffset), argv[0], argv[1], argv[2]);
 			return 1;
 		}
 		/*
