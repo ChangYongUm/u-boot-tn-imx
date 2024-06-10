@@ -442,5 +442,6 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 		return log_ret(ret);
 	}
 
+
 	return video_sync(dev, false);
 }
