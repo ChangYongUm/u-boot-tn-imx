@@ -380,11 +380,10 @@ height = 800;
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
 					*fb++ = 128;
+					*fb++ = i;
+					*fb++ = j;
 					*fb++ = 0;
-					*fb++ = 0;
-					*bmap++;
-					*bmap++;
-					*bmap++;
+					*bmap += 3;
 					/*
 					if (bpix == 16) {
 						// 16bit 565RGB format 
@@ -412,8 +411,8 @@ height = 800;
 					}
 					*/
 				}
-				//fb -= priv->line_length + width * (bpix / 8);
-				//bmap += (padded_width - width);
+				fb -= priv->line_length + width * (bpix / 8);
+				bmap += (padded_width - width);
 			}
 		}
 		break;
