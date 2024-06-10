@@ -379,8 +379,8 @@ height = 800;
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
-					*fb++ = i;
-					*fb++ = j;
+					*fb++ = 128;
+					*fb++ = 0;
 					*fb++ = 0;
 					*bmap++;
 					*bmap++;
