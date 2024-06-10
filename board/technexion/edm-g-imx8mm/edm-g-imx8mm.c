@@ -438,6 +438,8 @@ while(1);//test
 	env_set("board_rev", "iMX8MM");
 #endif
 
+printf("%s end\n", __func__ ); //test
+
 	return 0;
 }
 

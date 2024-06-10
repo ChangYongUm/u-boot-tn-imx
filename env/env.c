@@ -172,6 +172,8 @@ int env_load(void)
 	int best_prio = -1;
 	int prio;
 
+printf("%s start\n", __func__ ); //test
+
 	for (prio = 0; (drv = env_driver_lookup(ENVOP_LOAD, prio)); prio++) {
 		int ret;
 
@@ -216,6 +218,8 @@ int env_load(void)
 		best_prio = 0;
 
 	gd->env_load_prio = best_prio;
+
+	printf("%s end\n", __func__ ); //test
 
 	return -ENODEV;
 }

@@ -235,6 +235,8 @@ int board_mmc_getcd(struct mmc *mmc)
 #define I2C_PMIC	0
 int power_init_board(void)
 {
+	printf("%s start\n", __func__ ); //test
+
 	struct pmic *p;
 	int ret;
 
@@ -272,7 +274,7 @@ int power_init_board(void)
 	/* enable level translator, forced enable */
 	pmic_reg_write(p, PCA9450_CONFIG2, 0x3);
 
-		printf("%s done\n", __func__ ); //test
+printf("%s end\n", __func__ ); //test
 
 	return 0;
 }
@@ -290,6 +292,8 @@ void spl_board_init(void)
 	}
 #endif
 	puts("Normal Boot\n");
+
+	printf("%s end\n", __func__ ); //test
 }
 
 #ifdef CONFIG_SPL_LOAD_FIT
@@ -338,4 +342,6 @@ void board_init_f(ulong dummy)
 	spl_dram_init();
 
 	board_init_r(NULL, 0);
+
+	printf("%s end\n", __func__ ); //test
 }
