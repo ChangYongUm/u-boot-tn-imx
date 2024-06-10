@@ -839,9 +839,10 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 #endif
 
 
-	while(1);//test
-	
 	spl_board_prepare_for_boot();
+
+
+	while(1);//test
 	jump_to_image_no_args(&spl_image);
 
 }

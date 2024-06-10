@@ -379,6 +379,8 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
+	printf("imx8mm_ab2_evk %s done\n", __func__ ); //test
+
 #if defined(CONFIG_IMX8MN)
 	struct udevice *dev;
 	int ret;

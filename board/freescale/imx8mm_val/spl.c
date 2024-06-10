@@ -230,6 +230,8 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
+	printf("imx8mm_evk %s done\n", __func__ ); //test
+
 #ifndef CONFIG_SPL_USB_SDP_SUPPORT
 	/* Serial download mode */
 	if (is_usb_boot()) {

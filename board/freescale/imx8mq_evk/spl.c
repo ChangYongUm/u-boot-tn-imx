@@ -203,6 +203,11 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
+
+printf("imx8mq_evk %s done\n", __func__ ); //test
+
+	spl_board_prepare_for_boot
+
 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
 		if (sec_init())
 			printf("\nsec_init failed!\n");
