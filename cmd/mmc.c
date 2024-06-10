@@ -590,6 +590,8 @@ static int do_mmc_dev(struct cmd_tbl *cmdtp, int flag,
 		printf("mmc%d(part %d) is current device\n",
 		       curr_device, mmc_get_blk_desc(mmc)->hwpart);
 
+			   while(1);//test
+
 	return CMD_RET_SUCCESS;
 }
 
