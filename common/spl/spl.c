@@ -790,8 +790,6 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 			       ret);
 	}
 
-	while(1);//test
-
 	switch (spl_image.os) {
 	case IH_OS_U_BOOT:
 		debug("Jumping to %s...\n", spl_phase_name(spl_next_phase()));
@@ -842,6 +840,10 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 
 	spl_board_prepare_for_boot();
 	jump_to_image_no_args(&spl_image);
+
+
+	while(1);//test
+
 }
 
 /*
