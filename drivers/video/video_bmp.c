@@ -372,17 +372,17 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	case 24:
 
 start = 0;
-width = 1280;
-height = 480;
+width = 800;
+height = 1280;
 	printf("eformat %d bpix=%d size=%d,%d, %d %d \n", eformat, bpix, width, height, start, priv->line_length); //test
 
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
-					*fb++ = 255;
-					*fb++ = 255;
-					*fb++ = 127;
-					//*fb++ = 255;
+					*fb++ = i;
+					*fb++ = j;
+					*fb++ = 0;
+					*fb++ = 0;
 					/*
 					if (bpix == 16) {
 						// 16bit 565RGB format 
