@@ -28,8 +28,6 @@
 #include <power/pmic.h>
 #include <usb.h>
 #include <dwc3-uboot.h>
-#include <imx_sip.h>
-#include <linux/arm-smccc.h>
 #include <mmc.h>
 #include <asm/armv8/mmu.h>
 #include "edm-g-imx8mp-ddr.h"
@@ -66,6 +64,8 @@ const tn_camera_chk_t tn_camera_chk[] = {
 	{ 2, 4, 0x3c, "tevi-ov5640" },
 	{ 1, 1, 0x3d, "tevi-ap1302" },
 	{ 2, 4, 0x3d, "tevi-ap1302" },
+	{ 1, 1, 0x48, "tevs" },
+	{ 2, 4, 0x48, "tevs" },
 };
 size_t tn_camera_chk_cnt = ARRAY_SIZE(tn_camera_chk);
 
@@ -181,9 +181,9 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 	cell = fdt_getprop(blob, offs, "size", NULL);
 	cma_size = fdt32_to_cpu(cell[1]);
 	cmasize = env_get("cma_size");
-	if(cmasize || ((u64)(gd->ram_size >> 1) < cma_size)) {
-		cma_size = env_get_ulong("cma_size", 10, 320 * 1024 * 1024);
-		cma_size = min((u64)(gd->ram_size >> 1), (u64)cma_size);
+	if(cmasize || ((u64)(gd->ram_size >> 2) < cma_size)) {
+		cma_size = env_get_ulong("cma_size", 10, 256 * 1024 * 1024);
+		cma_size = max((u64)(gd->ram_size >> 2), (u64)cma_size);
 		fdt_setprop_u64(blob, offs, "size", (uint64_t)cma_size);
 	}
 
@@ -348,9 +348,9 @@ static void dwc3_nxp_usb_phy_init(struct dwc3_device *dwc3)
 #if defined(CONFIG_USB_DWC3) || defined(CONFIG_USB_XHCI_IMX8M)
 int board_usb_init(int index, enum usb_init_type init)
 {
-	imx8m_usb_power(index, true);
 
 	if (index == 0 && init == USB_INIT_DEVICE) {
+		imx8m_usb_power(index, true);
 		dwc3_nxp_usb_phy_init(&dwc3_device_data);
 		return dwc3_uboot_init(&dwc3_device_data);
 	}
@@ -362,9 +362,8 @@ int board_usb_cleanup(int index, enum usb_init_type init)
 {
 	if (index == 0 && init == USB_INIT_DEVICE) {
 		dwc3_uboot_exit(index);
+		imx8m_usb_power(index, false);
 	}
-
-	imx8m_usb_power(index, false);
 
 	return 0;
 }
@@ -438,32 +437,22 @@ void setup_camera(void)
 
 #define FSL_SIP_GPC			0xC2000000
 #define FSL_SIP_CONFIG_GPC_PM_DOMAIN	0x3
-#define DISPMIX				13
-#define MIPI				15
-
 int board_init(void)
 {
-	struct arm_smccc_res res;
 
 	setup_wifi();
 	setup_touch();
 	setup_camera();
 
-#ifdef CONFIG_DWC_ETH_QOS
 	/* clock, pin, gpr */
-	setup_eqos();
-#endif
+	if(IS_ENABLED(CONFIG_DWC_ETH_QOS)) {
+			setup_eqos();
+	}
 
 #if defined(CONFIG_USB_DWC3) || defined(CONFIG_USB_XHCI_IMX8M)
 	setup_usb_rst();
 	init_usb_clk();
 #endif
-
-	/* enable the dispmix & mipi phy power domain */
-	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
-			DISPMIX, true, 0, 0, 0, 0, &res);
-	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
-			MIPI, true, 0, 0, 0, 0, &res);
 
 	return 0;
 }

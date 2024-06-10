@@ -245,8 +245,7 @@ int power_init_board(void)
 	pmic_probe(p);
 
 	/* BUCKxOUT_DVS0/1 control BUCK123 output */
-	ret = pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
-
+	pmic_reg_write(p, PCA9450_BUCK123_DVS, 0x29);
 	/* Buck 1 DVS control through PMIC_STBY_REQ */
 	pmic_reg_write(p, PCA9450_BUCK1CTRL, 0x59);
 
@@ -300,8 +299,6 @@ int board_fit_config_name_match(const char *name)
 
 void board_init_f(ulong dummy)
 {
-	printf("%s start\n", __func__ ); //test
-
 	int ret;
 
 	/* Clear the BSS. */
@@ -334,6 +331,4 @@ void board_init_f(ulong dummy)
 	spl_dram_init();
 
 	board_init_r(NULL, 0);
-
-	printf("%s end\n", __func__ ); //test
 }

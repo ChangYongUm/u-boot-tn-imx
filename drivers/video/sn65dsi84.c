@@ -172,7 +172,6 @@ static int sn65dsi84_panel_get_display_timing(struct udevice *dev, struct displa
 		device->format = priv->format;
 		device->mode_flags = priv->mode_flags;
 	}
-
 	return 0;
 }
 

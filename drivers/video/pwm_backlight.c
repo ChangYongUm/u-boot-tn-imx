@@ -254,7 +254,7 @@ static int pwm_backlight_of_to_plat(struct udevice *dev)
 }
 
 static int pwm_backlight_probe(struct udevice *dev)
-{	
+{
 	return 0;
 }
 
