@@ -317,8 +317,6 @@ int board_init(void)
 
 printf("%s done\n", __func__ ); //test
 
-while(1);//test
-
 	return 0;
 }
 
@@ -418,13 +416,17 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 
 int board_late_init(void)
 {
-	printf("%s done\n", __func__ ); //test
+	printf("%s start\n", __func__ ); //test
 
 #ifndef CONFIG_AVB_SUPPORT
 	detect_baseboard();
 	detect_display_panel();
 	//detect_camera();
 #endif
+	printf("%s done\n", __func__ ); //test
+
+while(1);//test
+
 
 
 #ifdef CONFIG_ENV_IS_IN_MMC

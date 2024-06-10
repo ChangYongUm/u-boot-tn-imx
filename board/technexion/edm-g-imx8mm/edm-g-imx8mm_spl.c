@@ -280,7 +280,7 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
-	printf("%s done\n", __func__ ); //test
+	printf("%s start\n", __func__ ); //test
 
 #ifndef CONFIG_SPL_USB_SDP_SUPPORT
 	/* Serial download mode */
@@ -304,7 +304,7 @@ int board_fit_config_name_match(const char *name)
 
 void board_init_f(ulong dummy)
 {
-	printf("%s done\n", __func__ ); //test
+	printf("%s start\n", __func__ ); //test
 
 	int ret;
 
