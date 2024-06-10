@@ -1523,6 +1523,8 @@ int arch_misc_init(void)
 #endif
 	acquire_buildinfo();
 
+	while(1);//test
+
 	return 0;
 }
 #endif
