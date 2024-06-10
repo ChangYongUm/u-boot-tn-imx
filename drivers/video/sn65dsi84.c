@@ -158,6 +158,8 @@ static int sn65dsi84_panel_enable_backlight(struct udevice *dev)
 		return ret;
 	}
 
+printf("%s done", __func__ ); //test
+
 	return 0;
 }
 
@@ -192,6 +194,8 @@ static int sn65dsi84_panel_probe(struct udevice *dev)
 	mdelay(10);
 
 	sn65dsi84_enable(dev);
+
+	printf("%s done", __func__ ); //test
 
 	return 0;
 }
