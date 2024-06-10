@@ -372,9 +372,8 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	case 24:
 
 start = 0;
-width = 1280;
-height = 800;
-	printf("eformat %d bpix=%d size=%d,%d, %d %d \n", eformat, bpix, width, height, start, priv->line_length); //test
+
+	printf("eformat %d bpix=%d size=%d,%d, %d %d \n", eformat, bpix, width, height, start, priv->line_length, padded_width); //test
 
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
