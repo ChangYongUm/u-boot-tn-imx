@@ -373,8 +373,13 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
+					*fb++ = 0;
+					*fb++ = 0;
+					*fb++ = 127;
+					*fb++ = 0;
+					/*
 					if (bpix == 16) {
-						/* 16bit 565RGB format */
+						// 16bit 565RGB format 
 						*(u16 *)fb = ((bmap[2] >> 3)
 							<< 11) |
 							((bmap[1] >> 2) << 5) |
@@ -397,6 +402,7 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 						*fb++ = *bmap++;
 						*fb++ = 0;
 					}
+					*/
 				}
 				fb -= priv->line_length + width * (bpix / 8);
 				bmap += (padded_width - width);
