@@ -300,6 +300,8 @@ int splash_screen_prepare(void)
 
 int board_init(void)
 {
+	printf("%s done\n", __func__ ); //test
+
 	struct arm_smccc_res res;
 
 	//setup_wifi();
@@ -312,6 +314,7 @@ int board_init(void)
 		DISPMIX, true, 0, 0, 0, 0, &res);
 	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
 		MIPI, true, 0, 0, 0, 0, &res);
+
 
 	return 0;
 }
@@ -412,6 +415,8 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 
 int board_late_init(void)
 {
+	printf("%s done\n", __func__ ); //test
+
 #ifndef CONFIG_AVB_SUPPORT
 	detect_baseboard();
 	detect_display_panel();
@@ -426,6 +431,7 @@ int board_late_init(void)
 	env_set("board_name", "EDM-G");
 	env_set("board_rev", "iMX8MM");
 #endif
+while(1);// test
 	return 0;
 }
 
