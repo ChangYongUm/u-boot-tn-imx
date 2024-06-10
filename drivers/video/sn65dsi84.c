@@ -153,6 +153,8 @@ static int sn65dsi84_panel_enable_backlight(struct udevice *dev)
 
 	int ret;
 
+printf("%s done\n", __func__ ); //test
+
 	ret = mipi_dsi_attach(device);
 	if(ret < 0) {
 		return ret;

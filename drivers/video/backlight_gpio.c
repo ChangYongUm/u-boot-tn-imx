@@ -30,6 +30,8 @@ static int gpio_backlight_of_to_plat(struct udevice *dev)
 	struct gpio_backlight_priv *priv = dev_get_priv(dev);
 	int ret;
 
+printf("%s done\n", __func__ ); //test
+
 	ret = gpio_request_by_name(dev, "gpios", 0, &priv->gpio,
 				   GPIOD_IS_OUT);
 	if (ret) {

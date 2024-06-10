@@ -14,6 +14,8 @@ int panel_enable_backlight(struct udevice *dev)
 {
 	struct panel_ops *ops = panel_get_ops(dev);
 
+printf("%s done\n", __func__ ); //test
+
 	if (!ops->enable_backlight)
 		return -ENOSYS;
 
@@ -31,6 +33,8 @@ int panel_enable_backlight(struct udevice *dev)
 int panel_set_backlight(struct udevice *dev, int percent)
 {
 	struct panel_ops *ops = panel_get_ops(dev);
+
+printf("%s done\n", __func__ ); //test
 
 	if (!ops->set_backlight)
 		return -ENOSYS;

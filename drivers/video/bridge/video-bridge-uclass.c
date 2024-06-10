@@ -18,6 +18,8 @@ int video_bridge_set_backlight(struct udevice *dev, int percent)
 {
 	struct video_bridge_ops *ops = video_bridge_get_ops(dev);
 
+printf("%s done\n", __func__ ); //test
+
 	if (!ops->set_backlight)
 		return -ENOSYS;
 
@@ -72,6 +74,8 @@ static int video_bridge_pre_probe(struct udevice *dev)
 {
 	struct video_bridge_priv *uc_priv = dev_get_uclass_priv(dev);
 	int ret;
+
+	printf("%s done\n", __func__ ); //test
 
 	debug("%s\n", __func__);
 	ret = gpio_request_by_name(dev, "sleep-gpios", 0,
