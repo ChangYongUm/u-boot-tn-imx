@@ -315,7 +315,7 @@ int board_init(void)
 	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
 		MIPI, true, 0, 0, 0, 0, &res);
 
-
+while(1);//test
 
 	return 0;
 }
