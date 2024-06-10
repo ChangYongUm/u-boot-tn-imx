@@ -678,6 +678,8 @@ void build_info(void)
 	u32 fw_version, sha1, res, status;
 	int ret;
 
+
+	while(1);//test
 	printf("\nBuildInfo:\n");
 
 	ret = ahab_get_fw_status(&status, &res);
@@ -699,7 +701,6 @@ void build_info(void)
 	}
 	puts("\n");
 
-	while(1);//test
 }
 
 int arch_misc_init(void)
