@@ -316,6 +316,7 @@ int board_init(void)
 		MIPI, true, 0, 0, 0, 0, &res);
 
 
+
 	return 0;
 }
 
@@ -422,8 +423,6 @@ int board_late_init(void)
 	detect_display_panel();
 	//detect_camera();
 #endif
-
-while(1);// test
 
 
 #ifdef CONFIG_ENV_IS_IN_MMC

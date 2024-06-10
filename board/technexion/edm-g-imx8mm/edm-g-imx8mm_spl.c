@@ -272,6 +272,8 @@ int power_init_board(void)
 	/* enable level translator, forced enable */
 	pmic_reg_write(p, PCA9450_CONFIG2, 0x3);
 
+		printf("%s done\n", __func__ ); //test
+
 	return 0;
 }
 #endif
