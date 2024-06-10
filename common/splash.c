@@ -179,7 +179,7 @@ int splash_display(void)
 	splash_display_banner();
 #endif
 end:
-printf("%s done", __func__ ); //test
+printf("%s done\n", __func__ ); //test
 	return ret;
 }
 #endif

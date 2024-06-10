@@ -441,7 +441,7 @@ static int mxs_video_probe(struct udevice *dev)
 	video_set_flush_dcache(dev, true);
 	gd->fb_base = plat->base;
 
-	printf("%s done", __func__ ); //test
+	printf("%s done\n", __func__ ); //test
 
 	return ret;
 }

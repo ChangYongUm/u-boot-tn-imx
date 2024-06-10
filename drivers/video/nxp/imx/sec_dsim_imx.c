@@ -157,7 +157,7 @@ static int imx_sec_dsim_set_backlight(struct udevice *dev, int percent)
 		return ret;
 	}
 
-	printf("%s done", __func__ ); //test
+	printf("%s done\n", __func__ ); //test
 
 	return 0;
 }
@@ -194,7 +194,7 @@ static int imx_sec_dsim_probe(struct udevice *dev)
 	}
 #endif
 
-printf("%s done", __func__ ); //test
+printf("%s done\n", __func__ ); //test
 
 	return 0;
 }
