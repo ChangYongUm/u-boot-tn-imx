@@ -263,7 +263,10 @@ int video_sync(struct udevice *vid, bool force)
 	if (ops && ops->video_sync) {
 		ret = ops->video_sync(vid);
 		if (ret)
+		{
+			printf("ERROR %s dev.name=%s ret=%d\n", __func__, dev->name, ret); //test
 			return ret;
+		}
 	}
 
 	/*

@@ -437,7 +437,12 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	fb = (uchar *)(priv->fb + y * priv->line_length + x * bpix / 8);
 	ret = video_sync_copy(dev, start, fb);
 	if (ret)
+	{
+		printf("ERROR video_bmp_display %s bmp_image =0x%lx bmp_bpix=%d xy=%d,%d ret=%d\n", dev->name, bmp_image, bmp_bpix, x, y, ret); //test
 		return log_ret(ret);
+	}
+
+printf("SUCCESS video_bmp_display %s bmp_image =0x%lx bmp_bpix=%d xy=%d,%d ret=%d\n", dev->name, bmp_image, bmp_bpix, x, y, ret); //test
 
 	return video_sync(dev, false);
 }

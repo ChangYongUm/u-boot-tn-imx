@@ -267,8 +267,6 @@ int bmp_display(ulong addr, int x, int y)
 #endif
 		bool align = false;
 
-	printf("video_bmp_display %s addr =%ld xy=%d,%d \n", dev->name, addr, x, y); //test
-
 		if (CONFIG_IS_ENABLED(SPLASH_SCREEN_ALIGN) ||
 		    x == BMP_ALIGN_CENTER ||
 		    y == BMP_ALIGN_CENTER)
