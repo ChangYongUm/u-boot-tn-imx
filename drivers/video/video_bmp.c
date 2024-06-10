@@ -323,6 +323,9 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	/* Move back to the final line to be drawn */
 	fb = start - priv->line_length;
 
+
+	printf("video_bmp_display %s bmp_image =0x%lx bmp_bpix=%d xy=%d,%d \n", dev->name, bmp_image, bmp_bpix, x, y); //test
+
 	switch (bmp_bpix) {
 	case 1:
 	case 8:
