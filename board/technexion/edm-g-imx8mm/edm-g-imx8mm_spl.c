@@ -278,7 +278,7 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
-	rintf("%s done\n", __func__ ); //test
+	printf("%s done\n", __func__ ); //test
 
 #ifndef CONFIG_SPL_USB_SDP_SUPPORT
 	/* Serial download mode */
