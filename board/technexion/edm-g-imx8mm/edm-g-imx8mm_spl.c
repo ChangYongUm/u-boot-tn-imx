@@ -282,8 +282,6 @@ printf("%s end\n", __func__ ); //test
 
 void spl_board_init(void)
 {
-	printf("%s start\n", __func__ ); //test
-
 #ifndef CONFIG_SPL_USB_SDP_SUPPORT
 	/* Serial download mode */
 	if (is_usb_boot()) {
@@ -292,8 +290,6 @@ void spl_board_init(void)
 	}
 #endif
 	puts("Normal Boot\n");
-
-	printf("%s end\n", __func__ ); //test
 }
 
 #ifdef CONFIG_SPL_LOAD_FIT

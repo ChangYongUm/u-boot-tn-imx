@@ -363,7 +363,7 @@ efi_status_t EFIAPI efi_main(efi_handle_t image,
 	 *	return ret;
 	 */
 
-	printf("starting\n");
+	printf("%s starting\n", __func__ );
 
 	board_init_f(GD_FLG_SKIP_RELOC);
 	board_init_r(NULL, 0);

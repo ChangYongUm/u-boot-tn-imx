@@ -793,8 +793,6 @@ static int rng_init(uint8_t sec_idx, ccsr_sec_t *sec)
 
 int sec_init_idx(uint8_t sec_idx)
 {
-	printf("%s start\n", __func__ ); //test
-
 	int ret = 0;
 	struct caam_regs *caam;
 #if CONFIG_IS_ENABLED(DM)
@@ -927,8 +925,6 @@ init:
 			printf("Couldn't bind rng driver (%d)\n", ret);
 	}
 
-printf("%s done\n", __func__ ); //test
-while(1);//test
 	return ret;
 }
 
