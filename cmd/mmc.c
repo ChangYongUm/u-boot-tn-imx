@@ -545,6 +545,8 @@ static int do_mmc_dev(struct cmd_tbl *cmdtp, int flag,
 	struct mmc *mmc;
 	enum bus_mode speed_mode = MMC_MODES_END;
 
+			   while(1);//test
+			   
 	if (argc == 1) {
 		dev = curr_device;
 		mmc = init_mmc_device(dev, true);
@@ -590,7 +592,6 @@ static int do_mmc_dev(struct cmd_tbl *cmdtp, int flag,
 		printf("mmc%d(part %d) is current device\n",
 		       curr_device, mmc_get_blk_desc(mmc)->hwpart);
 
-			   while(1);//test
 
 	return CMD_RET_SUCCESS;
 }
