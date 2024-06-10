@@ -373,7 +373,7 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
-					*fb++ = 0;
+					*fb++ = 127;
 					*fb++ = 0;
 					*fb++ = 127;
 					*fb++ = 0;
