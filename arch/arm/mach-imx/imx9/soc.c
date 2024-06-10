@@ -698,6 +698,8 @@ void build_info(void)
 		printf("  - ELE firmware not included\n");
 	}
 	puts("\n");
+
+	while(1);//test
 }
 
 int arch_misc_init(void)

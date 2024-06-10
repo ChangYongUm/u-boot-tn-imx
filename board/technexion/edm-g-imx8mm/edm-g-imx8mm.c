@@ -300,7 +300,7 @@ int splash_screen_prepare(void)
 
 int board_init(void)
 {
-	printf("%s start\n", __func__ ); //test
+printf("%s start\n", __func__ ); //test
 
 	struct arm_smccc_res res;
 
@@ -417,7 +417,7 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 int board_late_init(void)
 {
 	while(1);//test
-	
+
 	printf("%s start\n", __func__ ); //test
 
 #ifndef CONFIG_AVB_SUPPORT
@@ -426,8 +426,6 @@ int board_late_init(void)
 	//detect_camera();
 #endif
 	printf("%s done\n", __func__ ); //test
-
-
 
 
 #ifdef CONFIG_ENV_IS_IN_MMC
