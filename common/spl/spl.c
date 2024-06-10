@@ -838,11 +838,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 		debug("Failed to stash bootstage: err=%d\n", ret);
 #endif
 
-	spl_board_prepare_for_boot();
-	jump_to_image_no_args(&spl_image);
-
 
 	while(1);//test
+	
+	spl_board_prepare_for_boot();
+	jump_to_image_no_args(&spl_image);
 
 }
 
