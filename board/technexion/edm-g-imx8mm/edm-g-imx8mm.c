@@ -300,7 +300,7 @@ int splash_screen_prepare(void)
 
 int board_init(void)
 {
-	printf("%s done\n", __func__ ); //test
+	printf("%s start\n", __func__ ); //test
 
 	struct arm_smccc_res res;
 
@@ -314,6 +314,8 @@ int board_init(void)
 		DISPMIX, true, 0, 0, 0, 0, &res);
 	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
 		MIPI, true, 0, 0, 0, 0, &res);
+
+printf("%s done\n", __func__ ); //test
 
 while(1);//test
 
