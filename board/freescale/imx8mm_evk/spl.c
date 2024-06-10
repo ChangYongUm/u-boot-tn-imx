@@ -268,6 +268,8 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
+	printf("imx8mm_evk %s done\n", __func__ ); //test
+
 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
 		if (sec_init())
 			printf("\nsec_init failed!\n");
@@ -296,6 +298,9 @@ int board_fit_config_name_match(const char *name)
 void board_init_f(ulong dummy)
 {
 	int ret;
+
+	printf("imx8mm_evk %s done\n", __func__ ); //test
+
 
 	/* Clear the BSS. */
 	memset(__bss_start, 0, __bss_end - __bss_start);
