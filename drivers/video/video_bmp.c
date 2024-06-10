@@ -323,7 +323,8 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	/* Move back to the final line to be drawn */
 	fb = start - priv->line_length;
 
-	printf("eformat %d bmp_bpix=%d bpix=%d size=%d,%d, xy=%d,%d %d %d \n", eformat, bmp_bpix, bpix, width, height, x, y, start, priv->line_length, padded_width); //test
+	printf("eformat %d bmp_bpix=%d bpix=%d size=%d,%d, xy=%d,%d %d %d \n", eformat, bmp_bpix, bpix, width, height, x, y, priv->line_length, padded_width); //test
+	printf("bmp=%p start=%p\n", bmp, start);
 
 	switch (bmp_bpix) {
 	case 1:
@@ -337,7 +338,7 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 			debug("compressed %d %d\n", compression, BMP_BI_RLE8);
 
 			printf("compressed %d %d\n", compression, BMP_BI_RLE8); //test
-			
+
 			if (compression == BMP_BI_RLE8) {
 				video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
 							  x, y, width, height);
