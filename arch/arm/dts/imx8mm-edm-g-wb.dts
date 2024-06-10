@@ -22,7 +22,6 @@
 	model = "TechNexion EDM-G-IMX8MM and Wandboard baseboard";
 	compatible = "fsl,imx8mm-edm-g", "fsl,imx8mm";
 
-/*
 	regulators {
 		reg_lvds_pwr: regulator_lvdspwr {
 			pinctrl-names = "default";
@@ -56,7 +55,7 @@
 		default-brightness-level = <6>;
 		status = "okay";
 	};
-	*/
+
 };
 
 &gpio1 {
