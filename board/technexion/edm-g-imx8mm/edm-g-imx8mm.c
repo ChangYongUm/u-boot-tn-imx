@@ -431,7 +431,7 @@ int board_late_init(void)
 
 printf("%s end\n", __func__ ); //test
 
-	while(1);//test
+	// while(1);//test
 
 	return 0;
 }
