@@ -423,6 +423,9 @@ int board_late_init(void)
 	//detect_camera();
 #endif
 
+while(1);// test
+
+
 #ifdef CONFIG_ENV_IS_IN_MMC
 	board_late_mmc_env_init();
 #endif
@@ -431,7 +434,7 @@ int board_late_init(void)
 	env_set("board_name", "EDM-G");
 	env_set("board_rev", "iMX8MM");
 #endif
-while(1);// test
+
 	return 0;
 }
 
