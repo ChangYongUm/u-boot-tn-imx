@@ -300,8 +300,6 @@ int splash_screen_prepare(void)
 
 int board_init(void)
 {
-printf("%s start\n", __func__ ); //test
-
 	struct arm_smccc_res res;
 
 	//setup_wifi();
@@ -314,8 +312,6 @@ printf("%s start\n", __func__ ); //test
 		DISPMIX, true, 0, 0, 0, 0, &res);
 	arm_smccc_smc(IMX_SIP_GPC, IMX_SIP_GPC_PM_DOMAIN,
 		MIPI, true, 0, 0, 0, 0, &res);
-
-printf("%s done\n", __func__ ); //test
 
 	return 0;
 }
@@ -423,8 +419,6 @@ int board_late_init(void)
 	detect_display_panel();
 	//detect_camera();
 #endif
-	printf("%s done\n", __func__ ); //test
-
 
 #ifdef CONFIG_ENV_IS_IN_MMC
 	board_late_mmc_env_init();

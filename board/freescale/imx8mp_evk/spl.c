@@ -63,8 +63,6 @@ void spl_dram_init(void)
 
 void spl_board_init(void)
 {
-	printf("imx8mp_evk %s done\n", __func__ ); //test
-
 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
 		struct udevice *dev;
 		int ret;

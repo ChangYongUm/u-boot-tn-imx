@@ -876,8 +876,6 @@ static int check_mipi_dsi_nodes(void *blob)
 	};
 
 
-//printf("%s ----- \n", __func__); //test
-
 	int lookup_node;
 	int nodeoff;
 	bool new_path = check_fdt_new_path(blob);
@@ -1511,8 +1509,6 @@ static __maybe_unused void acquire_buildinfo(void)
 
 int arch_misc_init(void)
 {
-	printf("%s start\n", __func__ ); //test
-
 
 #ifndef CONFIG_ANDROID_SUPPORT
 	if (IS_ENABLED(CONFIG_FSL_CAAM)) {
@@ -1525,10 +1521,6 @@ int arch_misc_init(void)
 	}
 #endif
 	acquire_buildinfo();
-
-
-	printf("%s done\n", __func__ ); //test
-
 
 	return 0;
 }

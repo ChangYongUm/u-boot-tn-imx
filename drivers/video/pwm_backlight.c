@@ -120,8 +120,6 @@ static int pwm_backlight_enable(struct udevice *dev)
 	struct pwm_backlight_priv *priv = dev_get_priv(dev);
 	int ret;
 
-printf("%s done\n", __func__ ); //test
-
 	ret = enable_sequence(dev, 0);
 	if (ret)
 		return log_ret(ret);
@@ -198,8 +196,6 @@ static int pwm_backlight_of_to_plat(struct udevice *dev)
 	int index, ret, count, len;
 	const u32 *cell;
 
-printf("%s done\n", __func__ ); //test
-
 	log_debug("start\n");
 	ret = uclass_get_device_by_phandle(UCLASS_REGULATOR, dev,
 					   "power-supply", &priv->reg);
@@ -258,9 +254,7 @@ printf("%s done\n", __func__ ); //test
 }
 
 static int pwm_backlight_probe(struct udevice *dev)
-{
-	printf("%s done\n", __func__ ); //test
-	
+{	
 	return 0;
 }
 

@@ -112,10 +112,6 @@ static int fdt_get_header_value(int argc, char *const argv[])
  */
 static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 {
-	printf("%s start\n", __func__ ); //test
-
-
-
 	if (argc < 2)
 		return CMD_RET_USAGE;
 
@@ -720,9 +716,6 @@ static int do_fdt(struct cmd_tbl *cmdtp, int flag, int argc, char *const argv[])
 		/* Unrecognized command */
 		return CMD_RET_USAGE;
 	}
-
-	printf("%s end\n", __func__ ); //test
-
 
 	return 0;
 }

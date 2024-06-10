@@ -320,9 +320,6 @@ int gpio_hog_probe_all(void)
 	struct udevice *dev;
 	int ret;
 	int retval = 0;
-
-	printf("%s start\n", __func__ ); //test
-
 	for (uclass_first_device(UCLASS_NOP, &dev);
 	     dev;
 	     uclass_find_next_device(&dev)) {
@@ -335,8 +332,6 @@ int gpio_hog_probe_all(void)
 			}
 		}
 	}
-
-	printf("%s end\n", __func__ ); //test
 
 	return retval;
 }

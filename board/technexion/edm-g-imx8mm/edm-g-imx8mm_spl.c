@@ -235,8 +235,6 @@ int board_mmc_getcd(struct mmc *mmc)
 #define I2C_PMIC	0
 int power_init_board(void)
 {
-	printf("%s start\n", __func__ ); //test
-
 	struct pmic *p;
 	int ret;
 
@@ -273,8 +271,6 @@ int power_init_board(void)
 
 	/* enable level translator, forced enable */
 	pmic_reg_write(p, PCA9450_CONFIG2, 0x3);
-
-printf("%s end\n", __func__ ); //test
 
 	return 0;
 }

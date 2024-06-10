@@ -576,8 +576,6 @@ __weak int arch_fixup_fdt(void *blob)
 int image_setup_libfdt(bootm_headers_t *images, void *blob,
 		       int of_size, struct lmb *lmb)
 {
-	printf("%s start\n", __func__ ); //test
-
 
 	ulong *initrd_start = &images->initrd_start;
 	ulong *initrd_end = &images->initrd_end;

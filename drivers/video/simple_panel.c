@@ -23,9 +23,6 @@ static int simple_panel_enable_backlight(struct udevice *dev)
 	struct simple_panel_priv *priv = dev_get_priv(dev);
 	int ret;
 
-
-printf("%s done\n", __func__ ); //test
-
 	dm_gpio_set_value(&priv->enable, 1);
 	if (priv->backlight) {
 		debug("%s: start, backlight = '%s'\n", __func__, priv->backlight->name);
@@ -42,8 +39,6 @@ static int simple_panel_set_backlight(struct udevice *dev, int percent)
 {
 	struct simple_panel_priv *priv = dev_get_priv(dev);
 	int ret;
-
-	
 
 	debug("%s: start, backlight = '%s'\n", __func__, priv->backlight->name);
 	dm_gpio_set_value(&priv->enable, 1);

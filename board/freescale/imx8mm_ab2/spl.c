@@ -379,8 +379,6 @@ int power_init_board(void)
 
 void spl_board_init(void)
 {
-	printf("imx8mm_ab2_evk %s done\n", __func__ ); //test
-
 #if defined(CONFIG_IMX8MN)
 	struct udevice *dev;
 	int ret;
@@ -412,8 +410,6 @@ int board_fit_config_name_match(const char *name)
 void board_init_f(ulong dummy)
 {
 	int ret;
-
-	printf("imx8mm_ab2_evk %s done\n", __func__ ); //test
 
 	/* Clear the BSS. */
 	memset(__bss_start, 0, __bss_end - __bss_start);

@@ -237,8 +237,6 @@ static int bmp_info(ulong addr)
  */
 int bmp_display(ulong addr, int x, int y)
 {
-	printf("%s start\n", __func__ ); //test
-
 #ifdef CONFIG_DM_VIDEO
 	struct udevice *dev;
 #endif
@@ -274,11 +272,6 @@ int bmp_display(ulong addr, int x, int y)
 		    y == BMP_ALIGN_CENTER)
 			align = true;
 		ret = video_bmp_display(dev, addr, x, y, align);
-
-		if(ret)
-		{
-			printf("ERROR %s video_bmp_display 0x%lx ret=%d\n", __func__, addr, ret); //test
-		}
 	}
 
 #elif defined(CONFIG_LCD)
@@ -291,8 +284,6 @@ int bmp_display(ulong addr, int x, int y)
 
 	if (bmp_alloc_addr)
 		free(bmp_alloc_addr);
-
-	printf("%s end\n", __func__ ); //test
 
 	return ret ? CMD_RET_FAILURE : 0;
 }

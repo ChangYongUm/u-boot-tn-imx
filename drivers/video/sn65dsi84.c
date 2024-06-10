@@ -140,8 +140,6 @@ static int sn65dsi84_enable(struct udevice *dev)
 	sn65dsi84_i2c_reg_write(dev,0x09,1);
 	debug("Soft reset to default \n");
 
-	printf("%s len=%d, i2c write done \n", __func__, len); //test
-
 	return 0;
 }
 
@@ -153,14 +151,10 @@ static int sn65dsi84_panel_enable_backlight(struct udevice *dev)
 
 	int ret;
 
-printf("%s done\n", __func__ ); //test
-
 	ret = mipi_dsi_attach(device);
 	if(ret < 0) {
 		return ret;
 	}
-
-printf("%s done\n", __func__ ); //test
 
 	return 0;
 }
@@ -196,8 +190,6 @@ static int sn65dsi84_panel_probe(struct udevice *dev)
 	mdelay(10);
 
 	sn65dsi84_enable(dev);
-
-	printf("%s done\n", __func__ ); //test
 
 	return 0;
 }
