@@ -338,37 +338,28 @@ int gpio_hog_probe_all(void)
 int gpio_hog_remove_all(void)
 {
 	struct udevice *dev;
-	int ret;
+	int ret, value;
 	int retval = 0;
+	
 	for (uclass_first_device(UCLASS_NOP, &dev); dev; uclass_find_next_device(&dev)) 
 	{
 		struct gpio_hog_data *plat = dev_get_plat(dev);
 		struct gpio_hog_priv *priv = dev_get_priv(dev);
 
-		ret = gpio_dev_request_index(dev->parent, dev->name, "gpio-hog",
-						plat->val[0], plat->gpiod_flags,
-						plat->val[1], &priv->gpiod);
-		if (ret < 0) 
-		{
-			printf("%s: node %s could not get gpio.\n", __func__, dev->name);
-			return ret;
-		}
-
 		if (plat->gpiod_flags == GPIOD_IS_OUT) 
 		{
-			//dm_gpio_get_value
-			ret = dm_gpio_set_value(&priv->gpiod, !plat->value);
+			value = dm_gpio_get_value(&priv->gpiod);
+			ret = dm_gpio_set_value(&priv->gpiod, !value);
 			if (ret < 0) 
 			{
 				printf("%s: node %s could not set gpio.\n", __func__, dev->name);
 				return ret;
 			}
 
-
-			printf("%s: node %s set gpio. false %d \n", __func__, dev->name, !plat->value);
-		}
-		
+			printf("%s: node %s set gpio. false %d \n", __func__, dev->name, !value);
+		}		
 	}
+
 
 	return retval;
 }
