@@ -68,10 +68,10 @@ static void announce_and_cleanup(int fake)
 
 
 #if defined(CONFIG_VIDEO_LINK)
-	gpio_hog_remove_all();
+	//gpio_hog_remove_all();
 	//video_link_shut_down();	
 #endif
-	board_quiesce_devices();
+	// board_quiesce_devices();
 
 	printf("\nStarting kernel ...%s\n\n", fake ?
 		"(fake run for tracing)" : "");
@@ -81,11 +81,10 @@ static void announce_and_cleanup(int fake)
 	 * of DMA operation or releasing device internal buffers.
 	 */
 #ifndef CONFIG_POWER_DOMAIN
-	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
-	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
+	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
+	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
-	cleanup_before_linux();
-
+	//cleanup_before_linux();
 	//splash_display();
 }
 
