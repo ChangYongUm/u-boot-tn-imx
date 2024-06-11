@@ -83,8 +83,9 @@ static void announce_and_cleanup(int fake)
 	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
 	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
-	cleanup_before_linux();
 	splash_display();
+	cleanup_before_linux();	
+	while(1);//
 }
 
 static void setup_start_tag (struct bd_info *bd)
@@ -379,7 +380,6 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 	}
 #endif
 
-while(1);//test
 }
 
 /* Main Entry point for arm bootm implementation
