@@ -87,6 +87,9 @@ static void announce_and_cleanup(int fake)
 #endif
 
 	cleanup_before_linux();
+
+	printf("\n1 Endless loop for debugging");
+	while(1);//
 }
 
 static void setup_start_tag (struct bd_info *bd)

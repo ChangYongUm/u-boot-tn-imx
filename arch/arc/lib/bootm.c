@@ -73,7 +73,7 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 
 	cleanup_before_linux();
 
-
+printf("\n2 Endless loop for debugging");
 	while(1);//
 
 	if (!fake)
