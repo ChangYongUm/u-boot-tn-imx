@@ -602,8 +602,6 @@ int boot_selected_os(int argc, char *const argv[], int state,
 	bootstage_error(BOOTSTAGE_ID_BOOT_OS_RETURNED);
 	debug("\n## Control returned to monitor - resetting...\n");
 
-splash_display(); //test
-
 	return BOOTM_ERR_RESET;
 }
 
