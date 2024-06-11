@@ -111,9 +111,7 @@
 };
 
 &mipi_dsi {
-	/delete-property/ assigned-clocks;
-	/delete-property/ assigned-clock-parents;
-	/delete-property/ assigned-clock-rates;
+
 	status = "okay";
 	#address-cells = <1>;
 	#size-cells = <0>;
@@ -129,9 +127,6 @@
 &lcdif {
 	enable_polarity_low;	
 
-	/delete-property/ assigned-clocks;
-	/delete-property/ assigned-clock-parents;
-	/delete-property/ assigned-clock-rates; 
 	
 	display = <&display0>;
 	status = "okay";
