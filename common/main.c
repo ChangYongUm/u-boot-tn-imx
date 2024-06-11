@@ -46,12 +46,6 @@ void main_loop(void)
 	if (IS_ENABLED(CONFIG_VERSION_VARIABLE))
 		env_set("ver", version_string);  /* set version variable */
 
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc()) break;
-	}
-
 	cli_init();
 
 	if (IS_ENABLED(CONFIG_USE_PREBOOT))
@@ -66,6 +60,12 @@ void main_loop(void)
 	s = bootdelay_process();
 	if (cli_process_fdt(&s))
 		cli_secure_boot_cmd(s);
+
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc()) break;
+	}
 
 	autoboot_command(s);
 

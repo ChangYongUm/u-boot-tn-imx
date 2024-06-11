@@ -138,6 +138,8 @@ void splash_display_banner(void)
 	col = 0;
 	row = 0;
 #endif
+	printf("\n%s \n", __func__);
+
 
 	display_options_get_banner(false, buf, sizeof(buf));
 	vidconsole_position_cursor(dev, col, 1);
