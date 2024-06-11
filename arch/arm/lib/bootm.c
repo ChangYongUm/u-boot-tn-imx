@@ -66,9 +66,37 @@ static void announce_and_cleanup(int fake)
 	udc_disconnect();
 #endif
 
+
+	printf("\n%s 1 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			for(int i=0;i<100;i++)
+			{
+				if (tstc()) char key = getchar();
+			}
+			break;
+		} 
+	}
+
 #if defined(CONFIG_VIDEO_LINK)
 	video_link_shut_down();
 #endif
+
+
+	printf("\n%s 2 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			for(int i=0;i<100;i++)
+			{
+				if (tstc()) char key = getchar();
+			}
+			break;
+		} 
+	}
 
 	board_quiesce_devices();
 
@@ -86,7 +114,36 @@ static void announce_and_cleanup(int fake)
 	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
 
+
+	printf("\n%s 3 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			for(int i=0;i<100;i++)
+			{
+				if (tstc()) char key = getchar();
+			}
+			break;
+		} 
+	}
+
 	cleanup_before_linux();
+
+
+	printf("\n%s 4 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			for(int i=0;i<100;i++)
+			{
+				if (tstc()) char key = getchar();
+			}
+			break;
+		} 
+	}
+
 }
 
 static void setup_start_tag (struct bd_info *bd)
@@ -311,16 +368,6 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 		(ulong) kernel_entry);
 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
 
-	printf("\n%s 1 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
-
 	announce_and_cleanup(fake);
 
 	printf("\n%s 2 Press any key to keep going\n", __func__);
@@ -328,7 +375,10 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 	{
 		if (tstc())
 		{
-			char key = getchar();
+			for(int i=0;i<100;i++)
+			{
+				if (tstc()) char key = getchar();
+			}
 			break;
 		} 
 	}
@@ -422,16 +472,6 @@ int do_bootm_linux(int flag, int argc, char *const argv[],
 	if (flag & (BOOTM_STATE_OS_GO | BOOTM_STATE_OS_FAKE_GO)) {
 		boot_jump_linux(images, flag);
 		return 0;
-	}
-
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
 	}
 
 	boot_prep_linux(images);
