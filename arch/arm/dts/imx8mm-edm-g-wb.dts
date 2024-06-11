@@ -22,39 +22,6 @@
 	model = "TechNexion EDM-G-IMX8MM and Wandboard baseboard";
 	compatible = "fsl,imx8mm-edm-g", "fsl,imx8mm";
 
-	regulators {
-		reg_lvds_pwr: regulator_lvdspwr {
-			pinctrl-names = "default";
-			pinctrl-0 = <&pinctrl_lvds0_pwr>;
-			compatible = "regulator-fixed";
-			regulator-name = "lvds0_vdden";
-			regulator-min-microvolt = <3300000>;
-			regulator-max-microvolt = <3300000>;
-			gpio = <&gpio1 7 GPIO_ACTIVE_HIGH>;
-			enable-active-high;
-			status = "okay";
-		};
-
-		reg_lvds_backlight_pwr: regulator_lvdsblpwr {
-			pinctrl-names = "default";
-			pinctrl-0 = <&pinctrl_lvds0_backlight_pwr>;
-			compatible = "regulator-fixed";
-			regulator-name = "lvds0_bl_en";
-			regulator-min-microvolt = <3300000>;
-			regulator-max-microvolt = <3300000>;
-			gpio = <&gpio1 12 GPIO_ACTIVE_HIGH>;
-			enable-active-high;
-			regulator-always-on;
-		};
-	};
-
-	lvds_backlight: lvds_backlight {
-		compatible = "pwm-backlight";
-		pwms = <&pwm2 0 50000>;
-		brightness-levels = <0 36 72 108 144 180 216 255>;
-		default-brightness-level = <6>;
-		status = "okay";
-	};
 
 };
 
