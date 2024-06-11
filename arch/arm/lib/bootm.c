@@ -88,8 +88,11 @@ static void announce_and_cleanup(int fake)
 
 	cleanup_before_linux();
 
-	printf("\n1 Endless loop for debugging");
-	while(1);//
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc()) break;
+	}
 }
 
 static void setup_start_tag (struct bd_info *bd)
