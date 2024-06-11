@@ -190,7 +190,7 @@ static void free_memory(struct efi_priv *priv)
 static bool devpath_is_partition(const struct efi_device_path *path)
 {
 	const struct efi_device_path *p;
-	bool was_part = false;
+	bool was_part;
 
 	for (p = path; p->type != DEVICE_PATH_TYPE_END;
 	     p = (void *)p + p->length) {
@@ -363,7 +363,7 @@ efi_status_t EFIAPI efi_main(efi_handle_t image,
 	 *	return ret;
 	 */
 
-	printf("starting\n");
+	printf("%s starting\n", __func__ );
 
 	board_init_f(GD_FLG_SKIP_RELOC);
 	board_init_r(NULL, 0);

@@ -124,9 +124,6 @@ static int fsl_ls_mdio_probe(struct udevice *dev)
 	struct memac_mdio_controller *regs;
 
 	priv->regs_base = dev_read_addr_ptr(dev);
-	if (!priv->regs_base)
-		return -ENODEV;
-
 	regs = (struct memac_mdio_controller *)(priv->regs_base);
 
 	memac_setbits_32(&regs->mdio_stat,

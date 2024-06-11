@@ -136,7 +136,7 @@ int clk_set_rate(struct clk *clk, unsigned long rate)
 	if (!clk)
 		return 0;
 
-	if (clk->set_rate)
+	if (clk->set_rate)	
 		clk->set_rate(clk, rate);
 
 	return clk->rate;
@@ -221,13 +221,13 @@ static struct clk ipu_clk = {
 	.usecount = 0,
 };
 
-#if !defined CFG_SYS_LDB_CLOCK
-#define CFG_SYS_LDB_CLOCK 65000000
+#if !defined CONFIG_SYS_LDB_CLOCK
+#define CONFIG_SYS_LDB_CLOCK 65000000
 #endif
 
 static struct clk ldb_clk = {
 	.name = "ldb_clk",
-	.rate = CFG_SYS_LDB_CLOCK,
+	.rate = CONFIG_SYS_LDB_CLOCK,
 	.usecount = 0,
 };
 
@@ -338,6 +338,7 @@ static int ipu_pixel_clk_set_rate(struct clk *clk, unsigned long rate)
 {
 	u64 div, parent_rate;
 	u32 remainder;
+
 
 	parent_rate = (unsigned long long)clk->parent->rate * 16;
 	div = parent_rate;

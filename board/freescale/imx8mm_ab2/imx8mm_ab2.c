@@ -4,28 +4,30 @@
  */
 
 #include <common.h>
-#include <efi_loader.h>
-#include <env.h>
-#include <init.h>
-#include <asm/global_data.h>
+#include <malloc.h>
+#include <errno.h>
 #include <miiphy.h>
 #include <netdev.h>
-#include <asm/mach-imx/iomux-v3.h>
-#include <asm-generic/gpio.h>
+#include <fsl_esdhc.h>
+#include <mmc.h>
+#include <asm/io.h>
+#include <asm/arch/clock.h>
 #include <power/regulator.h>
 #if defined(CONFIG_IMX8MM)
 #include <asm/arch/imx8mm_pins.h>
 #else
 #include <asm/arch/imx8mn_pins.h>
 #endif
-#include <asm/arch/clock.h>
+#include <asm/global_data.h>
 #include <asm/arch/sys_proto.h>
+#include <asm-generic/gpio.h>
+#include <asm/mach-imx/dma.h>
 #include <asm/mach-imx/gpio.h>
+#include <asm/mach-imx/iomux-v3.h>
 #include <asm/mach-imx/mxc_i2c.h>
-#include <i2c.h>
-#include <asm/io.h>
-#include "../common/tcpc.h"
+#include <spl.h>
 #include <usb.h>
+#include "../common/tcpc.h"
 
 DECLARE_GLOBAL_DATA_PTR;
 
@@ -35,23 +37,6 @@ DECLARE_GLOBAL_DATA_PTR;
 #define WDOG_PAD_CTRL	(PAD_CTL_DSE6 | PAD_CTL_ODE | PAD_CTL_PUE | PAD_CTL_PE)
 
 #if defined(CONFIG_IMX8MM)
-#if CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT)
-struct efi_fw_image fw_images[] = {
-	{
-		.image_type_id = IMX_BOOT_IMAGE_GUID,
-		.fw_name = u"IMX8MM-AB2-RAW",
-		.image_index = 1,
-	},
-};
-
-struct efi_capsule_update_info update_info = {
-	.dfu_string = "mmc 2=flash-bin raw 0x42 0x2000 mmcpart 1",
-	.images = fw_images,
-};
-
-u8 num_image_type_guids = ARRAY_SIZE(fw_images);
-#endif /* EFI_HAVE_CAPSULE_SUPPORT */
-
 static iomux_v3_cfg_t const uart_pads[] = {
 	IMX8MM_PAD_UART2_RXD_UART2_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
 	IMX8MM_PAD_UART2_TXD_UART2_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
@@ -71,23 +56,6 @@ static iomux_v3_cfg_t const pwr_en_ana[] = {
 #endif
 
 #if defined(CONFIG_IMX8MN)
-#if CONFIG_IS_ENABLED(EFI_HAVE_CAPSULE_SUPPORT)
-struct efi_fw_image fw_images[] = {
-	{
-		.image_type_id = IMX_BOOT_IMAGE_GUID,
-		.fw_name = u"IMX8MN-AB2-RAW",
-		.image_index = 1,
-	},
-};
-
-struct efi_capsule_update_info update_info = {
-	.dfu_string = "mmc 2=flash-bin raw 0 0x2000 mmcpart 1",
-	.images = fw_images,
-};
-
-u8 num_image_type_guids = ARRAY_SIZE(fw_images);
-#endif /* EFI_HAVE_CAPSULE_SUPPORT */
-
 static iomux_v3_cfg_t const uart_pads[] = {
 	IMX8MN_PAD_UART2_RXD__UART2_DCE_RX | MUX_PAD_CTRL(UART_PAD_CTRL),
 	IMX8MN_PAD_UART2_TXD__UART2_DCE_TX | MUX_PAD_CTRL(UART_PAD_CTRL),
@@ -136,7 +104,7 @@ int board_early_init_f(void)
 	return 0;
 }
 
-#if IS_ENABLED(CONFIG_FEC_MXC)
+#ifdef CONFIG_FEC_MXC
 static int setup_fec(void)
 {
 	struct iomuxc_gpr_base_regs *gpr =
@@ -146,13 +114,11 @@ static int setup_fec(void)
 	clrsetbits_le32(&gpr->gpr[1],
 			IOMUXC_GPR_GPR1_GPR_ENET1_TX_CLK_SEL_MASK, 0);
 
-	return 0;
+	return set_clk_enet(ENET_125MHZ);
 }
 
 int board_phy_config(struct phy_device *phydev)
 {
-	phy_set_supported(phydev, SPEED_100);
-
 	if (phydev->drv->config)
 		phydev->drv->config(phydev);
 

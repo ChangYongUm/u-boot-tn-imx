@@ -73,7 +73,7 @@ int power_domain_lookup_name(const char *name, struct power_domain *power_domain
 		return 0;
 	}
 
-	printf("%s fail: %s, ret = %d\n", __func__, name, ret);
+	printf("%s fail: %s, ret = %d\n", __func__, name, ret); 
 	return -EINVAL;
 }
 
@@ -93,6 +93,9 @@ int power_domain_get_by_index(struct udevice *dev,
 	if (ret) {
 		debug("%s: dev_read_phandle_with_args failed: %d\n",
 		      __func__, ret);
+
+		printf("%s %s(0) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
+
 		return ret;
 	}
 
@@ -101,8 +104,11 @@ int power_domain_get_by_index(struct udevice *dev,
 	if (ret) {
 		debug("%s: uclass_get_device_by_ofnode failed: %d\n",
 		      __func__, ret);
+		printf("%s %s(1) ret=%d count=%d valid=%d\n", 
+			  dev->name, __func__, ret, args.args_count, ofnode_valid(args.node)); //test
 		return ret;
 	}
+
 	ops = power_domain_dev_ops(dev_power_domain);
 
 	power_domain->dev = dev_power_domain;
@@ -111,12 +117,14 @@ int power_domain_get_by_index(struct udevice *dev,
 	else
 		ret = power_domain_of_xlate_default(power_domain, &args);
 	if (ret) {
+		printf("%s %s(2) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		debug("of_xlate() failed: %d\n", ret);
 		return ret;
 	}
 
 	ret = ops->request ? ops->request(power_domain) : 0;
 	if (ret) {
+		printf("%s %s(3) ret=%d index=%d \n", dev->name, __func__, ret, index); //test
 		debug("ops->request() failed: %d\n", ret);
 		return ret;
 	}
@@ -130,8 +138,12 @@ int power_domain_get_by_name(struct udevice *dev,
 	int index;
 
 	index = dev_read_stringlist_search(dev, "power-domain-names", name);
-	if (index < 0) {
+	if (index < 0) 
+	{
 		debug("fdt_stringlist_search() failed: %d\n", index);
+
+		printf("%s - %s fdt_stringlist_search() failed: %d\n  \n", __func__, dev->name, index); //test
+
 		return index;
 	}
 
@@ -139,7 +151,7 @@ int power_domain_get_by_name(struct udevice *dev,
 }
 
 int power_domain_get(struct udevice *dev, struct power_domain *power_domain)
-{
+{	
 	return power_domain_get_by_index(dev, power_domain, 0);
 }
 
@@ -178,20 +190,34 @@ static int dev_power_domain_ctrl(struct udevice *dev, bool on)
 
 	count = dev_count_phandle_with_args(dev, "power-domains",
 					    "#power-domain-cells", 0);
-	for (i = 0; i < count; i++) {
+
+
+	for (i = 0; i < count; i++) 
+	{
 		ret = power_domain_get_by_index(dev, &pd, i);
+
 		if (ret)
+		{
+			printf("%s %s(0) ret=%d on=%d \n", dev->name, __func__, ret, on); //test
 			return ret;
+		}
+
 		if (on)
 			ret = power_domain_on(&pd);
 		else
 			ret = power_domain_off(&pd);
 
 		if (ret)
+		{
+			printf("%s %s(1) ret=%d on=%d  \n", dev->name, __func__, ret, on); //test
 			return ret;
+		}
 
 		if (count > 0 && !on && dev_get_parent(dev) == pd.dev)
+		{
+			printf("%s %s(2) ret=%d on=%d  \n", dev->name, __func__, ret, on); //test		
 			return ret;
+		}
 
 		if (count > 0 && !on)
 			device_remove(pd.dev, DM_REMOVE_NORMAL);

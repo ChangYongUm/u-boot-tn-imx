@@ -8,7 +8,6 @@
 #include <cpu.h>
 #include <cpu_func.h>
 #include <dm.h>
-#include <event.h>
 #include <init.h>
 #include <log.h>
 #include <asm/cache.h>
@@ -60,8 +59,7 @@ int arch_cpu_init(void)
 
 static void power_off_all_usb(void);
 
-#define ARM_SMMU_sCR0_CLIENTPD	(1 << 0)
-static int imx8_init_mu(void *ctx, struct event *event)
+int arch_cpu_init_dm(void)
 {
 	struct udevice *devp;
 	int node, ret;
@@ -73,9 +71,6 @@ static int imx8_init_mu(void *ctx, struct event *event)
 		printf("could not get scu %d\n", ret);
 		return ret;
 	}
-
-	if (gd->flags & GD_FLG_RELOC) /* Skip others for board_r */
-		return 0;
 
 	if (IS_ENABLED(CONFIG_XEN))
 		return 0;
@@ -94,21 +89,18 @@ static int imx8_init_mu(void *ctx, struct event *event)
 	}
 
 #if !defined(CONFIG_TARGET_IMX8QM_MEK_A72_ONLY) && !defined(CONFIG_TARGET_IMX8QM_MEK_A53_ONLY)
-#ifdef CONFIG_IMX8QM
-	ret = sc_pm_set_resource_power_mode(-1, SC_R_SMMU,
-					    SC_PM_PW_MODE_ON);
-	if (ret)
-		return ret;
-	/* bypass system MMU translation for all clients */
-	writel(ARM_SMMU_sCR0_CLIENTPD, SMMU_BASE);
-#endif
+	if (is_imx8qm()) {
+		ret = sc_pm_set_resource_power_mode(-1, SC_R_SMMU,
+						    SC_PM_PW_MODE_ON);
+		if (ret)
+			return ret;
+	}
 #endif
 
 	power_off_all_usb();
 
 	return 0;
 }
-EVENT_SPY(EVT_DM_POST_INIT, imx8_init_mu);
 
 #if defined(CONFIG_ARCH_MISC_INIT)
 int arch_misc_init(void)
@@ -548,8 +540,8 @@ phys_size_t get_effective_memsize(void)
 
 			/* Find the memory region runs the U-Boot */
 			if (start >= phys_sdram_1_start && start <= end1 &&
-			    (start <= CONFIG_TEXT_BASE &&
-			    end >= CONFIG_TEXT_BASE)) {
+			    (start <= CONFIG_SYS_TEXT_BASE &&
+			    end >= CONFIG_SYS_TEXT_BASE)) {
 				if ((end + 1) <=
 				    ((sc_faddr_t)phys_sdram_1_start +
 				    phys_sdram_1_size))
@@ -694,19 +686,6 @@ int dram_init_banksize(void)
 			}
 		}
 	}
-#ifdef CONFIG_VPU_SECURE_HEAP
-	// pass the seucre memory to linux
-	gd->bd->bi_dram[i].start = CONFIG_SECURE_HEAP_BASE;
-	gd->bd->bi_dram[i].size = CONFIG_SECURE_HEAP_SIZE;
-	dram_bank_sort(i);
-	i++;
-
-	gd->bd->bi_dram[i].start = CONFIG_VPU_BOOT_BASE;
-	gd->bd->bi_dram[i].size = CONFIG_VPU_BOOT_SIZE;
-	dram_bank_sort(i);
-	i++;
-#endif
-
 
 	/* If error, set to the default value */
 	if (!i) {
@@ -1142,7 +1121,6 @@ void * board_imx_vservice_get_buffer(struct imx_vservice_channel *node, u32 size
 }
 #endif
 
-#ifdef CONFIG_SYS_I2C_IMX_VIRT_I2C
 /* imx8qxp i2c1 has lots of devices may used by both M4 and A core
 *   If A core partition does not own the resource, we will start
 *   virtual i2c driver. Otherwise use local i2c driver.
@@ -1162,7 +1140,6 @@ int board_imx_lpi2c_bind(struct udevice *dev)
 
 	return -ENODEV;
 }
-#endif
 
 #ifdef CONFIG_USB_PORT_AUTO
 static int usb_port_auto_check(void)

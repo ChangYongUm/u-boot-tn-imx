@@ -72,10 +72,6 @@
 	u-boot,dm-spl;
 };
 
-&pinctrl_usdhc1 {
-	u-boot,dm-spl;
-};
-
 &pinctrl_usdhc2_gpio {
 	u-boot,dm-spl;
 };
@@ -151,6 +147,10 @@
 	phy-reset-post-delay = <100>;
 };
 
+&eqos {
+	compatible = "fsl,imx-eqos";
+};
+
 &ethphy1 {
 	reset-gpios = <&pcal6524 15 GPIO_ACTIVE_LOW>;
 	reset-assert-us = <15000>;
@@ -177,7 +177,6 @@
 	u-boot,dm-spl;
 	/delete-property/ assigned-clocks;
 	/delete-property/ assigned-clock-rates;
-	/delete-property/ assigned-clock-parents;
 };
 
 &osc_32k {

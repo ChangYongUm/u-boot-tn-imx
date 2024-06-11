@@ -18,6 +18,12 @@
 #define BMP_RLE8_EOBMP		1
 #define BMP_RLE8_DELTA		2
 
+
+static inline void schedule(void)
+{
+}
+
+
 /**
  * get_bmp_col_16bpp() - Convert a colour-table entry into a 16bpp pixel value
  *
@@ -317,13 +323,22 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	/* Move back to the final line to be drawn */
 	fb = start - priv->line_length;
 
+	printf("eformat %d bmp_bpix=%d bpix=%d size=%d,%d, xy=%d,%d %d %d \n", eformat, bmp_bpix, bpix, width, height, x, y, priv->line_length, padded_width); //test
+	printf("bmp=%p start=%p\n", bmp, start);
+
 	switch (bmp_bpix) {
 	case 1:
 	case 8:
-		if (IS_ENABLED(CONFIG_VIDEO_BMP_RLE8)) {
+
+		if (IS_ENABLED(CONFIG_VIDEO_BMP_RLE8)) 
+		{		
+
 			u32 compression = get_unaligned_le32(
 				&bmp->header.compression);
 			debug("compressed %d %d\n", compression, BMP_BI_RLE8);
+
+			printf("compressed %d %d\n", compression, BMP_BI_RLE8); //test
+
 			if (compression == BMP_BI_RLE8) {
 				video_display_rle8_bitmap(dev, bmp, bpix, palette, fb,
 							  x, y, width, height);
@@ -361,11 +376,15 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 		}
 		break;
 	case 24:
+
+
+	printf("eformat %d bpix=%d size=%d,%d, %d %d \n", eformat, bpix, width, height, start, priv->line_length, padded_width); //test
+
 		if (IS_ENABLED(CONFIG_BMP_24BPP)) {
 			for (i = 0; i < height; ++i) {
 				for (j = 0; j < width; j++) {
 					if (bpix == 16) {
-						/* 16bit 565RGB format */
+						// 16bit 565RGB format 
 						*(u16 *)fb = ((bmap[2] >> 3)
 							<< 11) |
 							((bmap[1] >> 2) << 5) |
@@ -428,7 +447,11 @@ int video_bmp_display(struct udevice *dev, ulong bmp_image, int x, int y,
 	fb = (uchar *)(priv->fb + y * priv->line_length + x * bpix / 8);
 	ret = video_sync_copy(dev, start, fb);
 	if (ret)
+	{
+		printf("ERROR video_bmp_display %s bmp_image =0x%lx bmp_bpix=%d xy=%d,%d ret=%d\n", dev->name, bmp_image, bmp_bpix, x, y, ret); //test
 		return log_ret(ret);
+	}
+
 
 	return video_sync(dev, false);
 }

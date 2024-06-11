@@ -39,11 +39,6 @@
 #endif
 #include <asm/setup.h>
 
-#ifdef CONFIG_IMX_TRUSTY_OS
-#include <trusty/hwcrypto.h>
-#include <trusty/libtipc.h>
-#endif
-
 DECLARE_GLOBAL_DATA_PTR;
 
 static struct tag *params;
@@ -73,13 +68,6 @@ static void announce_and_cleanup(int fake)
 
 #if defined(CONFIG_VIDEO_LINK)
 	video_link_shut_down();
-#endif
-
-#ifdef CONFIG_IMX_TRUSTY_OS
-	/* lock the boot state so linux can't use some hwcrypto commands. */
-	hwcrypto_lock_boot_state();
-	/* put ql-tipc to release resource for Linux */
-	trusty_ipc_shutdown();
 #endif
 
 	board_quiesce_devices();
@@ -211,18 +199,20 @@ static void do_nonsec_virt_switch(void)
 }
 #endif
 
-__weak void board_prep_linux(struct bootm_headers *images) { }
+__weak void board_prep_linux(bootm_headers_t *images) { }
 
 /* Subcommand: PREP */
-static void boot_prep_linux(struct bootm_headers *images)
+static void boot_prep_linux(bootm_headers_t *images)
 {
 	char *commandline = env_get("bootargs");
 
-	if (CONFIG_IS_ENABLED(OF_LIBFDT) && IS_ENABLED(CONFIG_LMB) && images->ft_len) {
+	if (CONFIG_IS_ENABLED(OF_LIBFDT) && images->ft_len) {
+#ifdef CONFIG_OF_LIBFDT
 		debug("using: FDT\n");
 		if (image_setup_linux(images)) {
 			panic("FDT creation failed!");
 		}
+#endif
 	} else if (BOOTM_ENABLE_TAGS) {
 		debug("using: ATAGS\n");
 		setup_start_tag(gd->bd);
@@ -307,7 +297,7 @@ static void switch_to_el1(void)
 #endif
 
 /* Subcommand: GO */
-static void boot_jump_linux(struct bootm_headers *images, int flag)
+static void boot_jump_linux(bootm_headers_t *images, int flag)
 {
 #ifdef CONFIG_ARM64
 	void (*kernel_entry)(void *fdt_addr, void *res0, void *res1,
@@ -398,7 +388,7 @@ static void boot_jump_linux(struct bootm_headers *images, int flag)
  * they are called if subcommand is equal 0.
  */
 int do_bootm_linux(int flag, int argc, char *const argv[],
-		   struct bootm_headers *images)
+		   bootm_headers_t *images)
 {
 	/* No need for those on ARM */
 	if (flag & BOOTM_STATE_OS_BD_T || flag & BOOTM_STATE_OS_CMDLINE)
@@ -420,7 +410,7 @@ int do_bootm_linux(int flag, int argc, char *const argv[],
 }
 
 #if defined(CONFIG_BOOTM_VXWORKS)
-void boot_prep_vxworks(struct bootm_headers *images)
+void boot_prep_vxworks(bootm_headers_t *images)
 {
 #if defined(CONFIG_OF_LIBFDT)
 	int off;
@@ -435,8 +425,7 @@ void boot_prep_vxworks(struct bootm_headers *images)
 #endif
 	cleanup_before_linux();
 }
-
-void boot_jump_vxworks(struct bootm_headers *images)
+void boot_jump_vxworks(bootm_headers_t *images)
 {
 #if defined(CONFIG_ARM64) && defined(CONFIG_ARMV8_PSCI)
 	armv8_setup_psci();

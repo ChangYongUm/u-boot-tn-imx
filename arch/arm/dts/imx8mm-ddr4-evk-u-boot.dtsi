@@ -127,8 +127,6 @@
 
 &fec1 {
 	phy-reset-gpios = <&gpio4 22 GPIO_ACTIVE_LOW>;
-	phy-reset-duration = <15>;
-	phy-reset-post-delay = <100>;
 };
 
 &ethphy0 {
@@ -146,6 +144,12 @@
 &usbotg1 {
 	status = "okay";
 	extcon = <&ptn5110>;
+};
+
+&lcdif {
+	/delete-property/ assigned-clocks;
+	/delete-property/ assigned-clock-parents;
+	/delete-property/ assigned-clock-rates;
 };
 
 &mipi_dsi {

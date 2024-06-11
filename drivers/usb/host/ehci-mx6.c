@@ -48,8 +48,8 @@ DECLARE_GLOBAL_DATA_PTR;
 #define USBNC_OFFSET		0x200
 
 /* If this is not defined, assume MX6/MX7/MX8M SoC default */
-#ifndef CFG_MXC_USB_PORTSC
-#define CFG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
+#ifndef CONFIG_MXC_USB_PORTSC
+#define CONFIG_MXC_USB_PORTSC	(PORT_PTS_UTMI | PORT_PTS_PTW)
 #endif
 
 static void ehci_mx6_powerup_fixup(struct ehci_ctrl *ctrl, uint32_t *status_reg,
@@ -169,7 +169,7 @@ int ehci_hcd_init(int index, enum usb_init_type init,
 		(controller_spacing * index));
 	int ret;
 
-	if (IS_ENABLED(CONFIG_IMX_MODULE_FUSE)) {
+	if (CONFIG_IS_ENABLED(IMX_MODULE_FUSE)) {
 		if (usb_fused((ulong)ehci)) {
 			printf("SoC fuse indicates USB@0x%lx is unavailable.\n",
 			       (ulong)ehci);
@@ -212,7 +212,7 @@ int ehci_hcd_init(int index, enum usb_init_type init,
 		return 0;
 
 	setbits_le32(&ehci->usbmode, CM_HOST);
-	writel(CFG_MXC_USB_PORTSC, &ehci->portsc);
+	writel(CONFIG_MXC_USB_PORTSC, &ehci->portsc);
 	setbits_le32(&ehci->portsc, USB_EN);
 
 	mdelay(10);
@@ -261,7 +261,7 @@ static u32 mx6_portsc(enum usb_phy_interface phy_type)
 	case USBPHY_INTERFACE_MODE_HSIC:
 		return PORT_PTS_HSIC;
 	default:
-		return CFG_MXC_USB_PORTSC;
+		return CONFIG_MXC_USB_PORTSC;
 	}
 }
 
@@ -509,7 +509,9 @@ static int ehci_mx6_phy_remove(struct ehci_mx6_priv_data *priv)
 		if (ret)
 			return ret;
 
-		clk_free(&priv->phy_clk);
+		ret = clk_free(&priv->phy_clk);
+		if (ret)
+			return ret;
 	}
 #endif
 
@@ -535,7 +537,7 @@ static int ehci_usb_probe(struct udevice *dev)
 	struct ehci_hcor *hcor;
 	int ret;
 
-	if (IS_ENABLED(CONFIG_IMX_MODULE_FUSE)) {
+	if (CONFIG_IS_ENABLED(IMX_MODULE_FUSE)) {
 		if (usb_fused((ulong)ehci)) {
 			printf("SoC fuse indicates USB@0x%lx is unavailable.\n",
 			       (ulong)ehci);
@@ -589,7 +591,7 @@ static int ehci_usb_probe(struct udevice *dev)
 #if !CONFIG_IS_ENABLED(PHY) || defined(CONFIG_IMX8)
 	ehci_mx6_phy_init(ehci, &priv->phy_data, priv->portnr);
 #else
-	ret = generic_setup_phy(dev, &priv->phy, 0);
+	ret = ehci_setup_phy(dev, &priv->phy, priv->portnr);
 	if (ret)
 		goto err_clk;
 #endif
@@ -643,7 +645,7 @@ err_regulator:
 #endif
 err_phy:
 #if CONFIG_IS_ENABLED(PHY) && !defined(CONFIG_IMX8)
-	generic_shutdown_phy(&priv->phy);
+	ehci_shutdown_phy(dev, &priv->phy);
 #endif
 err_clk:
 #if CONFIG_IS_ENABLED(CLK)
@@ -664,7 +666,7 @@ int ehci_usb_remove(struct udevice *dev)
 	ehci_deregister(dev);
 
 #if CONFIG_IS_ENABLED(PHY) && !defined(CONFIG_IMX8)
-	generic_shutdown_phy(&priv->phy);
+	ehci_shutdown_phy(dev, &priv->phy);
 #endif
 
 #if CONFIG_IS_ENABLED(DM_REGULATOR)

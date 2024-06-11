@@ -81,9 +81,10 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 	uint8_t valid_data = 0;
 	uint32_t vdctrl0;
 
+
 #if CONFIG_IS_ENABLED(CLK)
 	struct clk clk;
-	int ret;
+	long ret;
 
 	ret = clk_get_by_name(dev, "pix", &clk);
 	if (ret) {
@@ -91,9 +92,11 @@ static void mxs_lcd_init(struct udevice *dev, u32 fb_addr,
 		return;
 	}
 
+	ofnode node = dev_ofnode(dev);
+
 	ret = clk_set_rate(&clk, timings->pixelclock.typ);
 	if (ret < 0) {
-		dev_err(dev, "Failed to set mxs pix clk: %d\n", ret);
+		dev_err(dev, "Failed to set mxs pix clk: %ld %d\n", clk.rate, ret);
 		return;
 	}
 
@@ -281,6 +284,7 @@ static int mxs_of_get_timings(struct udevice *dev,
 			      struct display_timing *timings,
 			      u32 *bpp)
 {
+	
 	int ret = 0;
 	u32 display_phandle;
 	ofnode display_node;
@@ -364,7 +368,7 @@ static int mxs_video_probe(struct udevice *dev)
 				dev_err(dev, "fail to enable display\n");
 				return ret;
 			}
-		}
+		}		
 #endif
 
 #if IS_ENABLED(CONFIG_VIDEO_BRIDGE)
@@ -486,3 +490,4 @@ U_BOOT_DRIVER(mxs_video) = {
 	.flags	= DM_FLAG_PRE_RELOC | DM_FLAG_OS_PREPARE,
 	.priv_auto   = sizeof(struct mxsfb_priv),
 };
+
