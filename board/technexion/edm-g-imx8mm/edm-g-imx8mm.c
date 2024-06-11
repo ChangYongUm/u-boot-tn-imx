@@ -412,8 +412,6 @@ int ft_board_setup(void *blob, struct bd_info *bd)
 
 int board_late_init(void)
 {
-	printf("%s start\n", __func__ ); //test
-
 #ifndef CONFIG_AVB_SUPPORT
 	detect_baseboard();
 	detect_display_panel();
@@ -428,10 +426,6 @@ int board_late_init(void)
 	env_set("board_name", "EDM-G");
 	env_set("board_rev", "iMX8MM");
 #endif
-
-printf("%s end\n", __func__ ); //test
-
-	// while(1);//test
 
 	return 0;
 }

@@ -106,7 +106,6 @@
 				remote-endpoint = <&dsim_to_sn65dsi84>;
 			};
 		};
-
 	};
 };
 
@@ -126,7 +125,6 @@
 
 &lcdif {
 	enable_polarity_low;	
-
 	
 	display = <&display0>;
 	status = "okay";

@@ -576,7 +576,6 @@ __weak int arch_fixup_fdt(void *blob)
 int image_setup_libfdt(bootm_headers_t *images, void *blob,
 		       int of_size, struct lmb *lmb)
 {
-
 	ulong *initrd_start = &images->initrd_start;
 	ulong *initrd_end = &images->initrd_end;
 	int ret = -EPERM;
@@ -658,9 +657,6 @@ int image_setup_libfdt(bootm_headers_t *images, void *blob,
 	if (IS_ENABLED(CONFIG_OF_BOARD_SETUP))
 		ft_board_setup_ex(blob, gd->bd);
 #endif
-
-	printf("%s end\n", __func__ ); //test
-
 
 	return 0;
 err:

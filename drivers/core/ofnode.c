@@ -590,8 +590,6 @@ int ofnode_parse_phandle_with_args(ofnode node, const char *list_name,
 						     list_name, cells_name,
 						     cell_count, index, &args);
 
-		//printf("[1] %s %s fdtdec_parse_phandle_with_args %d \n", __func__, ofnode_get_name(node), ret); //test
-
 		if (ret)
 		{
 			return ret;

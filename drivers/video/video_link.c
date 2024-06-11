@@ -520,9 +520,6 @@ int video_link_init(void)
 					{
 						curr_video_link = env_id;
 						env_id = video_links_num;
-
-						printf("%s, env_id=%d curr_video_link=%ld video_links_num=%ld \n", __func__, env_id, curr_video_link, video_links_num);//test
-
 					}
 					break;
 				}
