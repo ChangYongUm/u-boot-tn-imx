@@ -87,16 +87,6 @@ static void announce_and_cleanup(int fake)
 #endif
 
 	cleanup_before_linux();
-
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
 }
 
 static void setup_start_tag (struct bd_info *bd)
@@ -309,6 +299,16 @@ static void switch_to_el1(void)
 /* Subcommand: GO */
 static void boot_jump_linux(bootm_headers_t *images, int flag)
 {
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
+	}
+
 #ifdef CONFIG_ARM64
 	void (*kernel_entry)(void *fdt_addr, void *res0, void *res1,
 			void *res2);
@@ -400,6 +400,16 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 int do_bootm_linux(int flag, int argc, char *const argv[],
 		   bootm_headers_t *images)
 {
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
+	}
+
 	/* No need for those on ARM */
 	if (flag & BOOTM_STATE_OS_BD_T || flag & BOOTM_STATE_OS_CMDLINE)
 		return -1;
