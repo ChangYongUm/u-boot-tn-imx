@@ -66,7 +66,7 @@ void main_loop(void)
 	{
 		if (tstc())
 		{
-			key = getchar();
+			char key = getchar();
 			break;
 		} 
 	}
@@ -81,7 +81,7 @@ void main_loop(void)
 	{
 		if (tstc())
 		{
-			key = getchar();
+			char key = getchar();
 			break;
 		} 
 	}

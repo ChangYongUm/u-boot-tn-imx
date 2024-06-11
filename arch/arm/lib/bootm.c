@@ -91,7 +91,11 @@ static void announce_and_cleanup(int fake)
 	printf("\n%s Press any key to keep going\n", __func__);
 	while(1)//test
 	{
-		if (tstc()) break;
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
 	}
 }
 
