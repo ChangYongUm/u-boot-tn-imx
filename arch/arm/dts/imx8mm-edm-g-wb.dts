@@ -22,7 +22,6 @@
 	model = "TechNexion EDM-G-IMX8MM and Wandboard baseboard";
 	compatible = "fsl,imx8mm-edm-g", "fsl,imx8mm";
 
-
 };
 
 &gpio1 {
@@ -88,7 +87,6 @@
 		};
 	};
 };
-
 
 &lcdif {
 	enable_polarity_low;	
