@@ -65,14 +65,4 @@ void main_loop(void)
 
 	cli_loop();
 	panic("No CLI available");
-
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
 }
