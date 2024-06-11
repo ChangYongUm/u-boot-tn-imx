@@ -68,7 +68,7 @@ static void announce_and_cleanup(int fake)
 
 
 #if defined(CONFIG_VIDEO_LINK)
-	video_link_shut_down();
+	// video_link_shut_down();
 	gpio_hog_remove_all();
 #endif
 
