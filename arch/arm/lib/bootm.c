@@ -66,7 +66,6 @@ static void announce_and_cleanup(int fake)
 	udc_disconnect();
 #endif
 
-
 #if defined(CONFIG_VIDEO_LINK)
 	//gpio_hog_remove_all();
 	//video_link_shut_down();	
@@ -84,8 +83,11 @@ static void announce_and_cleanup(int fake)
 	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL | DM_REMOVE_NON_VITAL);
 	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
-	//cleanup_before_linux();
-	//splash_display();
+	cleanup_before_linux();
+
+	splash_display();
+
+	while(1);
 }
 
 static void setup_start_tag (struct bd_info *bd)
