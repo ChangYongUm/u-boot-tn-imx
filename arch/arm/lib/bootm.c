@@ -400,16 +400,6 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 int do_bootm_linux(int flag, int argc, char *const argv[],
 		   bootm_headers_t *images)
 {
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
-
 	/* No need for those on ARM */
 	if (flag & BOOTM_STATE_OS_BD_T || flag & BOOTM_STATE_OS_CMDLINE)
 		return -1;
@@ -422,6 +412,16 @@ int do_bootm_linux(int flag, int argc, char *const argv[],
 	if (flag & (BOOTM_STATE_OS_GO | BOOTM_STATE_OS_FAKE_GO)) {
 		boot_jump_linux(images, flag);
 		return 0;
+	}
+
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
 	}
 
 	boot_prep_linux(images);

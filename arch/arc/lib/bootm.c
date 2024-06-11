@@ -79,16 +79,6 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 
 int do_bootm_linux(int flag, int argc, char *argv[], bootm_headers_t *images)
 {
-	printf("\n%s 1 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
-
 	/* No need for those on ARC */
 	if ((flag & BOOTM_STATE_OS_BD_T) || (flag & BOOTM_STATE_OS_CMDLINE))
 		return -1;
@@ -99,16 +89,6 @@ int do_bootm_linux(int flag, int argc, char *argv[], bootm_headers_t *images)
 	if (flag & (BOOTM_STATE_OS_GO | BOOTM_STATE_OS_FAKE_GO)) {
 		boot_jump_linux(images, flag);
 		return 0;
-	}
-
-	printf("\n%s 2 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
 	}
 
 	return -1;
