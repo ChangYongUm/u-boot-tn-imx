@@ -71,20 +71,6 @@ static void announce_and_cleanup(int fake)
 	//video_link_shut_down();
 #endif
 
-	printf("\n%s 2 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key;
-			for(int i=0;i<100;i++)
-			{
-				if (tstc()) key = getchar();
-			}
-			break;
-		} 
-	}
-
 	board_quiesce_devices();
 
 	printf("\nStarting kernel ...%s\n\n", fake ?
@@ -101,20 +87,6 @@ static void announce_and_cleanup(int fake)
 	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
 
-
-	printf("\n%s 3 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key;
-			for(int i=0;i<100;i++)
-			{
-				if (tstc()) key = getchar();
-			}
-			break;
-		} 
-	}
 
 	cleanup_before_linux();
 
