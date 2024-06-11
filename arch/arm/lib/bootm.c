@@ -299,16 +299,6 @@ static void switch_to_el1(void)
 /* Subcommand: GO */
 static void boot_jump_linux(bootm_headers_t *images, int flag)
 {
-	printf("\n%s Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key = getchar();
-			break;
-		} 
-	}
-
 #ifdef CONFIG_ARM64
 	void (*kernel_entry)(void *fdt_addr, void *res0, void *res1,
 			void *res2);
@@ -321,7 +311,27 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 		(ulong) kernel_entry);
 	bootstage_mark(BOOTSTAGE_ID_RUN_OS);
 
+	printf("\n%s 1 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
+	}
+
 	announce_and_cleanup(fake);
+
+	printf("\n%s 2 Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			char key = getchar();
+			break;
+		} 
+	}
 
 	if (!fake) {
 #ifdef CONFIG_ARMV8_PSCI
