@@ -90,20 +90,6 @@ static void announce_and_cleanup(int fake)
 
 	cleanup_before_linux();
 
-	printf("\n%s 4 Press any key to keep going\n", __func__);
-	while(1)//test
-	{
-		if (tstc())
-		{
-			char key;
-			for(int i=0;i<100;i++)
-			{
-				if (tstc()) key = getchar();
-			}
-			break;
-		} 
-	}
-
 }
 
 static void setup_start_tag (struct bd_info *bd)
