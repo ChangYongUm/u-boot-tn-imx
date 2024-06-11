@@ -64,11 +64,25 @@ void main_loop(void)
 	printf("\n%s Press any key to keep going\n", __func__);
 	while(1)//test
 	{
-		if (tstc()) break;
+		if (tstc())
+		{
+			key = getchar();
+			break;
+		} 
 	}
 
 	autoboot_command(s);
 
 	cli_loop();
 	panic("No CLI available");
+
+	printf("\n%s Press any key to keep going\n", __func__);
+	while(1)//test
+	{
+		if (tstc())
+		{
+			key = getchar();
+			break;
+		} 
+	}
 }
