@@ -70,7 +70,7 @@ static void announce_and_cleanup(int fake)
 	//gpio_hog_remove_all();
 	//video_link_shut_down();	
 #endif
-	// board_quiesce_devices();
+	board_quiesce_devices();
 
 	printf("\nStarting kernel ...%s\n\n", fake ?
 		"(fake run for tracing)" : "");
@@ -84,10 +84,7 @@ static void announce_and_cleanup(int fake)
 	//dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
 	cleanup_before_linux();
-
 	splash_display();
-
-	while(1);
 }
 
 static void setup_start_tag (struct bd_info *bd)
@@ -381,6 +378,8 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 			kernel_entry(0, machid, r2);
 	}
 #endif
+
+while(1);//test
 }
 
 /* Main Entry point for arm bootm implementation
