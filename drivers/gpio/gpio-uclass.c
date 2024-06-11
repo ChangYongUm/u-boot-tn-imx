@@ -355,8 +355,7 @@ int gpio_hog_remove_all(void)
 				return ret;
 			}
 
-
-			printf("%s: node %s set gpio. false %d \n", __func__, dev->name, !plat->value);
+			printf("%s: node %s set gpio. false %d \n", __func__, dev->name, !value);
 		}
 		
 	}
