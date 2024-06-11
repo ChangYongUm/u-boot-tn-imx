@@ -68,7 +68,7 @@ static void announce_and_cleanup(int fake)
 
 
 #if defined(CONFIG_VIDEO_LINK)
-	gpio_hog_remove_all();
+	//gpio_hog_remove_all();
 	//video_link_shut_down();	
 #endif
 	board_quiesce_devices();
@@ -86,7 +86,7 @@ static void announce_and_cleanup(int fake)
 #endif
 
 	cleanup_before_linux();
-
+	splash_display();
 }
 
 static void setup_start_tag (struct bd_info *bd)
