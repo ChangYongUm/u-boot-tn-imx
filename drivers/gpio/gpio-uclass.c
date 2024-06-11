@@ -356,12 +356,15 @@ int gpio_hog_remove_all(void)
 
 		if (plat->gpiod_flags == GPIOD_IS_OUT) 
 		{
-			ret = dm_gpio_set_value(&priv->gpiod, false);
+			ret = dm_gpio_set_value(&priv->gpiod, !plat->value));
 			if (ret < 0) 
 			{
 				printf("%s: node %s could not set gpio.\n", __func__, dev->name);
 				return ret;
 			}
+
+
+			printf("%s: node %s set gpio. false %d \n", __func__, dev->name, !plat->value));
 		}
 		
 	}
