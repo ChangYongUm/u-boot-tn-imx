@@ -72,9 +72,10 @@ static void announce_and_cleanup(int fake)
 	{
 		if (tstc())
 		{
+			char key;
 			for(int i=0;i<100;i++)
 			{
-				if (tstc()) char key = getchar();
+				if (tstc()) key = getchar();
 			}
 			break;
 		} 
@@ -90,9 +91,10 @@ static void announce_and_cleanup(int fake)
 	{
 		if (tstc())
 		{
+			char key;
 			for(int i=0;i<100;i++)
 			{
-				if (tstc()) char key = getchar();
+				if (tstc()) key = getchar();
 			}
 			break;
 		} 
@@ -120,9 +122,10 @@ static void announce_and_cleanup(int fake)
 	{
 		if (tstc())
 		{
+			char key;
 			for(int i=0;i<100;i++)
 			{
-				if (tstc()) char key = getchar();
+				if (tstc()) key = getchar();
 			}
 			break;
 		} 
@@ -136,9 +139,10 @@ static void announce_and_cleanup(int fake)
 	{
 		if (tstc())
 		{
+			char key;
 			for(int i=0;i<100;i++)
 			{
-				if (tstc()) char key = getchar();
+				if (tstc()) key = getchar();
 			}
 			break;
 		} 
@@ -370,14 +374,15 @@ static void boot_jump_linux(bootm_headers_t *images, int flag)
 
 	announce_and_cleanup(fake);
 
-	printf("\n%s 2 Press any key to keep going\n", __func__);
+	printf("\n%s 1 Press any key to keep going\n", __func__);
 	while(1)//test
 	{
 		if (tstc())
 		{
+			char key;
 			for(int i=0;i<100;i++)
 			{
-				if (tstc()) char key = getchar();
+				if (tstc()) key = getchar();
 			}
 			break;
 		} 
