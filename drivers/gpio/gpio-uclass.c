@@ -297,17 +297,18 @@ static int gpio_hog_probe(struct udevice *dev)
 	ret = gpio_dev_request_index(dev->parent, dev->name, "gpio-hog",
 				     plat->val[0], plat->gpiod_flags,
 				     plat->val[1], &priv->gpiod);
-	if (ret < 0) {
-		debug("%s: node %s could not get gpio.\n", __func__,
-		      dev->name);
+	if (ret < 0) 
+	{
+		printf("%s: node %s could not get gpio.\n", __func__, dev->name);
 		return ret;
 	}
 
-	if (plat->gpiod_flags == GPIOD_IS_OUT) {
+	if (plat->gpiod_flags == GPIOD_IS_OUT) 
+	{
 		ret = dm_gpio_set_value(&priv->gpiod, plat->value);
-		if (ret < 0) {
-			debug("%s: node %s could not set gpio.\n", __func__,
-			      dev->name);
+		if (ret < 0) 
+		{
+			printf("%s: node %s could not set gpio.\n", __func__, dev->name);
 			return ret;
 		}
 	}
@@ -325,8 +326,7 @@ int gpio_hog_probe_all(void)
 		if (dev->driver == DM_DRIVER_GET(gpio_hog)) {
 			ret = device_probe(dev);
 			if (ret) {
-				printf("Failed to probe device %s err: %d\n",
-				       dev->name, ret);
+				printf("Failed to probe device %s err: %d\n", dev->name, ret);
 				retval = ret;
 			}
 		}
@@ -350,30 +350,20 @@ int gpio_hog_remove_all(void)
 						plat->val[1], &priv->gpiod);
 		if (ret < 0) 
 		{
-			debug("%s: node %s could not get gpio.\n", __func__,
-				dev->name);
+			printf("%s: node %s could not get gpio.\n", __func__, dev->name);
 			return ret;
 		}
 
-		if (plat->gpiod_flags == GPIOD_IS_OUT) {
+		if (plat->gpiod_flags == GPIOD_IS_OUT) 
+		{
 			ret = dm_gpio_set_value(&priv->gpiod, false);
-			if (ret < 0) {
-				debug("%s: node %s could not set gpio.\n", __func__,
-					dev->name);
+			if (ret < 0) 
+			{
+				printf("%s: node %s could not set gpio.\n", __func__, dev->name);
 				return ret;
 			}
 		}
 		
-		if (dev->driver == DM_DRIVER_GET(gpio_hog)) 
-		{
-			ret = device_remove(dev, DM_REMOVE_NORMAL);
-
-			if (ret) {
-				printf("Failed to probe device %s err: %d\n",
-				       dev->name, ret);
-				retval = ret;
-			}
-		}
 	}
 
 	return retval;
