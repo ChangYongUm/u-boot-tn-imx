@@ -336,6 +336,27 @@ int gpio_hog_probe_all(void)
 	return retval;
 }
 
+int gpio_hog_remove_all(void)
+{
+	struct udevice *dev;
+	int ret;
+	int retval = 0;
+	for (uclass_first_device(UCLASS_NOP, &dev);
+	     dev;
+	     uclass_find_next_device(&dev)) {
+		if (dev->driver == DM_DRIVER_GET(gpio_hog)) {
+			ret = device_remove(dev, DM_REMOVE_NORMAL);
+			if (ret) {
+				printf("Failed to probe device %s err: %d\n",
+				       dev->name, ret);
+				retval = ret;
+			}
+		}
+	}
+
+	return retval;
+}
+
 int gpio_hog_lookup_name(const char *name, struct gpio_desc **desc)
 {
 	struct udevice *dev;

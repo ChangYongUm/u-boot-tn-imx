@@ -68,7 +68,8 @@ static void announce_and_cleanup(int fake)
 
 
 #if defined(CONFIG_VIDEO_LINK)
-	//video_link_shut_down();
+	video_link_shut_down();
+	gpio_hog_remove_all();
 #endif
 
 	board_quiesce_devices();
@@ -87,9 +88,7 @@ static void announce_and_cleanup(int fake)
 	dm_remove_devices_flags(DM_REMOVE_ACTIVE_ALL);
 #endif
 
-
 	cleanup_before_linux();
-
 
 	printf("\n%s 4 Press any key to keep going\n", __func__);
 	while(1)//test

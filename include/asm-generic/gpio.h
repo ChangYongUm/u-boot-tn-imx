@@ -469,6 +469,7 @@ int gpio_hog_lookup_name(const char *name, struct gpio_desc **desc);
  * @return:	Returns return value from device_probe()
  */
 int gpio_hog_probe_all(void);
+int gpio_hog_remove_all(void);
 
 /**
  * gpio_lookup_name - Look up a GPIO name and return its details
